@@ -83,7 +83,7 @@ namespace Gameplay.NodeSelection.UI.Map
         {
             int current = _runState.CurrentNodeId.Value;
             bool reachable = current >= 0 && _map.Get(current).NextIds.Contains(nodeId);
-            if (!reachable) return; // ignore taps on nodes that cannot reach
+            if (!reachable) return; // ignore click on nodes that cannot reach
  
             
             _runState.MoveTo(nodeId); 

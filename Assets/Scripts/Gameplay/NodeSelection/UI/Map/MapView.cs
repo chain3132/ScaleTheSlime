@@ -70,9 +70,6 @@ namespace Gameplay.NodeSelection.UI.Map
         {
             
             StretchToFill(_lineLayer);
-            StretchToFill(_nodeLayer);
-            AnchorLeftMiddle(_player);
-            
             ComputePositions();
             ResizeContent();
             DrawLines();
@@ -137,7 +134,6 @@ namespace Gameplay.NodeSelection.UI.Map
             {
                 var go = Instantiate(_nodePrefab, _nodeLayer);
                 var rt = (RectTransform)go.transform;
-                AnchorLeftMiddle(rt);
                 rt.anchoredPosition = _positions[nodeVm.Id];
                 go.GetComponent<NodeView>().Bind(nodeVm,_database.SpriteFor(nodeVm.Type));
                 _spawned.Add(go);
