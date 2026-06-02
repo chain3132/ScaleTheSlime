@@ -155,6 +155,7 @@ MonoBehaviour:
     MaxNodesPerLayer: 3
     NoEliteBeforeLayer: 3
     MaxOutgoingEdges: 2
+  _nodeDatabase: {fileID: 11400000, guid: 4f0fbc91b49105147993fe30af985495, type: 2}
   _playerName: Slime Queen
   _nodePrefabAddress: Assets/Scripts/Gameplay/NodeSelection/UI/Prefabs/NodeView.prefab
   _seed: 12345

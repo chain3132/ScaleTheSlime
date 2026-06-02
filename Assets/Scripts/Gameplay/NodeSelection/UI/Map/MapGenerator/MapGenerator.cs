@@ -7,12 +7,22 @@ namespace Gameplay.NodeSelection.UI.Map.MapGenerator
 {
     public class MapGenerator
     {
+        #region fields
+
         private readonly MapGenerationConfig _config;
         private readonly Random _rng;
+        private readonly IReadOnlyList<NodeWeight> _weights;
 
-        public MapGenerator(MapGenerationConfig config, int seed)
+
+        #endregion
+        
+
+        public MapGenerator(MapGenerationConfig config,
+            int seed,
+            IReadOnlyList<NodeWeight> weights)
         {
             _config = config;
+            _weights = weights;
             _rng = new Random(seed);
         }
 
@@ -47,7 +57,7 @@ namespace Gameplay.NodeSelection.UI.Map.MapGenerator
 
             // set node type
             foreach (var node in all)
-                node.Type = PickType(node, cfg);
+                node.Type = PickType(node);
 
             return new MapData(all, cfg.LayerCount, layers[0][0].Id, layers[^1][0].Id);
         }
@@ -97,30 +107,24 @@ namespace Gameplay.NodeSelection.UI.Map.MapGenerator
             return false;
         }
 
-        private NodeType PickType(Node node, MapGenerationConfig cfg)
+        private NodeType PickType(Node node)
         {
             if (node.Layer == 0) return NodeType.Start;
-            if (node.Layer == cfg.LayerCount - 1) return NodeType.Boss;
+            if (node.Layer == _config.LayerCount - 1) return NodeType.Boss;
             
-            var pool = new (NodeType type, int weight)[]
-            {
-                (NodeType.Minor, 60),
-                (NodeType.Elite, node.Layer >= cfg.NoEliteBeforeLayer ? 20 : 0),
-                (NodeType.Rest, 10),
-                (NodeType.Event, 7),
-                (NodeType.Shop, 3),
-            };
-
             int total = 0;
-            foreach (var e in pool) total += e.weight;
-
+            foreach (var w in _weights)
+                if (w.MinLayer <= node.Layer) total += w.Weight;
+ 
+            if (total <= 0) return NodeType.Minor; // nothing eligible: safe fallback
+ 
             int roll = _rng.Next(0, total);
-            foreach (var e in pool)
+            foreach (var w in _weights)
             {
-                if (roll < e.weight) return e.type;
-                roll -= e.weight;
+                if (w.MinLayer > node.Layer) continue;
+                if (roll < w.Weight) return w.Type;
+                roll -= w.Weight;
             }
-
             return NodeType.Minor;
         }
     }

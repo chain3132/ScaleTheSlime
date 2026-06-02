@@ -21,9 +21,10 @@ namespace Gameplay.NodeSelection.UI.Nodes
         private readonly CompositeDisposable _bindings = new();
 
         
-        public void Bind(NodeViewModel vm)
+        public void Bind(NodeViewModel vm,
+            Sprite icon)
         {
-            _nodeTypeIcon.sprite = SpriteFor(vm.Type);
+            _nodeTypeIcon.sprite = icon;
         
             vm.IsReachable.Subscribe(on => _glow.SetActive(on)).AddTo(_bindings);
             vm.IsReachable.Subscribe(on => _button.interactable = on).AddTo(_bindings);
@@ -34,11 +35,7 @@ namespace Gameplay.NodeSelection.UI.Nodes
                 .Subscribe(_ => vm.Select())
                 .AddTo(_bindings);
         }
-
-        private Sprite SpriteFor(NodeType type)
-        {
-            return null;
-        }
+        
         
         private void OnDestroy()
         {

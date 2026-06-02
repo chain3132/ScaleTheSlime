@@ -2,6 +2,7 @@ using System.Threading;
 using Cysharp.Threading.Tasks;
 using Gameplay.NodeSelection.UI.Map;
 using Gameplay.NodeSelection.UI.Map.MapGenerator;
+using Gameplay.NodeSelection.UI.Nodes;
 using R3;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
@@ -16,6 +17,7 @@ namespace Gameplay.NodeSelection.UI
  
         [Header("Config")]
         [SerializeField] private MapGenerationConfig _mapConfig = new();
+        [SerializeField] private NodeDatabase _nodeDatabase;
         [SerializeField] private string _playerName = "Slime Queen";
         [SerializeField] private string _nodePrefabAddress = "NodeView"; // Addressables key
         [SerializeField] private int _seed = 12345;
@@ -44,11 +46,11 @@ namespace Gameplay.NodeSelection.UI
  
         private void BuildRunMap()
         {
-            var generator = new MapGenerator(_mapConfig, _seed + _runState.RunNumber.Value);
+            var generator = new MapGenerator(_mapConfig, _seed + _runState.RunNumber.Value,_nodeDatabase.BuildWeightTable());
             MapData map = generator.Generate();
  
             _mapVm = new MapViewModel(map, _runState);
-            _mapView.Initialize(_mapVm, _nodePrefab);
+            _mapView.Initialize(_mapVm, _nodePrefab,_nodeDatabase);
  
             // When the boss is cleared, rebuild the map.
             _mapVm.BossCleared
