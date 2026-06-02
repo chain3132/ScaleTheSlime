@@ -53,7 +53,9 @@ namespace Gameplay.NodeSelection.UI.Map.MapGenerator
 
             // Draw edges from each layer
             for (int layer = 0; layer < layers.Count - 1; layer++)
+            {
                 ConnectLayers(layers[layer], layers[layer + 1]);
+            }
 
             // set node type
             foreach (var node in all)
@@ -66,11 +68,12 @@ namespace Gameplay.NodeSelection.UI.Map.MapGenerator
         {
             foreach (var node in fromNodes)
             {
-                int center = ProjectIndex(node.IndexInLayer, fromNodes.Count, toNodes.Count);
+                int center = MapIndexToLayer(node.IndexInLayer, fromNodes.Count, toNodes.Count);
                 // tell 
                 int wanted = Math.Min(_rng.Next(1, _config.MaxOutgoingEdges + 1), toNodes.Count);
 
                 var picked = new SortedSet<int> { center };
+                //
                 for (int step = 1; picked.Count < wanted && step <= toNodes.Count; step++)
                 {
                     if (center - step >= 0) picked.Add(center - step);
@@ -87,12 +90,12 @@ namespace Gameplay.NodeSelection.UI.Map.MapGenerator
             for (int t = 0; t < toNodes.Count; t++)
             {
                 if (HasIncoming(fromNodes, toNodes[t].Id)) continue;
-                int src = ProjectIndex(t, toNodes.Count, fromNodes.Count);
+                int src = MapIndexToLayer(t, toNodes.Count, fromNodes.Count);
                 fromNodes[src].NextIds.Add(toNodes[t].Id);
             }
         }
 
-        private int ProjectIndex(int index, int fromCount, int toCount)
+        private int MapIndexToLayer(int index, int fromCount, int toCount)
         {
             if (fromCount <= 1 || toCount <= 1) return toCount / 2;
             float t = index / (float)(fromCount - 1);
@@ -116,7 +119,7 @@ namespace Gameplay.NodeSelection.UI.Map.MapGenerator
             foreach (var w in _weights)
                 if (w.MinLayer <= node.Layer) total += w.Weight;
  
-            if (total <= 0) return NodeType.Minor; // nothing eligible: safe fallback
+            if (total <= 0) return NodeType.Minor;
  
             int roll = _rng.Next(0, total);
             foreach (var w in _weights)

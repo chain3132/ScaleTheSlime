@@ -16,11 +16,16 @@ namespace Gameplay.NodeSelection.UI
         [SerializeField] private MapView _mapView;
  
         [Header("Config")]
-        [SerializeField] private MapGenerationConfig _mapConfig = new();
-        [SerializeField] private NodeDatabase _nodeDatabase;
-        [SerializeField] private string _playerName = "Slime Queen";
-        [SerializeField] private string _nodePrefabAddress = "NodeView"; // Addressables key
-        [SerializeField] private int _seed = 12345;
+        [SerializeField] 
+        private MapGenerationConfig _mapConfig = new();
+        [SerializeField] 
+        private NodeDatabase _nodeDatabase;
+        [SerializeField] 
+        private string _playerName = "Slime Queen";
+        [SerializeField] 
+        private string _nodePrefabAddress = "NodeView"; // Addressables key
+        [SerializeField] 
+        private int _seed = 12345;
  
         private RunState _runState;
         private AsyncOperationHandle<GameObject> _nodePrefabHandle;

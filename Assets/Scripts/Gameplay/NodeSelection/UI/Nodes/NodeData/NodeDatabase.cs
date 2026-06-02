@@ -7,7 +7,8 @@ namespace Gameplay.NodeSelection.UI.Nodes
     [CreateAssetMenu(fileName = "NodeDatabase", menuName = "NodeSelection/NodeDatabase")]
     public class NodeDatabase : ScriptableObject
     {
-        [SerializeField] private List<NodeDefinition> _definitions = new();
+        [SerializeField] 
+        private List<NodeDefinition> _definitions = new();
  
         private Dictionary<NodeType, NodeDefinition> _byType;
  
