@@ -2,6 +2,8 @@ using System.Collections.Generic;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using Gameplay.NodeSelection.UI.Nodes;
+using LitMotion;
+using LitMotion.Extensions;
 using R3;
 using UnityEngine;
 using UnityEngine.UI;
@@ -39,6 +41,8 @@ namespace Gameplay.NodeSelection.UI.Map
         private float _moveSpeed ;
 
         #endregion
+        [SerializeField]
+        private SerializableMotionSettings<Vector2,NoOptions> _playerMoveSettings;
 
 
         #region fields
@@ -50,6 +54,7 @@ namespace Gameplay.NodeSelection.UI.Map
         private readonly List<GameObject> _spawned = new();
         private readonly CompositeDisposable _bindings = new();
         private CancellationTokenSource _moveCts;
+        private MotionHandle _moveMotion;
 
         #endregion
  
@@ -159,20 +164,21 @@ namespace Gameplay.NodeSelection.UI.Map
         
         public UniTask MoveTokenToAsync(int nodeId, CancellationToken ct)
         {
-            return MoveAsync(_positions[nodeId], ct);
+            return MoveAsync(nodeId, ct);
         }
 
-        private async UniTask MoveAsync(Vector2 target, CancellationToken ct)
+        private UniTask MoveAsync(int nodeId, CancellationToken ct)
         {
-            while (true)
+            if (_moveMotion.IsActive()) _moveMotion.Cancel();
+
+            var settings = _playerMoveSettings with
             {
-                if (ct.IsCancellationRequested) return;
-                Vector2 pos = _player.anchoredPosition;
-                if (pos == target) return;
-                _player.anchoredPosition = Vector2.MoveTowards(
-                    pos, target, _moveSpeed * Time.deltaTime);
-                await UniTask.Yield(PlayerLoopTiming.Update);
-            }
+                StartValue = _player.anchoredPosition,
+                EndValue   = _positions[nodeId],
+            };
+
+            _moveMotion = LMotion.Create(settings).BindToAnchoredPosition(_player);
+            return _moveMotion.ToUniTask(ct);
         }
  
         private void StretchToFill(RectTransform rt)
@@ -192,9 +198,7 @@ namespace Gameplay.NodeSelection.UI.Map
  
         public void Teardown()
         {
-            _moveCts?.Cancel();
-            _moveCts?.Dispose();
-            _moveCts = null;
+            if (_moveMotion.IsActive()) {_moveMotion.Cancel();} 
             _bindings.Clear();
             foreach (var go in _spawned) Destroy(go);
             _spawned.Clear();

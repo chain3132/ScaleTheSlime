@@ -138,7 +138,45 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::NodeView
   _button: {fileID: 3289906618741673695}
   _nodeTypeIcon: {fileID: 7484479039579167508}
-  _glow: {fileID: 7046304938865705230}
+  _glow: {fileID: 1968034748884203985}
+  _glowSettings:
+    startValue: {r: 1, g: 0.95686275, b: 0, a: 1}
+    endValue: {r: 1, g: 0.95686275, b: 0, a: 0}
+    duration: 1
+    ease: 3
+    customEaseCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    delay: 0
+    delayType: 0
+    loops: -1
+    loopType: 3
+    cancelOnError: 0
+    skipValuesDuringDelay: 0
+    immediateBind: 0
+    schedulerType: 0
+    additionalSettings: 0
 --- !u!1 &6068756872508820852
 GameObject:
   m_ObjectHideFlags: 0

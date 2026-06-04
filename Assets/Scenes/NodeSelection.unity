@@ -1404,6 +1404,44 @@ MonoBehaviour:
   _xPadding: 200
   _lineThickness: 6
   _moveSpeed: 600
+  _playerMoveSettings:
+    startValue: {x: 0, y: 0}
+    endValue: {x: 0, y: 0}
+    duration: 1
+    ease: 12
+    customEaseCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    delay: 0
+    delayType: 0
+    loops: 1
+    loopType: 0
+    cancelOnError: 0
+    skipValuesDuringDelay: 0
+    immediateBind: 0
+    schedulerType: 0
+    additionalSettings: 0
 --- !u!1 &1397067217
 GameObject:
   m_ObjectHideFlags: 0
