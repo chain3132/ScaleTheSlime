@@ -14,7 +14,8 @@ namespace Gameplay.NodeSelection.UI
     {
         [Header("Scene Views")]
         [SerializeField] private MapView _mapView;
- 
+        [SerializeField] private PanelMenuView _panelMenuView;
+
         [Header("Config")]
         [SerializeField] 
         private MapGenerationConfig _mapConfig = new();
@@ -28,6 +29,7 @@ namespace Gameplay.NodeSelection.UI
         private int _seed = 12345;
  
         private RunState _runState;
+        private PanelMenuViewModel _panelMenuVm;
         private AsyncOperationHandle<GameObject> _nodePrefabHandle;
         private GameObject _nodePrefab;
         private CancellationTokenSource _cts;
@@ -43,6 +45,9 @@ namespace Gameplay.NodeSelection.UI
  
             _nodePrefabHandle = Addressables.LoadAssetAsync<GameObject>(_nodePrefabAddress);
             _nodePrefab = await _nodePrefabHandle.ToUniTask(cancellationToken: _cts.Token);
+            
+            _panelMenuVm = new PanelMenuViewModel(_playerName, _runState);
+            _panelMenuView.Bind(_panelMenuVm);
             
             // Build First map.
             Debug.Log("Building first map...");
