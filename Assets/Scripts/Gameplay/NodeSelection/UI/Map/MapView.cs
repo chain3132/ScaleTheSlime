@@ -75,10 +75,6 @@ namespace Gameplay.NodeSelection.UI.Map
             DrawLines();
             SpawnNodes();
             PlacePlayerAtCurrent();
- 
-            _vm.PlayerMoved
-                .Subscribe(MovePlayerTo)
-                .AddTo(_bindings);
         }
  
         private void ComputePositions()
@@ -127,7 +123,16 @@ namespace Gameplay.NodeSelection.UI.Map
             go.GetComponent<Image>().color = new Color(0f, 0f, 0f, 0.6f);
             _spawned.Add(go);
         }
- 
+        public void Show()
+        {
+            gameObject.SetActive(true);
+        }
+
+        public void Hide()
+        {
+            gameObject.SetActive(false);
+        }
+
         private void SpawnNodes()
         {
             foreach (var nodeVm in _vm.Nodes)
@@ -151,27 +156,21 @@ namespace Gameplay.NodeSelection.UI.Map
                 }
             }
         }
- 
-        private void MovePlayerTo(int nodeId)
+        
+        public UniTask MoveTokenToAsync(int nodeId, CancellationToken ct)
         {
-            _moveCts?.Cancel();
-            _moveCts?.Dispose();
-            _moveCts = new CancellationTokenSource();
-            MoveAsync(_positions[nodeId], _moveCts.Token).Forget();
+            return MoveAsync(_positions[nodeId], ct);
         }
- 
-        private async UniTaskVoid MoveAsync(Vector2 target, CancellationToken ct)
+
+        private async UniTask MoveAsync(Vector2 target, CancellationToken ct)
         {
             while (true)
             {
                 if (ct.IsCancellationRequested) return;
- 
                 Vector2 pos = _player.anchoredPosition;
                 if (pos == target) return;
- 
                 _player.anchoredPosition = Vector2.MoveTowards(
                     pos, target, _moveSpeed * Time.deltaTime);
- 
                 await UniTask.Yield(PlayerLoopTiming.Update);
             }
         }

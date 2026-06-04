@@ -27,7 +27,11 @@ namespace Gameplay.NodeSelection.Encounter
     public readonly struct EncounterResult
     {
         public readonly EncounterOutcome Outcome;
-        public EncounterResult(EncounterOutcome outcome) { Outcome = outcome; }
+
+        public EncounterResult(EncounterOutcome outcome)
+        {
+            Outcome = outcome;
+        }
 
         public static EncounterResult Victory => new(EncounterOutcome.Victory);
         public static EncounterResult Defeat  => new(EncounterOutcome.Defeat);

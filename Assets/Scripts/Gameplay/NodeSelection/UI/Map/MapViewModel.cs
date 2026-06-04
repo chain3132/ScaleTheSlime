@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
+using Gameplay.NodeSelection.Encounter;
 using Gameplay.NodeSelection.UI.Nodes;
-using NUnit.Framework.Interfaces;
 using R3;
 
 namespace Gameplay.NodeSelection.UI.Map
@@ -18,18 +18,16 @@ namespace Gameplay.NodeSelection.UI.Map
         public IReadOnlyList<NodeViewModel> Nodes => _nodes;
         public IReadOnlyList<MapEdge> Edges => _edges;
  
-        public Observable<int> PlayerMoved => _playerMoved;
- 
-        public Observable<Unit> BossCleared => _bossCleared;
- 
+        public Observable<EncounterRequest> NodeSelected => _nodeSelected;
+            
+        private readonly Subject<EncounterRequest> _nodeSelected = new();
         private readonly RunState _runState;
         private readonly MapData _map;
         private readonly List<NodeViewModel> _nodes = new();
         private readonly List<MapEdge> _edges = new();
  
         private readonly Subject<int> _selectRequested = new();
-        private readonly Subject<int> _playerMoved = new();
-        private readonly Subject<Unit> _bossCleared = new();
+        
         private readonly CompositeDisposable _disposables = new();
         
         public MapViewModel(MapData mapData, 
@@ -86,22 +84,17 @@ namespace Gameplay.NodeSelection.UI.Map
             if (!reachable) return; // ignore click on nodes that cannot reach
             
             //enter the node
-            
-            _runState.MoveTo(nodeId); 
- 
-            if (nodeId == _map.BossId)
-                _bossCleared.OnNext(Unit.Default);
-            else
-                _playerMoved.OnNext(nodeId); 
+            var node = _map.Get(nodeId);
+            _nodeSelected.OnNext(new EncounterRequest(
+                nodeId, node.Type, node.Layer, _runState.RunNumber.Value));
         }
  
         public void Dispose()
         {
             foreach (var n in _nodes) n.Dispose();
             _nodes.Clear();
+            _nodeSelected.Dispose();    
             _selectRequested.Dispose();
-            _playerMoved.Dispose();
-            _bossCleared.Dispose();
             _disposables.Dispose();
         }
     }

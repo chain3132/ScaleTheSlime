@@ -159,6 +159,8 @@ MonoBehaviour:
   _playerName: Slime Queen
   _nodePrefabAddress: Assets/Scripts/Gameplay/NodeSelection/UI/Prefabs/NodeView.prefab
   _seed: 12345
+  _walkOnly: 0
+  _forceDefeat: 0
 --- !u!4 &53611837
 Transform:
   m_ObjectHideFlags: 0
@@ -777,7 +779,7 @@ MonoBehaviour:
   _nameText: {fileID: 1220811135}
   _runText: {fileID: 463955572}
   _turnText: {fileID: 2054269050}
-  _clockText: {fileID: 2054269050}
+  _clockText: {fileID: 1131075025}
 --- !u!1 &1004988629
 GameObject:
   m_ObjectHideFlags: 0

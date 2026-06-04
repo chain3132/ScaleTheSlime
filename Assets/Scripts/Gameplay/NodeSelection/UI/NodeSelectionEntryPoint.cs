@@ -1,5 +1,6 @@
 using System.Threading;
 using Cysharp.Threading.Tasks;
+using Gameplay.NodeSelection.Encounter;
 using Gameplay.NodeSelection.UI.Map;
 using Gameplay.NodeSelection.UI.Map.MapGenerator;
 using Gameplay.NodeSelection.UI.Nodes;
@@ -13,8 +14,10 @@ namespace Gameplay.NodeSelection.UI
     public class NodeSelectionEntryPoint : MonoBehaviour
     {
         [Header("Scene Views")]
-        [SerializeField] private MapView _mapView;
-        [SerializeField] private PanelMenuView _panelMenuView;
+        [SerializeField] 
+        private MapView _mapView;
+        [SerializeField] 
+        private PanelMenuView _panelMenuView;
 
         [Header("Config")]
         [SerializeField] 
@@ -27,14 +30,19 @@ namespace Gameplay.NodeSelection.UI
         private string _nodePrefabAddress = "NodeView"; // Addressables key
         [SerializeField] 
         private int _seed = 12345;
+        
+        [Header("Debug")]
+        [SerializeField] 
+        private bool _walkOnly = true;     
+        [SerializeField] 
+        private bool _forceDefeat = false;
  
         private RunState _runState;
         private PanelMenuViewModel _panelMenuVm;
         private AsyncOperationHandle<GameObject> _nodePrefabHandle;
         private GameObject _nodePrefab;
         private CancellationTokenSource _cts;
- 
-        private MapViewModel _mapVm;
+        private GameFlowController _flow;
         private readonly CompositeDisposable _runScope = new();
  
         private async UniTaskVoid Start()
@@ -49,34 +57,13 @@ namespace Gameplay.NodeSelection.UI
             _panelMenuVm = new PanelMenuViewModel(_playerName, _runState);
             _panelMenuView.Bind(_panelMenuVm);
             
-            // Build First map.
-            Debug.Log("Building first map...");
-            BuildRunMap();
+            //for testing
+            IEncounter encounter = new EncounterEntry(_forceDefeat);
+            _flow = new GameFlowController(_mapView, _runState, encounter,
+                _mapConfig, _nodeDatabase, _nodePrefab, _seed, _walkOnly);
+            _flow.BuildRunMap();
         }
- 
-        private void BuildRunMap()
-        {
-            var generator = new MapGenerator(_mapConfig, _seed + _runState.RunNumber.Value,_nodeDatabase.BuildWeightTable());
-            MapData map = generator.Generate();
- 
-            _mapVm = new MapViewModel(map, _runState);
-            _mapView.Initialize(_mapVm, _nodePrefab,_nodeDatabase);
- 
-            // When the boss is cleared, rebuild the map.
-            _mapVm.BossCleared
-                .Subscribe(_ => OnBossCleared())
-                .AddTo(_runScope);
-        }
- 
-        private void OnBossCleared()
-        {
-            _mapView.Teardown();
-            _mapVm.Dispose();
-            _runScope.Clear();
- 
-            _runState.NextRun();
-            BuildRunMap();
-        }
+        
  
         private void OnDestroy()
         {
@@ -84,10 +71,9 @@ namespace Gameplay.NodeSelection.UI
             _cts?.Dispose();
  
             _mapView?.Teardown();
-            _mapVm?.Dispose();
-            _runScope.Dispose();
- 
             _panelMenuVm?.Dispose();
+            _runScope.Dispose();
+            _flow?.Dispose();
             _runState?.Dispose();
  
             if (_nodePrefabHandle.IsValid())
