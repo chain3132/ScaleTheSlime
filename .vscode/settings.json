@@ -67,5 +67,5 @@
         "*.sln": "*.csproj",
         "*.slnx": "*.csproj"
     },
-    "dotnet.defaultSolution": "ScaleTheSlime_chain.slnx"
+    "dotnet.defaultSolution": "ScaleTheSlime.slnx"
 }
