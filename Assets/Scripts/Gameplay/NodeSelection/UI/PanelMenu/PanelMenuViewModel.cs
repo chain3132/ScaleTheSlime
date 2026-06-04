@@ -18,7 +18,7 @@ namespace Gameplay.NodeSelection.UI
             
             TurnText = new ReactiveProperty<string>(string.Empty).ToReadOnlyReactiveProperty();
             ClockText = Observable
-                .Interval(TimeSpan.FromMinutes(1))
+                .Interval(TimeSpan.FromSeconds(1))
                 .Select(_ => DateTime.Now.ToString("HH:mm"))
                 .ToReadOnlyReactiveProperty(DateTime.Now.ToString("HH:mm"));
             

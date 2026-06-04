@@ -87,7 +87,7 @@ namespace Gameplay.NodeSelection.UI
             _mapVm?.Dispose();
             _runScope.Dispose();
  
-            //_panelMenuVm?.Dispose();
+            _panelMenuVm?.Dispose();
             _runState?.Dispose();
  
             if (_nodePrefabHandle.IsValid())
