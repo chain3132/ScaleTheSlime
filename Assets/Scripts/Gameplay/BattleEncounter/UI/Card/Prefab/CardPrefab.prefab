@@ -875,6 +875,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf71989d2b51b0d43b89d348cb3bb2fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Gameplay.BattleEncounter.UI.Card.CardView
+  cardBackground: {fileID: 5859681655910390345}
+  cardArt: {fileID: 4260604300985235188}
+  cardHeader: {fileID: 5070419879957655829}
+  cardIcon: {fileID: 3092807795231894551}
+  cardFrameLeft: {fileID: 0}
+  cardIconRight: {fileID: 0}
+  headerText: {fileID: 728548125939806986}
 --- !u!1 &7829149154009303226
 GameObject:
   m_ObjectHideFlags: 0

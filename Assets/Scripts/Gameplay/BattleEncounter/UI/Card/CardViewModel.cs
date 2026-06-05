@@ -1,16 +1,17 @@
 using UnityEngine;
 
-public class CardViewModel : MonoBehaviour
+namespace Gameplay.BattleEncounter.UI.Card
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    
+    public class CardViewModel
     {
-        
-    }
+        public string DisplayName { get; }
+        public Sprite Art { get; }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        public CardViewModel(string displayName, Sprite art)
+        {
+            DisplayName = displayName;
+            Art = art;
+        }
     }
 }

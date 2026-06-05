@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -20,10 +21,17 @@ namespace Gameplay.BattleEncounter.UI.Card
         private Image cardFrameLeft;
         [SerializeField]
         private Image cardIconRight;
-        
+        [SerializeField]
+        private TMP_Text headerText;
 
         #endregion
-        
+
+        public void Bind(CardViewModel vm)
+        {
+            if (cardArt != null) cardArt.sprite = vm.Art;
+            if (headerText != null) headerText.text = vm.DisplayName;
+        }
+
         public void TestClick()
         {
             Debug.Log("Card Clicked");
