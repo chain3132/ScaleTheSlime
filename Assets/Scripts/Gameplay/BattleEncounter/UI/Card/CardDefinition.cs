@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using Gameplay.BattleEncounter.UI.Card.Enum;
 using UnityEngine;
 
 namespace Gameplay.BattleEncounter.UI.Card
@@ -8,6 +10,8 @@ namespace Gameplay.BattleEncounter.UI.Card
         public string Id;
         public string DisplayName;
         public CardSprites Art;
-        
+        public CardTarget PlayTarget;          
+        public CardKeyword Keywords;        
+        public List<CardEffectData> Effects;
     }
 }
