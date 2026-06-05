@@ -23,7 +23,7 @@ namespace AmplifyShaderEditor
 
 		private readonly string[] m_channelTypeStr = { "Red Channel", "Green Channel", "Blue Channel", "Alpha Channel" };
 		private readonly string[] m_channelTypeVal = { "r", "g", "b", "a" };
-		
+
 		[SerializeField]
 		private int m_selectedChannelInt = 0;
 
@@ -37,7 +37,7 @@ namespace AmplifyShaderEditor
 
 		[SerializeField]
 		private InlineProperty m_inlineMaxSamples = new InlineProperty( 16 );
-		
+
 		[SerializeField]
 		private int m_sidewallSteps = 2;
 
@@ -58,12 +58,12 @@ namespace AmplifyShaderEditor
 
 		[SerializeField]
 		private Vector2 m_CurvatureVector = new Vector2( 0, 0 );
-		
+
 		private string m_functionHeader = "POM( {0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}, {9}, {10}, {11}, {12}, {13}, {14} )";
 		private string m_functionBody = string.Empty;
 
 		//private const string WorldDirVarStr = "worldViewDir";
-		
+
 		private InputPort m_uvPort;
 		private InputPort m_texPort;
 		private InputPort m_ssPort;
@@ -131,14 +131,7 @@ namespace AmplifyShaderEditor
 		public override void OnConnectedOutputNodeChanges( int outputPortId, int otherNodeId, int otherPortId, string name, WirePortDataType type )
 		{
 			base.OnConnectedOutputNodeChanges( outputPortId, otherNodeId, otherPortId, name, type );
-			if( !m_texPort.CheckValidType( type ) )
-			{
-				m_texPort.FullDeleteConnections();
-				UIUtils.ShowMessage( UniqueId, "Parallax Occlusion Mapping node only accepts SAMPLER2D, SAMPLER3D and SAMPLER2DARRAY input types.\nTexture Object connected changed to "+ type + ", connection was lost, please review and update accordingly.", MessageSeverity.Warning );
-			} else
-			{
-				m_texPort.MatchPortToConnection();
-			}
+			m_texPort.MatchPortToConnection();
 			UpdateIndexPort();
 		}
 
@@ -268,14 +261,14 @@ namespace AmplifyShaderEditor
 				if ( !dataCollector.DirtyNormal )
 					dataCollector.ForceNormal = true;
 
-				
+
 				if ( dataCollector.IsTemplate )
 				{
-					viewDirTan = dataCollector.TemplateDataCollectorInstance.GetTangentViewDir( CurrentPrecisionType );
+					viewDirTan = dataCollector.TemplateDataCollectorInstance.GetViewDir( CurrentPrecisionType, space: ViewSpace.Tangent );
 				}
 				else
 				{
-					viewDirTan = GeneratorUtils.GenerateViewDirection( ref dataCollector, UniqueId, ViewSpace.Tangent );
+					viewDirTan = GeneratorUtils.GenerateViewDirection( ref dataCollector, UniqueId, space: ViewSpace.Tangent );
 					//dataCollector.AddToInput( UniqueId, SurfaceInputs.VIEW_DIR, m_currentPrecisionType );
 					//viewDirTan = Constants.InputVarStr + "." + UIUtils.GetInputValueFromType( SurfaceInputs.VIEW_DIR );
 				}
@@ -298,27 +291,27 @@ namespace AmplifyShaderEditor
 			}
 			else
 			{
-				dataCollector.AddToInput( UniqueId, SurfaceInputs.WORLD_NORMAL, CurrentPrecisionType );
+				dataCollector.AddToInput( UniqueId, SurfaceInputs.WORLD_NORMAL, UIUtils.CurrentWindow.CurrentGraph.CurrentPrecision );
 				dataCollector.AddToInput( UniqueId, SurfaceInputs.INTERNALDATA, addSemiColon: false );
 				normalWorld = GeneratorUtils.GenerateWorldNormal( ref dataCollector, UniqueId );
 			}
 
-			string worldViewDir = GeneratorUtils.GenerateViewDirection( ref dataCollector, UniqueId, ViewSpace.World );
-			
-			string dx = "ddx("+ textcoords + ")";
-			string dy = "ddy(" + textcoords + ")";
+			string worldViewDir = GeneratorUtils.GenerateViewDirection( ref dataCollector, UniqueId, space: ViewSpace.World );
+
+			string dx = "ddx( " + textcoords + " )";
+			string dy = "ddy( " + textcoords + " )";
 
 			string refPlane = m_defaultRefPlane.ToString();
 			if ( m_refPlanePort.IsConnected )
 				refPlane = m_refPlanePort.GeneratePortInstructions( ref dataCollector );
 
 
-			string curvature = "float2("+ m_CurvatureVector.x + "," + m_CurvatureVector.y + ")";
+			string curvature = "float2( "+ m_CurvatureVector.x + ", " + m_CurvatureVector.y + " )";
 			if ( m_useCurvature )
 			{
-				dataCollector.AddToProperties( UniqueId, "[Header(Parallax Occlusion Mapping)]", 300 );
-				dataCollector.AddToProperties( UniqueId, "_CurvFix(\"Curvature Bias\", Range( 0 , 1)) = 1", 301 );
-				dataCollector.AddToUniforms( UniqueId, "uniform float _CurvFix;" );
+				dataCollector.AddToProperties( UniqueId, "[Header( Parallax Occlusion Mapping )]", 300 );
+				dataCollector.AddToProperties( UniqueId, "_CurvFix(\"Curvature Bias\", Range( 0, 1 ) ) = 1", 301 );
+				dataCollector.AddToUniforms( UniqueId, "float _CurvFix;", true );
 
 				if ( m_curvaturePort.IsConnected )
 					curvature = m_curvaturePort.GeneratePortInstructions( ref dataCollector );
@@ -335,17 +328,12 @@ namespace AmplifyShaderEditor
 				m_texCoordsHelper.ContainerGraph = ContainerGraph;
 				m_texCoordsHelper.SetBaseUniqueId( UniqueId, true );
 				m_texCoordsHelper.RegisterPropertyOnInstancing = false;
-				m_texCoordsHelper.AddGlobalToSRPBatcher = true;
 			}
 
-			if( outsideGraph.IsInstancedShader )
-			{
-				m_texCoordsHelper.CurrentParameterType = PropertyType.InstancedProperty;
-			}
-			else
-			{
-				m_texCoordsHelper.CurrentParameterType = PropertyType.Global;
-			}
+			var textureProperty = m_texPort.GetOutputNodeWhichIsNotRelay( 0 ) as TexturePropertyNode;
+			m_texCoordsHelper.AddGlobalToSRPBatcher = ( textureProperty != null ) ? ( textureProperty.CurrentParameterType != PropertyType.Global ) : true;
+			m_texCoordsHelper.CurrentParameterType = PropertyType.Global;
+
 			m_texCoordsHelper.ResetOutputLocals();
 			m_texCoordsHelper.SetRawPropertyName( texture + "_ST" );
 			textCoordsST = m_texCoordsHelper.GenerateShaderForOutput( 0, ref dataCollector, false );
@@ -412,12 +400,12 @@ namespace AmplifyShaderEditor
 					IOUtils.AddFunctionHeader( ref m_functionBody, "inline float2 POM( UNITY_DECLARE_TEX2DARRAY_NOSAMPLER(heightMap), SamplerState samplerheightMap, float2 uvs, float2 dx, float2 dy, float3 normalWorld, float3 viewWorld, float3 viewDirTan, int minSamples, int maxSamples, int sidewallSteps, float parallax, float refPlane, float2 tilling, float2 curv, int index )" );
 				break;
 			}
-			
+
 			IOUtils.AddFunctionLine( ref m_functionBody, "float3 result = 0;" );
-			IOUtils.AddFunctionLine( ref m_functionBody, "int stepIndex = 0;" );
-			//IOUtils.AddFunctionLine( ref m_functionBody, "int numSteps = ( int )( minSamples + dot( viewWorld, normalWorld ) * ( maxSamples - minSamples ) );" );
-			//IOUtils.AddFunctionLine( ref m_functionBody, "int numSteps = ( int )lerp( maxSamples, minSamples, length( fwidth( uvs ) ) * 10 );" );
-			IOUtils.AddFunctionLine( ref m_functionBody, "int numSteps = ( int )lerp( (float)maxSamples, (float)minSamples, saturate( dot( normalWorld, viewWorld ) ) );" );
+			IOUtils.AddFunctionLine( ref m_functionBody, "float stepIndex = 0;" );
+			//IOUtils.AddFunctionLine( ref m_functionBody, "float numSteps = ( float )( minSamples + dot( viewWorld, normalWorld ) * ( maxSamples - minSamples ) );" );
+			//IOUtils.AddFunctionLine( ref m_functionBody, "float numSteps = ( float )lerp( maxSamples, minSamples, length( fwidth( uvs ) ) * 10 );" );
+			IOUtils.AddFunctionLine( ref m_functionBody, "float numSteps = floor( lerp( (float)maxSamples, (float)minSamples, saturate( dot( normalWorld, viewWorld ) ) ) );" );
 			IOUtils.AddFunctionLine( ref m_functionBody, "float layerHeight = 1.0 / numSteps;" );
 			IOUtils.AddFunctionLine( ref m_functionBody, "float2 plane = parallax * ( viewDirTan.xy / viewDirTan.z );" );
 			IOUtils.AddFunctionLine( ref m_functionBody, "uvs.xy += refPlane * plane;" );
@@ -472,8 +460,8 @@ namespace AmplifyShaderEditor
 
 			if ( m_sidewallSteps > 0 || m_sidewallStepsPort.IsConnected )
 			{
-				IOUtils.AddFunctionLine( ref m_functionBody, "int sectionSteps = sidewallSteps;" );
-				IOUtils.AddFunctionLine( ref m_functionBody, "int sectionIndex = 0;" );
+				IOUtils.AddFunctionLine( ref m_functionBody, "float sectionSteps = sidewallSteps;" );
+				IOUtils.AddFunctionLine( ref m_functionBody, "float sectionIndex = 0;" );
 				IOUtils.AddFunctionLine( ref m_functionBody, "float newZ = 0;" );
 				IOUtils.AddFunctionLine( ref m_functionBody, "float newHeight = 0;" );
 				IOUtils.AddFunctionLine( ref m_functionBody, "while ( sectionIndex < sectionSteps )" );
@@ -517,24 +505,33 @@ namespace AmplifyShaderEditor
 
 			if ( m_useCurvature )
 			{
-				IOUtils.AddFunctionLine( ref m_functionBody, "#ifdef UNITY_PASS_SHADOWCASTER" );
-				IOUtils.AddFunctionLine( ref m_functionBody, "if ( unity_LightShadowBias.z == 0.0 )" );
-				IOUtils.AddFunctionLine( ref m_functionBody, "{" );
-				IOUtils.AddFunctionLine( ref m_functionBody, "#endif" );
+				if ( !dataCollector.IsSRP )
+				{
+					IOUtils.AddFunctionLine( ref m_functionBody, "#ifdef UNITY_PASS_SHADOWCASTER" );
+					IOUtils.AddFunctionLine( ref m_functionBody, "if ( unity_LightShadowBias.z == 0.0 )" );
+					IOUtils.AddFunctionLine( ref m_functionBody, "{" );
+					IOUtils.AddFunctionLine( ref m_functionBody, "#endif" );
+				}
 				IOUtils.AddFunctionLine( ref m_functionBody, " \tif ( result.z > 1 )" );
 				IOUtils.AddFunctionLine( ref m_functionBody, " \t \tclip( -1 );" );
-				IOUtils.AddFunctionLine( ref m_functionBody, "#ifdef UNITY_PASS_SHADOWCASTER" );
-				IOUtils.AddFunctionLine( ref m_functionBody, "}" );
-				IOUtils.AddFunctionLine( ref m_functionBody, "#endif" );
+				if ( !dataCollector.IsSRP )
+				{
+					IOUtils.AddFunctionLine( ref m_functionBody, "#ifdef UNITY_PASS_SHADOWCASTER" );
+					IOUtils.AddFunctionLine( ref m_functionBody, "}" );
+					IOUtils.AddFunctionLine( ref m_functionBody, "#endif" );
+				}
 			}
 
 			if ( m_clipEnds )
 			{
 				IOUtils.AddFunctionLine( ref m_functionBody, "result.xy = uvs.xy + finalTexOffset;" );
-				IOUtils.AddFunctionLine( ref m_functionBody, "#ifdef UNITY_PASS_SHADOWCASTER" );
-				IOUtils.AddFunctionLine( ref m_functionBody, "if ( unity_LightShadowBias.z == 0.0 )" );
-				IOUtils.AddFunctionLine( ref m_functionBody, "{" );
-				IOUtils.AddFunctionLine( ref m_functionBody, "#endif" );
+				if ( !dataCollector.IsSRP )
+				{
+					IOUtils.AddFunctionLine( ref m_functionBody, "#ifdef UNITY_PASS_SHADOWCASTER" );
+					IOUtils.AddFunctionLine( ref m_functionBody, "if ( unity_LightShadowBias.z == 0.0 )" );
+					IOUtils.AddFunctionLine( ref m_functionBody, "{" );
+					IOUtils.AddFunctionLine( ref m_functionBody, "#endif" );
+				}
 				IOUtils.AddFunctionLine( ref m_functionBody, " \tif ( result.x < 0 )" );
 				IOUtils.AddFunctionLine( ref m_functionBody, " \t \tclip( -1 );" );
 				IOUtils.AddFunctionLine( ref m_functionBody, " \tif ( result.x > tilling.x )" );
@@ -543,9 +540,12 @@ namespace AmplifyShaderEditor
 				IOUtils.AddFunctionLine( ref m_functionBody, " \t \tclip( -1 );" );
 				IOUtils.AddFunctionLine( ref m_functionBody, " \tif ( result.y > tilling.y )" );
 				IOUtils.AddFunctionLine( ref m_functionBody, " \t \tclip( -1 );" );
-				IOUtils.AddFunctionLine( ref m_functionBody, "#ifdef UNITY_PASS_SHADOWCASTER" );
-				IOUtils.AddFunctionLine( ref m_functionBody, "}" );
-				IOUtils.AddFunctionLine( ref m_functionBody, "#endif" );
+				if ( !dataCollector.IsSRP )
+				{
+					IOUtils.AddFunctionLine( ref m_functionBody, "#ifdef UNITY_PASS_SHADOWCASTER" );
+					IOUtils.AddFunctionLine( ref m_functionBody, "}" );
+					IOUtils.AddFunctionLine( ref m_functionBody, "#endif" );
+				}
 				IOUtils.AddFunctionLine( ref m_functionBody, "return result.xy;" );
 			}
 			else
