@@ -1669,6 +1669,7 @@ GameObject:
   - component: {fileID: 1851462480}
   - component: {fileID: 1851462486}
   - component: {fileID: 1851462485}
+  - component: {fileID: 1851462488}
   m_Layer: 0
   m_Name: Spine GameObject (raptor)
   m_TagString: Untagged
@@ -1967,6 +1968,26 @@ MonoBehaviour:
     originalMaterial: {fileID: 2100000, guid: 3d645292a7b9c7547bf7b14caa569410, type: 2}
     replacementMaterial: {fileID: 2100000, guid: b4a994702bba90348beb1c28734bda8b, type: 2}
   previousSkeletonRenderer: {fileID: 1851462481}
+  wasUpgradedTo43: 1
+--- !u!114 &1851462488
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1851462479}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26947ae098a8447408d80c0c86e35b48, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: spine-unity::Spine.Unity.SkeletonRendererCustomMaterials
+  skeletonRenderer: {fileID: 1851462485}
+  customSlotMaterials: []
+  customMaterialOverrides:
+  - overrideDisabled: 1
+    originalMaterial: {fileID: 2100000, guid: 3d645292a7b9c7547bf7b14caa569410, type: 2}
+    replacementMaterial: {fileID: 0}
+  previousSkeletonRenderer: {fileID: 0}
   wasUpgradedTo43: 1
 --- !u!1 &2051539989
 GameObject:
