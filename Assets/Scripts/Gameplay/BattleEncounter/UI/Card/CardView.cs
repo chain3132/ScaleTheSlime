@@ -28,8 +28,24 @@ namespace Gameplay.BattleEncounter.UI.Card
 
         public void Bind(CardViewModel vm)
         {
-            if (cardArt != null) cardArt.sprite = vm.Art;
+            var s = vm.Definition.Art;
+            if (s == null) return;
+
+            Apply(cardBackground, s.CardBackground, true);
+            Apply(cardArt, s.CardArt, true);
+            Apply(cardHeader, s.CardHeader, true);
             if (headerText != null) headerText.text = vm.DisplayName;
+
+            Apply(cardIcon, s.CardIcon, s.IsSpecialCard);
+            Apply(cardFrameLeft, s.CardFrameLeft, s.IsSpecialCard);
+            Apply(cardIconRight, s.CardFrameRight, s.IsSpecialCard);
+        }
+
+        private static void Apply(Image image, Sprite sprite, bool visible)
+        {
+            if (image == null) return;
+            image.gameObject.SetActive(visible);
+            if (visible) image.sprite = sprite;
         }
 
         public void TestClick()

@@ -211,6 +211,54 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &579890436
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 579890438}
+  - component: {fileID: 579890437}
+  m_Layer: 0
+  m_Name: HandController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &579890437
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 579890436}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f9e900e71f981a428c7a126c9fbd52a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HandController
+  _rack: {fileID: 2079019086}
+  _startingDeck: {fileID: 11400000, guid: 249893e5d38f8484aa159a640dc7c1f2, type: 2}
+  _seed: 12345
+  _startingHand: 5
+--- !u!4 &579890438
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 579890436}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 843.54016, y: 443.7493, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1043501256
 GameObject:
   m_ObjectHideFlags: 0
@@ -436,7 +484,7 @@ GameObject:
   - component: {fileID: 2079019082}
   - component: {fileID: 2079019086}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: CardRackCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -536,7 +584,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eba486a8e4084dc4a9f7f75cfe8af315, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Gameplay.BattleEncounter.UI.Card.CardRack
-  _cardPrefab: {fileID: 2136575188985974761, guid: cce6ed48209ee5e40aa2898226471478, type: 3}
+  _cardPrefabAddress: Assets/Scripts/Gameplay/BattleEncounter/UI/Card/Prefab/CardPrefab.prefab
   _drawSpline: {fileID: 1043501257}
   _drawDuration: 0.4
   _arrangeDuration: 0.2
@@ -544,8 +592,6 @@ MonoBehaviour:
   _maxStep: 0.2
   _maxSpread: 0.95
   _stagger: 0.08
-  _testDrawOnStart: 1
-  _testDrawCount: 7
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -554,3 +600,4 @@ SceneRoots:
   - {fileID: 2079019085}
   - {fileID: 1155597021}
   - {fileID: 1043501258}
+  - {fileID: 579890438}

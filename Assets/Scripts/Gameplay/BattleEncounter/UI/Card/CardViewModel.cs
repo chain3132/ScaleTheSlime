@@ -1,17 +1,18 @@
+using Gameplay.BattleEncounter.UI.Card.Data;
 using UnityEngine;
 
 namespace Gameplay.BattleEncounter.UI.Card
 {
-    
     public class CardViewModel
     {
-        public string DisplayName { get; }
-        public Sprite Art { get; }
+        public Data.Card Card { get; }
+        public CardDefinition Definition => Card.Definition;
+        public string DisplayName => Definition.DisplayName;
+        public Sprite Art => Definition.Art != null ? Definition.Art.CardArt : null;
 
-        public CardViewModel(string displayName, Sprite art)
+        public CardViewModel(Data.Card card)
         {
-            DisplayName = displayName;
-            Art = art;
+            Card = card;
         }
     }
 }

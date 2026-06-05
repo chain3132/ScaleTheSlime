@@ -4,14 +4,16 @@ using Cysharp.Threading.Tasks;
 using LitMotion;
 using LitMotion.Extensions;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
+using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.Splines;
 
 namespace Gameplay.BattleEncounter.UI.Card
 {
     public class CardRack : MonoBehaviour
     {
-        [SerializeField]
-        private CardView _cardPrefab;
+        [SerializeField] 
+        private string _cardPrefabAddress = "CardPrefab";
         [SerializeField]
         private SplineContainer _drawSpline;
         [SerializeField]
@@ -29,28 +31,28 @@ namespace Gameplay.BattleEncounter.UI.Card
         [SerializeField]
         private float _stagger = 0.08f;
 
-        [Header("Debug")]
-        [SerializeField]
-        private bool _testDrawOnStart;
-        [SerializeField]
-        private int _testDrawCount = 5;
-
         private readonly List<CardView> _hand = new();
+        private AsyncOperationHandle<GameObject> _cardPrefabHandle;
+        private GameObject _cardPrefab;
 
-        private async UniTaskVoid Start()
+        public async UniTask InitializeAsync(CancellationToken ct)
         {
-            if (!_testDrawOnStart) return;
+            if (_cardPrefab != null) return; 
+            _cardPrefabHandle = Addressables.LoadAssetAsync<GameObject>(_cardPrefabAddress);
+            _cardPrefab = await _cardPrefabHandle.ToUniTask(cancellationToken: ct);
+        }
 
-            var cards = new List<CardViewModel>(_testDrawCount);
-            for (int i = 0; i < _testDrawCount; i++)
-                cards.Add(new CardViewModel($"Card {i + 1}", null));
-
-            await DrawManyAsync(cards, this.GetCancellationTokenOnDestroy());
+        private void OnDestroy()
+        {
+            if (_cardPrefabHandle.IsValid())
+                Addressables.Release(_cardPrefabHandle);
         }
 
         public async UniTask DrawAsync(CardViewModel vm, CancellationToken ct)
         {
-            var card = Instantiate(_cardPrefab, transform);
+            if (_cardPrefab == null) return; 
+
+            var card = Instantiate(_cardPrefab, transform).GetComponent<CardView>();
             card.Bind(vm);
             _hand.Add(card);
 
