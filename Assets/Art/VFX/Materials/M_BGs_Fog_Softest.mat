@@ -172,7 +172,7 @@ Material:
     - _Src: 5
     - _SrcBlend: 1
     - _SrcBlendAlpha: 1
-    - _StaticAlphaInvert: 0
+    - _StaticAlphaInvert: 0.9
     - _StaticAlphaRotation: 0
     - _Surface: 0
     - _TextureRotation: 0
