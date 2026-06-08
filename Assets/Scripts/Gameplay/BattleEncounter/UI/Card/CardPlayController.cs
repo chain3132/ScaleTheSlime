@@ -75,12 +75,18 @@ namespace Gameplay.BattleEncounter.UI.Card
                 case CardTarget.Background:
                     return RectTransformUtility.RectangleContainsScreenPoint(_playZoneRect, mousePosition, null);
                 case CardTarget.Enemy:
-                    return false; 
+                    return TryGetEnemyUnderMouse(mousePosition);; 
                 default:
                     return false; // None 
             }
         }
-
+        private bool TryGetEnemyUnderMouse(Vector2 screenPos)
+        {
+            Vector2 world = Camera.main.ScreenToWorldPoint(screenPos);
+            Collider2D hit = Physics2D.OverlapPoint(world);
+            if (hit == null || !hit.CompareTag("Enemy")) return false;   
+            return true;
+        }
         private void UpdateArrow(Vector2 mousePosition, Vector2 cardPosition)
         {
             var parent = (RectTransform)_arrowRT.parent;

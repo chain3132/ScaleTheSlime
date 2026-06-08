@@ -112,7 +112,6 @@ namespace Gameplay.BattleEncounter.UI.Card
             _isDragging = false; 
             bool played = _cardPlayController.EndDrag(eventData.position);
             if (!played) ResetDragVisual();
-            
         }
 
         private void ResetDragVisual()
