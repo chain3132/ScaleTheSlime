@@ -84,8 +84,8 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _VertexDisplacementNoise:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
+        m_Texture: {fileID: 2800000, guid: eb8737d8330750f49b46c22bb7677292, type: 3}
+        m_Scale: {x: 0.1, y: 0.1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
         m_Texture: {fileID: 0}
@@ -116,8 +116,8 @@ Material:
     - _CoreIntensity: 0
     - _CorePower: 0
     - _Cull: 0
-    - _CustomData1XAffectsStrength: 1
-    - _CustomData1YAffectsSpeed: 1
+    - _CustomData1XAffectsStrength: 0.487
+    - _CustomData1YAffectsSpeed: 0.872
     - _Cutoff: 0.5
     - _DepthFadeDivide: 1
     - _DetailAlbedoMapScale: 1
@@ -150,13 +150,13 @@ Material:
     - _Surface: 0
     - _TextureRotation: 0
     - _UVBasedDisplacementMaskDisplacement: -0.63
-    - _UVBasedDisplacementMaskSoften: 2
+    - _UVBasedDisplacementMaskSoften: 5.46
     - _UVSinWaveFrequency: 1
-    - _UVSinWaveSpeed: 1
+    - _UVSinWaveSpeed: 0.93
     - _UseDepthFade: 1
     - _UseVertexNormals: 0
     - _VertexDisplacementNoiseRotation: 0
-    - _VertexDisplacementNoiseStrength: 0
+    - _VertexDisplacementNoiseStrength: 0.8
     - _WorkflowMode: 1
     - _ZTest: 2
     - _ZWrite: 0
@@ -168,11 +168,11 @@ Material:
     - _GradientShapeChannel: {r: 0, g: 1, b: 0, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
     - _TextureChannel: {r: 1, g: 0, b: 0, a: 0}
-    - _UVBasedDisplacementMaskChannel: {r: 0, g: 1, b: 0, a: 0}
-    - _UVSinWaveStrength: {r: 0, g: 1, b: 0, a: 0}
-    - _VertexDisplacementAmount: {r: 0.5, g: 0, b: 0, a: 0}
-    - _VertexDisplacementNoiseChannel: {r: 0, g: 0, b: 0, a: 0}
-    - _VertexDisplacementNoisePanSpeed: {r: 0, g: 0, b: 0, a: 0}
+    - _UVBasedDisplacementMaskChannel: {r: 0, g: 0.81, b: 0, a: 0}
+    - _UVSinWaveStrength: {r: 0, g: 10, b: 0, a: 0}
+    - _VertexDisplacementAmount: {r: 15.91, g: 1, b: 0, a: 0}
+    - _VertexDisplacementNoiseChannel: {r: 0, g: 0.29, b: 0, a: 0}
+    - _VertexDisplacementNoisePanSpeed: {r: 0, g: 1.69, b: 0, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
 --- !u!114 &6184326343352367262
