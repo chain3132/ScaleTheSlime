@@ -82,9 +82,9 @@ namespace Gameplay.BattleEncounter.UI.Card
             RectTransformUtility.ScreenPointToLocalPointInRectangle(parent, mousePosition, null, out Vector2 b);
 
             Vector2 dir = b - a;
-            _arrowRT.sizeDelta = new Vector2(dir.magnitude, thickness);
+            _arrowRT.sizeDelta = new Vector2(thickness, dir.magnitude);
             _arrowRT.anchoredPosition = a + dir * 0.5f;
-            _arrowRT.localEulerAngles = new Vector3(0, 0, Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg);
+            _arrowRT.localEulerAngles = new Vector3(0, 0, Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg - 90);
         }
 
         private void IfInPlayZone(Vector2 mousePosition)
