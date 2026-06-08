@@ -11,10 +11,10 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a6b194f808b1af6499c93410e504af42, type: 3}
   m_Name: princess_Atlas
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier: spine-unity::Spine.Unity.SpineAtlasAsset
   serializedMaterialOverrides: []
   textureLoadingMode: 0
   onDemandTextureLoader: {fileID: 0}
   atlasFile: {fileID: 4900000, guid: 6b1f8557d8f94ad4889927acc11eb4ef, type: 3}
   materials:
-  - {fileID: 2100000, guid: d23bbde54d421844aac975f32833e93c, type: 2}
+  - {fileID: 2100000, guid: bf4d5177d2fa15f418f564dbf35dfab6, type: 2}

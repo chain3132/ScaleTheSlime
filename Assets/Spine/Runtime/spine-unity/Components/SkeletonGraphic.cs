@@ -643,6 +643,7 @@ namespace Spine.Unity {
 		}
 
 		public void PrepareInstructionsAndRenderers (bool isInRebuild = false) {
+			skeleton.SetColor(this.color);
 			if (UsesSingleSubmesh) {
 				MeshGenerator.GenerateSingleSubmeshInstruction(currentInstructions, skeleton, skeletonDataAsset.atlasAssets[0].PrimaryMaterial);
 				if (canvasRenderers.Count > 0)
@@ -872,7 +873,7 @@ namespace Spine.Unity {
 			meshGenerator.settings = meshSettings;
 			meshGenerator.Begin();
 
-			if (!currentInstructions.hasActiveClipping)
+			if (!currentInstructions.hasActiveClipping || workingSubmeshInstructions.Count == 0)
 				meshGenerator.BuildMeshWithArrays(currentInstructions, updateTriangles);
 			else // if (UsesSingleSubmesh) is always true here in SkeletonGraphic, ensured by caller
 				meshGenerator.AddSubmesh(workingSubmeshInstructions.Items[0], updateTriangles);

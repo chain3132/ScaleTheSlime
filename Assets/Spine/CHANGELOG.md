@@ -487,6 +487,8 @@
     |-----|-|-----|
     | `AnimationState.SetCurrent()`     |→| `AnimationState.SetTrack()` |
     | `AnimationState.GetCurrent()`     |→| `AnimationState.GetTrack()` |
+  - Ported the AnimationState additive/hold rework from spine-libgdx. `MixBlend`, `MixDirection`, `holdPrevious`, and `interruptAlpha` are no longer used. Timeline mixing now uses `MixFrom`, `add`, and `mixOut` parameters, with hold state calculated automatically.
+  - `Animation.Apply()` and `Timeline.Apply()` now take a `MixFrom` value instead of the previous boolean `fromSetup` argument. Replace `true` with `MixFrom.Setup` and `false` with `MixFrom.Current`. If you upgraded to an intermediate 4.3 runtime that still used `fromSetup`, update those call sites again.
 
 ### Unity
 
@@ -1417,7 +1419,7 @@
 - **Breaking changes**
   - Renamed `TrackEntry` `AttachmentThreshold` to `MixAttachmentThreshold`, renamed `DrawOrderThreshold` to `MixDrawOrderThreshold`.
   - Changed signature of `Skeleton.UpdateWorldTransform()` to `UpdateWorldTransform(Skeleton.Physics physics)`. The default replacement for `skeleton.UpdateWorldTransform()` calls is `skeleton.UpdateWorldTransform(Skeleton.Physics.Update)`. If you are certain that a subsequent call to `skeleton.UpdateWorldTransform(Skeleton.Physics.Update)` follows in the same frame, you can pass `Skeleton.Physics.Pose` as argument instead of `Skeleton.Physics.Update`.
-
+  
 ### Unity
 
 - **Officially supported Unity versions are 2017.1-6000.1**.
