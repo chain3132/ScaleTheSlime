@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 namespace Gameplay.BattleEncounter.UI.Card
 {
-    public class CardView : MonoBehaviour ,IPointerEnterHandler,IPointerExitHandler
+    public class CardView : MonoBehaviour ,IPointerEnterHandler,IPointerExitHandler,IBeginDragHandler, IDragHandler, IEndDragHandler
     {
         #region CardView References
         [Header("Card View References")]
@@ -26,8 +26,19 @@ namespace Gameplay.BattleEncounter.UI.Card
 
         #endregion
 
-        public void Bind(CardViewModel vm)
+        public Data.Card Card => _card;   
+
+        #region fields
+
+        private CardPlayController _cardPlayController;
+        private Data.Card _card;
+
+        #endregion
+
+        public void Bind(CardViewModel vm,CardPlayController playController)
         {
+            _cardPlayController = playController;
+            _card = vm.Card;
             var s = vm.Definition.Art;
             if (s == null) return;
 
@@ -47,11 +58,7 @@ namespace Gameplay.BattleEncounter.UI.Card
             image.gameObject.SetActive(visible);
             if (visible) image.sprite = sprite;
         }
-
-        public void TestClick()
-        {
-            Debug.Log("Card Clicked");
-        }
+        
 
         public void OnPointerEnter(PointerEventData eventData)
         {
@@ -61,6 +68,21 @@ namespace Gameplay.BattleEncounter.UI.Card
         public void OnPointerExit(PointerEventData eventData)
         {
             Debug.Log("Card Unhovered");
+        }
+
+        public void OnBeginDrag(PointerEventData eventData)
+        {
+            _cardPlayController.BeginDrag(this.transform.position,_card);
+        }
+
+        public void OnDrag(PointerEventData eventData)
+        {
+            _cardPlayController.OnDrag(eventData.position);
+        }
+
+        public void OnEndDrag(PointerEventData eventData)
+        {
+            _cardPlayController.EndDrag(eventData.position);
         }
     }
 }
