@@ -1,5 +1,8 @@
 using System;
+using Cysharp.Threading.Tasks;
 using Gameplay.BattleEncounter.UI.Card.Enum;
+using LitMotion;
+using LitMotion.Extensions;
 using R3;
 using UnityEngine;
 
@@ -116,6 +119,15 @@ namespace Gameplay.BattleEncounter.UI.Card
                     break;
                     
             }
+        }
+        
+        public async UniTask PlayHoverAnim(RectTransform rt)
+        {
+            await LMotion.Create(rt.localScale, Vector3.one * 1.1f, 0.2f).WithEase(Ease.OutBack).BindToLocalScale(rt).ToUniTask();
+        }
+        public async UniTask PlayHoverExitAnim(RectTransform rt)
+        {
+            await LMotion.Create(rt.localScale, Vector3.one, 0.2f).WithEase(Ease.OutBack).BindToLocalScale(rt).ToUniTask();
         }
 
         private void OnDestroy()

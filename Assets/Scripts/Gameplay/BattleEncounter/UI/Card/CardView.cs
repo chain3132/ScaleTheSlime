@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -23,6 +24,8 @@ namespace Gameplay.BattleEncounter.UI.Card
         private Image cardIconRight;
         [SerializeField]
         private TMP_Text headerText;
+        [SerializeField]
+        private RectTransform rtRectTransform;
 
         #endregion
 
@@ -62,12 +65,12 @@ namespace Gameplay.BattleEncounter.UI.Card
 
         public void OnPointerEnter(PointerEventData eventData)
         {
-            Debug.Log("Card Hovered");
+            _cardPlayController.PlayHoverAnim(rtRectTransform).Forget();
         }
 
         public void OnPointerExit(PointerEventData eventData)
         {
-            Debug.Log("Card Unhovered");
+            _cardPlayController.PlayHoverExitAnim(rtRectTransform).Forget();
         }
 
         public void OnBeginDrag(PointerEventData eventData)

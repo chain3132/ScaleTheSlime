@@ -882,6 +882,7 @@ MonoBehaviour:
   cardFrameLeft: {fileID: 0}
   cardIconRight: {fileID: 0}
   headerText: {fileID: 728548125939806986}
+  rtRectTransform: {fileID: 7262689853895157852}
 --- !u!1 &7829149154009303226
 GameObject:
   m_ObjectHideFlags: 0
