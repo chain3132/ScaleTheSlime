@@ -43,7 +43,7 @@ namespace Gameplay.NodeSelection.UI.Map
                 .Subscribe(OnSelect)
                 .AddTo(_disposables);
  
-            // Put the player on the start node at the beginning of a run.
+            // Put the player on the start node at the beginning of a run
             if (_runState.CurrentNodeId.Value < 0)
                 _runState.MoveTo(_map.StartId);
 

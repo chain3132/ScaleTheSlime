@@ -15,6 +15,11 @@ MonoBehaviour:
   m_GroupName: Default Local Group
   m_GUID: a415d580278b3e742b84d46e8cd8bf1f
   m_SerializeEntries:
+  - m_GUID: 13b6e848458469a4b88aacfbee6b4556
+    m_Address: Assets/Scripts/Gameplay/NodeSelection/UI/Prefabs/NodeView.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: cce6ed48209ee5e40aa2898226471478
     m_Address: Assets/Scripts/Gameplay/BattleEncounter/UI/Card/Prefab/CardPrefab.prefab
     m_ReadOnly: 0
