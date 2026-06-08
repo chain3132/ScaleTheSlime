@@ -4,16 +4,31 @@ using Cysharp.Threading.Tasks;
 using LitMotion;
 using LitMotion.Extensions;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
+using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.Splines;
 
 namespace Gameplay.BattleEncounter.UI.Card
 {
     public class CardRack : MonoBehaviour
     {
-        [SerializeField]
-        private CardView _cardPrefab;
+        #region References
+
+        [SerializeField] 
+        private string _cardPrefabAddress = "CardPrefab";
         [SerializeField]
         private SplineContainer _drawSpline;
+        [SerializeField]
+        private CardPlayController _cardPlayController;
+        [SerializeField]
+        private RectTransform _cardContainer;
+        [SerializeField]
+        private RectTransform _discardPilePoint;   
+
+        #endregion
+
+        #region Setup
+
         [SerializeField]
         private float _drawDuration = 0.4f;
         [SerializeField]
@@ -28,30 +43,37 @@ namespace Gameplay.BattleEncounter.UI.Card
         private float _maxSpread = 0.9f; 
         [SerializeField]
         private float _stagger = 0.08f;
+        [SerializeField]
+        private float _showcaseDuration = 0.25f;   
+        [SerializeField]
+        private float _toDiscardDuration = 0.3f;   
 
-        [Header("Debug")]
-        [SerializeField]
-        private bool _testDrawOnStart;
-        [SerializeField]
-        private int _testDrawCount = 5;
+        #endregion
+        
 
         private readonly List<CardView> _hand = new();
+        private AsyncOperationHandle<GameObject> _cardPrefabHandle;
+        private GameObject _cardPrefab;
 
-        private async UniTaskVoid Start()
+        public async UniTask InitializeAsync(CancellationToken ct)
         {
-            if (!_testDrawOnStart) return;
+            if (_cardPrefab != null) return; 
+            _cardPrefabHandle = Addressables.LoadAssetAsync<GameObject>(_cardPrefabAddress);
+            _cardPrefab = await _cardPrefabHandle.ToUniTask(cancellationToken: ct);
+        }
 
-            var cards = new List<CardViewModel>(_testDrawCount);
-            for (int i = 0; i < _testDrawCount; i++)
-                cards.Add(new CardViewModel($"Card {i + 1}", null));
-
-            await DrawManyAsync(cards, this.GetCancellationTokenOnDestroy());
+        private void OnDestroy()
+        {
+            if (_cardPrefabHandle.IsValid())
+                Addressables.Release(_cardPrefabHandle);
         }
 
         public async UniTask DrawAsync(CardViewModel vm, CancellationToken ct)
         {
-            var card = Instantiate(_cardPrefab, transform);
-            card.Bind(vm);
+            if (_cardPrefab == null) return; 
+
+            var card = Instantiate(_cardPrefab, _cardContainer).GetComponent<CardView>();
+            card.Bind(vm,_cardPlayController);
             _hand.Add(card);
 
             int n = _hand.Count;
@@ -66,6 +88,53 @@ namespace Gameplay.BattleEncounter.UI.Card
                 .WithEase(Ease.OutCubic)
                 .Bind(p => rt.anchoredPosition = SplineToAnchored(p))
                 .ToUniTask(ct);
+        }
+
+        public async UniTask PlayCardAsync(Data.Card card, CancellationToken ct)
+        {
+            var view = _hand.Find(c => c.Card == card);
+            if (view == null) return;
+
+            _hand.Remove(view);
+            Arrange();                       
+            var rt = (RectTransform)view.transform;
+            rt.SetAsLastSibling();          
+            var parent = (RectTransform)rt.parent;
+
+            Vector2 ToLocal(Vector2 screen)
+            {
+                RectTransformUtility.ScreenPointToLocalPointInRectangle(parent, screen, null, out var p);
+                return p;
+            }
+
+            
+            Vector2 center = ToLocal(new Vector2(Screen.width * 0.5f, Screen.height * 0.5f));
+            await UniTask.WhenAll(
+                LMotion.Create(rt.anchoredPosition, center, _showcaseDuration)
+                    .WithEase(Ease.OutCubic).BindToAnchoredPosition(rt).ToUniTask(ct),
+                LMotion.Create(rt.localScale, Vector3.one * 1.2f, _showcaseDuration)
+                    .WithEase(Ease.OutCubic).BindToLocalScale(rt).ToUniTask(ct));
+
+            await UniTask.Delay(System.TimeSpan.FromSeconds(0.2f), cancellationToken: ct);
+
+            Vector2 discard = ToLocal(RectTransformUtility.WorldToScreenPoint(null, _discardPilePoint.position));
+            await UniTask.WhenAll(
+                LMotion.Create(rt.anchoredPosition, discard, _toDiscardDuration)
+                    .WithEase(Ease.InCubic).BindToAnchoredPosition(rt).ToUniTask(ct),
+                LMotion.Create(rt.localScale, Vector3.one * 0.2f, _toDiscardDuration)
+                    .WithEase(Ease.InCubic).BindToLocalScale(rt).ToUniTask(ct));
+
+            
+            Destroy(view.gameObject);
+        }
+
+        
+        private void Arrange()
+        {
+            int n = _hand.Count;
+            float step = StepFor(n);
+            for (int i = 0; i < n; i++)
+                TweenToSlot(_hand[i], SlotT(i, n, step));
         }
 
         public async UniTask DrawManyAsync(IReadOnlyList<CardViewModel> vms, CancellationToken ct)

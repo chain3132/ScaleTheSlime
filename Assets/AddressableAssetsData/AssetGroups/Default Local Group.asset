@@ -20,28 +20,8 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 41613ba0f10bf2142ab02c3e4b926217
-    m_Address: Assets/Scripts/Gameplay/NodeSelection/UI/Nodes/ScriptableObjects/NodeDefinitionSOs/NodeDefinition_Start.asset
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 4f0fbc91b49105147993fe30af985495
-    m_Address: Assets/Scripts/Gameplay/NodeSelection/UI/Nodes/ScriptableObjects/NodeDatabaseSOs/NodeDatabase.asset
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 4f94b43e5907da4499d79b1cf82ae367
-    m_Address: Assets/Scripts/Gameplay/NodeSelection/UI/Nodes/ScriptableObjects/NodeDefinitionSOs/NodeDefinition_Minor.asset
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: c53a0600ac564084da9e3b203be37e0c
-    m_Address: Assets/Scripts/Gameplay/NodeSelection/UI/Nodes/ScriptableObjects/NodeDefinitionSOs/NodeDefinition_Elite.asset
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: fabf58c8955b85e4fba2e8bc47e9497a
-    m_Address: Assets/Scripts/Gameplay/NodeSelection/UI/Nodes/ScriptableObjects/NodeDefinitionSOs/NodeDefinition_Boss.asset
+  - m_GUID: cce6ed48209ee5e40aa2898226471478
+    m_Address: Assets/Scripts/Gameplay/BattleEncounter/UI/Card/Prefab/CardPrefab.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 namespace Gameplay.BattleEncounter.UI.Card
 {
-    public class CardView : MonoBehaviour ,IPointerEnterHandler,IPointerExitHandler
+    public class CardView : MonoBehaviour ,IPointerEnterHandler,IPointerExitHandler,IBeginDragHandler, IDragHandler, IEndDragHandler
     {
         #region CardView References
         [Header("Card View References")]
@@ -26,16 +26,39 @@ namespace Gameplay.BattleEncounter.UI.Card
 
         #endregion
 
-        public void Bind(CardViewModel vm)
+        public Data.Card Card => _card;   
+
+        #region fields
+
+        private CardPlayController _cardPlayController;
+        private Data.Card _card;
+
+        #endregion
+
+        public void Bind(CardViewModel vm,CardPlayController playController)
         {
-            if (cardArt != null) cardArt.sprite = vm.Art;
+            _cardPlayController = playController;
+            _card = vm.Card;
+            var s = vm.Definition.Art;
+            if (s == null) return;
+
+            Apply(cardBackground, s.CardBackground, true);
+            Apply(cardArt, s.CardArt, true);
+            Apply(cardHeader, s.CardHeader, true);
             if (headerText != null) headerText.text = vm.DisplayName;
+
+            Apply(cardIcon, s.CardIcon, s.IsSpecialCard);
+            Apply(cardFrameLeft, s.CardFrameLeft, s.IsSpecialCard);
+            Apply(cardIconRight, s.CardFrameRight, s.IsSpecialCard);
         }
 
-        public void TestClick()
+        private static void Apply(Image image, Sprite sprite, bool visible)
         {
-            Debug.Log("Card Clicked");
+            if (image == null) return;
+            image.gameObject.SetActive(visible);
+            if (visible) image.sprite = sprite;
         }
+        
 
         public void OnPointerEnter(PointerEventData eventData)
         {
@@ -45,6 +68,21 @@ namespace Gameplay.BattleEncounter.UI.Card
         public void OnPointerExit(PointerEventData eventData)
         {
             Debug.Log("Card Unhovered");
+        }
+
+        public void OnBeginDrag(PointerEventData eventData)
+        {
+            _cardPlayController.BeginDrag(this.transform.position,_card);
+        }
+
+        public void OnDrag(PointerEventData eventData)
+        {
+            _cardPlayController.OnDrag(eventData.position);
+        }
+
+        public void OnEndDrag(PointerEventData eventData)
+        {
+            _cardPlayController.EndDrag(eventData.position);
         }
     }
 }
