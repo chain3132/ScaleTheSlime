@@ -1,4 +1,7 @@
+using System;
 using Cysharp.Threading.Tasks;
+using LitMotion;
+using LitMotion.Extensions;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -32,10 +35,10 @@ namespace Gameplay.BattleEncounter.UI.Card
         public Data.Card Card => _card;   
 
         #region fields
-
+        private MotionHandle _hoverMotion;
         private CardPlayController _cardPlayController;
         private Data.Card _card;
-
+        private bool _isDragging;
         #endregion
 
         public void Bind(CardViewModel vm,CardPlayController playController)
@@ -65,27 +68,70 @@ namespace Gameplay.BattleEncounter.UI.Card
 
         public void OnPointerEnter(PointerEventData eventData)
         {
-            _cardPlayController.PlayHoverAnim(rtRectTransform).Forget();
+            if (_isDragging) return;    
+            transform.SetAsLastSibling(); 
+            if (_hoverMotion.IsActive()) _hoverMotion.Cancel();
+            {
+                _hoverMotion = LMotion.Create(rtRectTransform.localScale, Vector3.one * 1.1f, 0.15f).WithEase(Ease.OutQuad)
+                    .BindToLocalScale(rtRectTransform);
+            }
         }
 
         public void OnPointerExit(PointerEventData eventData)
         {
-            _cardPlayController.PlayHoverExitAnim(rtRectTransform).Forget();
+            if (_isDragging) return;    
+            ResetDragVisual();
         }
 
         public void OnBeginDrag(PointerEventData eventData)
         {
+            _isDragging = true;  
             _cardPlayController.BeginDrag(this.transform.position,_card);
+            transform.SetAsLastSibling(); 
+            if (_hoverMotion.IsActive()) _hoverMotion.Cancel();
+            {
+                _hoverMotion = LSequence.Create()
+                    .Append(LMotion.Create(rtRectTransform.localScale, Vector3.one * 1.3f , 0.11f)
+                        .WithEase(Ease.OutQuad)
+                        .BindToLocalScale(rtRectTransform))
+                    .Join(LMotion.Create(rtRectTransform.rotation, Quaternion.Euler(0f, 0f, 5f), 0.11f)
+                        .WithEase(Ease.OutQuad)
+                        .BindToLocalRotation(rtRectTransform))
+                    .Run();
+            }
         }
 
         public void OnDrag(PointerEventData eventData)
         {
             _cardPlayController.OnDrag(eventData.position);
+            
         }
 
         public void OnEndDrag(PointerEventData eventData)
         {
-            _cardPlayController.EndDrag(eventData.position);
+            _isDragging = false; 
+            bool played = _cardPlayController.EndDrag(eventData.position);
+            if (!played) ResetDragVisual();
+        }
+
+        private void ResetDragVisual()
+        {
+            if (_hoverMotion.IsActive()) _hoverMotion.Cancel();
+            {
+                _hoverMotion = LSequence.Create()
+                    .Append(LMotion.Create(rtRectTransform.localScale, Vector3.one , 0.11f)
+                        .WithEase(Ease.OutQuad)
+                        .BindToLocalScale(rtRectTransform))
+                    .Join(LMotion.Create(rtRectTransform.rotation, Quaternion.identity, 0.11f)
+                        .WithEase(Ease.OutQuad)
+                        .BindToLocalRotation(rtRectTransform))
+                    .Run();
+            }
+        }
+
+        private void OnDestroy()
+        {
+            if (_hoverMotion.IsActive()) _hoverMotion.Cancel();
         }
     }
 }

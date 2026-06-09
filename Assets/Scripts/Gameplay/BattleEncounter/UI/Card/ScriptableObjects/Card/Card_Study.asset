@@ -28,5 +28,5 @@ MonoBehaviour:
   - Type: 7
     Target: 3
     ValueSource: 1
-    CardValue: 3
+    CardValue: 1
     CustomSource: 3

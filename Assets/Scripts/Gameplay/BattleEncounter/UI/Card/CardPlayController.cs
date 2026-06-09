@@ -50,17 +50,20 @@ namespace Gameplay.BattleEncounter.UI.Card
             UpdateArrow(mousePosition, _origin);
             IfInPlayZone(mousePosition);
         }
-        public void EndDrag(Vector2 mousePosition)
+        public bool EndDrag(Vector2 mousePosition)
         {
             _arrowRT.gameObject.SetActive(false);
             _playZoneUI.SetActive(false);
 
             if (IsValidPlay(_currentCard, mousePosition))
             {
-                _cardPlayed.OnNext(_currentCard);;   
-
+                _cardPlayed.OnNext(_currentCard);
+                _currentCard = null;
+                return true;
             }
             _currentCard = null;
+            return false;
+
         }
 
         private bool IsValidPlay(Data.Card card, Vector2 mousePosition)
@@ -72,12 +75,18 @@ namespace Gameplay.BattleEncounter.UI.Card
                 case CardTarget.Background:
                     return RectTransformUtility.RectangleContainsScreenPoint(_playZoneRect, mousePosition, null);
                 case CardTarget.Enemy:
-                    return false; 
+                    return TryGetEnemyUnderMouse(mousePosition);; 
                 default:
                     return false; // None 
             }
         }
-
+        private bool TryGetEnemyUnderMouse(Vector2 screenPos)
+        {
+            Vector2 world = Camera.main.ScreenToWorldPoint(screenPos);
+            Collider2D hit = Physics2D.OverlapPoint(world);
+            if (hit == null || !hit.CompareTag("Enemy")) return false;   
+            return true;
+        }
         private void UpdateArrow(Vector2 mousePosition, Vector2 cardPosition)
         {
             var parent = (RectTransform)_arrowRT.parent;
@@ -121,14 +130,6 @@ namespace Gameplay.BattleEncounter.UI.Card
             }
         }
         
-        public async UniTask PlayHoverAnim(RectTransform rt)
-        {
-            await LMotion.Create(rt.localScale, Vector3.one * 1.1f, 0.2f).WithEase(Ease.OutBack).BindToLocalScale(rt).ToUniTask();
-        }
-        public async UniTask PlayHoverExitAnim(RectTransform rt)
-        {
-            await LMotion.Create(rt.localScale, Vector3.one, 0.2f).WithEase(Ease.OutBack).BindToLocalScale(rt).ToUniTask();
-        }
 
         private void OnDestroy()
         {

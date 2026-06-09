@@ -27,6 +27,6 @@ MonoBehaviour:
   Effects:
   - Type: 0
     Target: 1
-    ValueSource: 1
+    ValueSource: 2
     CardValue: 3
     CustomSource: 3

@@ -1,6 +1,7 @@
 using System;
 using Gameplay.BattleEncounter.UI.Card;
 using Gameplay.BattleEncounter.UI.Card.Enum;
+using NaughtyAttributes;
 using UnityEngine;
 
 [Serializable]
@@ -11,6 +12,9 @@ public class CardEffectData
 
     [Header("Value")]
     public ValueSource ValueSource;
-    public int CardValue;                  
+    public int CardValue; 
+    private bool UseCardValue => ValueSource == ValueSource.Custom;
+    [ShowIf(nameof(UseCardValue))]
+    [AllowNesting]
     public CustomValueSource CustomSource;
 }
