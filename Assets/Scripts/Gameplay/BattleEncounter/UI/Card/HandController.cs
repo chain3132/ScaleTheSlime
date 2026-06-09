@@ -47,11 +47,11 @@ namespace Gameplay.BattleEncounter.UI.Card
         private void Bind()
         {
             _playController.CardPlayed
-                .SubscribeAwait(async (card, ct) =>
+                .SubscribeAwait(async (play, ct) =>
                 {
-                    await _rack.PlayCardAsync(card, ct);
-                    _deck.Discard(card);
-                }, AwaitOperation.Drop) 
+                    await _rack.PlayCardAsync(play.Card, ct);   
+                    _deck.Discard(play.Card);                    
+                }, AwaitOperation.Drop)
                 .AddTo(this);
         }
         
