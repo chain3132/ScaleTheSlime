@@ -126,6 +126,7 @@ namespace Gameplay.BattleEncounter.UI.Card
 
             
             Destroy(view.gameObject);
+            // change this to object pooling 
         }
 
         
