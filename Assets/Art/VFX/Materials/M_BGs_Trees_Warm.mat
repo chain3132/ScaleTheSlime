@@ -152,7 +152,7 @@ Material:
     - _UVBasedDisplacementMaskDisplacement: -0.63
     - _UVBasedDisplacementMaskSoften: 5.46
     - _UVSinWaveFrequency: 1
-    - _UVSinWaveSpeed: 2.26
+    - _UVSinWaveSpeed: 1.25
     - _UseDepthFade: 1
     - _UseVertexNormals: 0
     - _VertexDisplacementNoiseRotation: 0
