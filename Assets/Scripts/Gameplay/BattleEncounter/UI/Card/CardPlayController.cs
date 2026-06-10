@@ -122,7 +122,6 @@ namespace Gameplay.BattleEncounter.UI.Card
             else
             {
                 _playZoneUI.SetActive(false);
-
             }
             
         }
