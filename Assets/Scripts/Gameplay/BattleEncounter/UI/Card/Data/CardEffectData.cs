@@ -12,9 +12,14 @@ public class CardEffectData
 
     [Header("Value")]
     public ValueSource ValueSource;
-    public int CardValue; 
-    private bool UseCardValue => ValueSource == ValueSource.Custom;
-    [ShowIf(nameof(UseCardValue))]
+    public int CardValue;
+
     [AllowNesting]
+    [ShowIf(nameof(UseCardValue))]
     public CustomValueSource CustomSource;
+    
+    private bool UseCardValue()
+    {
+        return ValueSource == ValueSource.Custom;
+    }
 }

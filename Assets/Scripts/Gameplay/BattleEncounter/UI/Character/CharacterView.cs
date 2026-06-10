@@ -1,3 +1,6 @@
+using System.Threading;
+using Coffee.UIExtensions;
+using Cysharp.Threading.Tasks;
 using Gameplay.BattleEncounter.Characters;
 using Gameplay.BattleEncounter.Characters.Enums;
 using R3;
@@ -12,6 +15,8 @@ namespace Gameplay.BattleEncounter.UI.Characters
 {
     public class CharacterView : MonoBehaviour
     {
+        #region References
+
         [SerializeField] 
         private TMP_Text _hpText;
         [SerializeField] 
@@ -21,28 +26,88 @@ namespace Gameplay.BattleEncounter.UI.Characters
         [SerializeField] 
         private Image _sizeFill;
         [SerializeField]
+        private Image _hpFill;
+        [SerializeField]
+        private UIParticle shieldGainEffect;
+        [SerializeField]
+        private Image shieldIcon;
+        [SerializeField]
+        private Image healthIcon;
+        
+
+        #endregion
+
+        #region Setup
+
+        [SerializeField]
         private Color _sizeColorTinyForm = Color.blue;
         [SerializeField]
         private Color _sizeColorNormal = Color.gray;
         [SerializeField]
         private Color _sizeColorGiantForm = Color.darkOrange;
 
+        #endregion
+        
+        
+
         private readonly CompositeDisposable _bindings = new();
+        private ParticleSystem[] _particles;
+
 
         public void Bind(Character c)
         {
             _bindings.Clear();
 
             if (_hpText != null)
-                c.Health.Subscribe(h => _hpText.text = $"HP {h}/{c.MaxHealth}").AddTo(_bindings);
+                c.Health.Subscribe(h 
+                    => UpdateHealth(h,c.MaxHealth))
+                    .AddTo(_bindings);
             if (_sizeText != null){
-                c.Size.Subscribe(UpdateSizeText).AddTo(_bindings);}
+                c.Size.Subscribe(UpdateSizeText)
+                    .AddTo(_bindings);}
 
             if (_sizeFill != null)
-                c.Form.Subscribe(UpdateFillColor).AddTo(_bindings);
+                c.Form.Subscribe(UpdateFillColor)
+                    .AddTo(_bindings);
             
             if (_shieldText != null)
-                c.Shield.Subscribe(s => _shieldText.text = s > 0 ? $"Shield {s}" : "").AddTo(_bindings);
+                c.Shield.Skip(1).
+                    SubscribeAwait((shield, ct) 
+                        => UpdateShield(shield,ct))
+                    .AddTo(_bindings);
+        }
+        private async UniTask UpdateShield(int shield, CancellationToken ct)
+        {
+            healthIcon.gameObject.SetActive(false);
+            shieldIcon.gameObject.SetActive(true);
+            shieldGainEffect.gameObject.SetActive(true);
+            _particles = shieldGainEffect.GetComponentsInChildren<ParticleSystem>();
+            shieldGainEffect.Play();
+
+            await UniTask.WaitUntil(() => {
+                foreach (var ps in _particles)
+                {
+                    if (ps.IsAlive(true))
+                    {
+                        Debug.Log($"{ps.name} Alive");
+                        return false;
+
+                    }
+                }
+                return true;}, cancellationToken: ct);     
+            Debug.Log("Wait Finished");
+            if (_shieldText != null)
+                _shieldText.text = shield > 0 ? $"{shield}" : "";
+        }
+        private void UpdateHealth(int health, int maxHealth)
+        {
+            _hpText.text = $"{health}/{maxHealth}";
+            if (_hpFill != null)
+            {
+                LMotion.Create(_hpFill.fillAmount, (float)health / maxHealth, 0.2f)
+                    .BindToFillAmount(_hpFill)
+                    .AddTo(_bindings);
+            }
         }
 
         private void UpdateSizeText(int size)
