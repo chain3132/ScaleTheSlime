@@ -6,6 +6,7 @@ using Gameplay.BattleEncounter.Characters;
 using Gameplay.BattleEncounter.Characters.Data;
 using Gameplay.BattleEncounter.UI.Card;
 using Gameplay.BattleEncounter.UI.Characters;
+using Gameplay.NodeSelection.UI;
 using R3;
 using UnityEngine;
 using UnityEngine.UI;
@@ -14,33 +15,65 @@ namespace Gameplay.BattleEncounter.Battle
 {
     public class BattleController : MonoBehaviour
     {
-        [SerializeField] 
+        [SerializeField]
         private PlayerDefinition _playerDefinition;
-        [SerializeField] 
+        [SerializeField]
         private CharacterView _playerView;
-        [SerializeField] 
+        [SerializeField]
         private CardPlayController _playController;
-        [SerializeField] 
+        [SerializeField]
         private HandController _handController;
-        [SerializeField] 
+        [SerializeField]
         private Button _endTurnButton;
-        [SerializeField] 
+        [SerializeField]
         private List<EnemyView> _enemyViews = new();
-        [SerializeField] 
+        [SerializeField]
         private float _betweenEnemyDelay = 0.4f;
+        [SerializeField]
+        private bool _autoStart = true;   
 
         private Player _player;
         private readonly List<Enemy> _enemies = new();
         private BattleContext _context;
         private CardEffectExecutor _executor;
-        private readonly CompositeDisposable _scope = new();
+        private readonly CompositeDisposable _battleScope = new();   
+        private UniTaskCompletionSource<bool> _result;               
 
-        private bool _enemyPhase;        
+        private bool _enemyPhase;
         private bool _battleOver;
 
         private void Start()
         {
-            _player = new Player(_playerDefinition);
+            if (_endTurnButton != null)
+                _endTurnButton.onClick.AddListener(OnEndTurnClicked);
+
+            if (_autoStart)
+            {
+                var deck = _playerDefinition.StartingDeck != null
+                    ? new List<CardDefinition>(_playerDefinition.StartingDeck.Cards)
+                    : new List<CardDefinition>();
+                var progress = new RunProgress(_playerDefinition.MaxHealth, deck);
+                RunAsync(progress, this.GetCancellationTokenOnDestroy()).Forget();
+            }
+        }
+        public async UniTask<bool> RunAsync(RunProgress progress, CancellationToken ct)
+        {
+            Setup(progress);
+
+            bool win = await _result.Task.AttachExternalCancellation(ct);
+
+            if (win) progress.SetHealth(_player.Health.Value);  
+            Teardown();
+            return win;
+        }
+
+        private void Setup(RunProgress progress)
+        {
+            _battleOver = false;
+            _enemyPhase = false;
+            _result = new UniTaskCompletionSource<bool>();
+
+            _player = new Player(_playerDefinition, progress.CurrentHealth);
             if (_playerView != null) _playerView.Bind(_player);
 
             foreach (var ev in _enemyViews)
@@ -48,7 +81,7 @@ namespace Gameplay.BattleEncounter.Battle
                 if (ev == null) continue;
                 var enemy = ev.Create();
                 _enemies.Add(enemy);
-                enemy.Died.Subscribe(_ => OnEnemyDied()).AddTo(_scope);
+                enemy.Died.Subscribe(_ => OnEnemyDied()).AddTo(_battleScope);
             }
 
             _context = new BattleContext(_player, _enemies, null);
@@ -57,12 +90,24 @@ namespace Gameplay.BattleEncounter.Battle
 
             _playController.CardPlayed
                 .Subscribe(play => _executor.Execute(play.Card, play.Target))
-                .AddTo(_scope);
+                .AddTo(_battleScope);
 
-            _player.Died.Subscribe(_ => EndBattle(false)).AddTo(_scope);
+            _player.Died.Subscribe(_ => EndBattle(false)).AddTo(_battleScope);
 
-            if (_endTurnButton != null)
-                _endTurnButton.onClick.AddListener(OnEndTurnClicked);
+            SetPlayerInput(true);
+        }
+
+        private void Teardown()
+        {
+            _battleScope.Clear();
+            _player?.Dispose();
+            _player = null;
+            foreach (var e in _enemies) e?.Dispose();
+            _enemies.Clear();
+            foreach (var ev in _enemyViews)
+                if (ev != null) ev.ClearIntent();
+            _context = null;
+            _executor = null;
         }
 
         private void OnEndTurnClicked()
@@ -76,7 +121,7 @@ namespace Gameplay.BattleEncounter.Battle
             _enemyPhase = true;
             SetPlayerInput(false);
 
-            _player.CheckSizeDeath();   
+            _player.CheckSizeDeath();
             if (_battleOver) { _enemyPhase = false; return; }
 
             await EnemyPhaseAsync(ct);
@@ -98,8 +143,8 @@ namespace Gameplay.BattleEncounter.Battle
                 var enemy = ev != null ? ev.Enemy : null;
                 if (enemy == null || enemy.IsDead) continue;
 
-                await enemy.ActAsync(_context);  
-                ev.ClearIntent();                
+                await enemy.ActAsync(_context);
+                ev.ClearIntent();
 
                 if (_player.IsDead) { EndBattle(false); return; }
                 await UniTask.Delay(TimeSpan.FromSeconds(_betweenEnemyDelay), cancellationToken: ct);
@@ -144,12 +189,13 @@ namespace Gameplay.BattleEncounter.Battle
             if (_battleOver) return;
             _battleOver = true;
             SetPlayerInput(false);
+            _result?.TrySetResult(win);
         }
 
         private void OnDestroy()
         {
             if (_endTurnButton != null) _endTurnButton.onClick.RemoveListener(OnEndTurnClicked);
-            _scope.Dispose();
+            _battleScope.Dispose();
             _player?.Dispose();
             foreach (var e in _enemies) e?.Dispose();
         }

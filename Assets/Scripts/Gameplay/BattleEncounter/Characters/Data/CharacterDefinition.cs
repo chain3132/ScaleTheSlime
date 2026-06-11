@@ -4,8 +4,6 @@ namespace Gameplay.BattleEncounter.Characters.Data
 {
     public abstract class CharacterDefinition : ScriptableObject
     {
-        public string DisplayName;
-        public Sprite Sprite;
         public int MaxHealth = 30;
         [Range(0, 10)] 
         public int StartSize = 5;

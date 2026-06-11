@@ -8,7 +8,6 @@ namespace Gameplay.BattleEncounter.Characters
 {
     public abstract class Character : IDisposable
     {
-        public string Name { get; }
         public int MaxHealth { get; }
 
         public ReactiveProperty<int> Health { get; }  
@@ -22,11 +21,10 @@ namespace Gameplay.BattleEncounter.Characters
         private readonly Subject<Unit> _died = new();
         public Observable<Unit> Died => _died;
 
-        protected Character(string name, int maxHealth, int startSize)
+        protected Character( int maxHealth, int startSize,int startHealth = -1)
         {
-            Name = name;
             MaxHealth = maxHealth;
-            Health = new ReactiveProperty<int>(maxHealth);
+            Health = new ReactiveProperty<int>(startHealth < 0 ? maxHealth : Mathf.Clamp(startHealth, 1, maxHealth));
             Size = new ReactiveProperty<int>(startSize);
             Shield = new ReactiveProperty<int>(0);
             Form = Size.Select(SizeFormUtil.FormOf).ToReadOnlyReactiveProperty();
@@ -64,18 +62,15 @@ namespace Gameplay.BattleEncounter.Characters
         public void ChangeSize(int delta)
         {
             if (IsDead || delta == 0) return;
-            // size แตะ 0/10 ระหว่างเทิร์นไม่ตายทันที — ไปเช็คตอนจบเทิร์น (CheckSizeDeath)
             Size.Value = Mathf.Clamp(Size.Value + delta, 0, 10);
         }
 
-        // เช็คตายจาก size (เรียกตอนจบเทิร์น) — เกณฑ์ override ต่อชนิดตัวละครได้
         public void CheckSizeDeath()
         {
             if (IsDead) return;
             if (IsLethalSize(Size.Value)) Die();
         }
 
-        // player ตายทั้ง 0 และ 10 ; enemy override เลือกฝั่งเอง
         protected virtual bool IsLethalSize(int size) => size <= 0 || size >= 10;
 
         public void ApplyStatus(StatusType type, int amount, bool persistent = false)

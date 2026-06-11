@@ -15,12 +15,11 @@ namespace Gameplay.BattleEncounter.Characters
         public IReadOnlyList<EnemyAction> CurrentPlan { get; private set; } = Array.Empty<EnemyAction>();
 
         public Enemy(EnemyDefinition def)
-            : base(def.DisplayName, def.MaxHealth, def.StartSize)
+            : base( def.MaxHealth, def.StartSize)
         {
             _def = def;
         }
 
-        // ตายฝั่งไหนแล้วแต่ config ของ enemy (size 0 และ/หรือ 10)
         protected override bool IsLethalSize(int size)
             => (_def.DiesWhenTooSmall && size <= 0) || (_def.DiesWhenTooBig && size >= 10);
 

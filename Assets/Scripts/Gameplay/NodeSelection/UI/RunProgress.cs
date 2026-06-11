@@ -16,5 +16,11 @@ namespace Gameplay.NodeSelection.UI
             CurrentHealth = maxHealth;
             Deck = deck;
         }   
+        public void SetHealth(int hp)
+        {
+            CurrentHealth = Mathf.Clamp(hp, 0, MaxHealth);
+        }
+
+        public void HealFull() => CurrentHealth = MaxHealth;
     }
 }
