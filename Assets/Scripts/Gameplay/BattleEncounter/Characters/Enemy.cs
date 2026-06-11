@@ -20,6 +20,10 @@ namespace Gameplay.BattleEncounter.Characters
             _def = def;
         }
 
+        // ตายฝั่งไหนแล้วแต่ config ของ enemy (size 0 และ/หรือ 10)
+        protected override bool IsLethalSize(int size)
+            => (_def.DiesWhenTooSmall && size <= 0) || (_def.DiesWhenTooBig && size >= 10);
+
         public void PlanTurn()
         {
             var behavior = _def.BehaviorFor(Form.CurrentValue);

@@ -10,9 +10,9 @@ namespace Gameplay.BattleEncounter.Characters.Passives
         [SerializeField] private int _amount = 2;
 
         public override void OnEnter(Player player, BattleContext ctx)
-            => player.ApplyStatus(StatusType.Strength, _amount);
+            => player.ApplyStatus(StatusType.Strength, _amount, persistent: true);
 
         public override void OnExit(Player player, BattleContext ctx)
-            => player.ApplyStatus(StatusType.Strength, -_amount);
+            => player.ApplyStatus(StatusType.Strength, -_amount, persistent: true);
     }
 }

@@ -89,13 +89,10 @@ namespace Gameplay.BattleEncounter.UI.Characters
                 {
                     if (ps.IsAlive(true))
                     {
-                        Debug.Log($"{ps.name} Alive");
                         return false;
-
                     }
                 }
                 return true;}, cancellationToken: ct);     
-            Debug.Log("Wait Finished");
             if (_shieldText != null)
                 _shieldText.text = shield > 0 ? $"{shield}" : "";
         }

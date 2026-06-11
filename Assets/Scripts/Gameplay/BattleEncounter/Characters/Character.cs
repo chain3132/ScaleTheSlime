@@ -64,15 +64,34 @@ namespace Gameplay.BattleEncounter.Characters
         public void ChangeSize(int delta)
         {
             if (IsDead || delta == 0) return;
-            int next = Mathf.Clamp(Size.Value + delta, 0, 10);
-            Size.Value = next;
-            if (next == 0 || next == 10) Die();
+            // size แตะ 0/10 ระหว่างเทิร์นไม่ตายทันที — ไปเช็คตอนจบเทิร์น (CheckSizeDeath)
+            Size.Value = Mathf.Clamp(Size.Value + delta, 0, 10);
         }
 
-        public void ApplyStatus(StatusType type, int amount)
+        // เช็คตายจาก size (เรียกตอนจบเทิร์น) — เกณฑ์ override ต่อชนิดตัวละครได้
+        public void CheckSizeDeath()
         {
             if (IsDead) return;
-            Statuses.Add(type, amount);
+            if (IsLethalSize(Size.Value)) Die();
+        }
+
+        // player ตายทั้ง 0 และ 10 ; enemy override เลือกฝั่งเอง
+        protected virtual bool IsLethalSize(int size) => size <= 0 || size >= 10;
+
+        public void ApplyStatus(StatusType type, int amount, bool persistent = false)
+        {
+            if (IsDead) return;
+            Statuses.Add(type, amount, persistent);
+        }
+
+        public void ClearShield()
+        {
+            if (Shield.Value != 0) Shield.Value = 0;
+        }
+
+        public void ClearTemporaryStatuses()
+        {
+            Statuses.ClearTemporary();
         }
 
         protected virtual void Die()

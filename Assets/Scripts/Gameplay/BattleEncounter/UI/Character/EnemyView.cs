@@ -2,6 +2,8 @@ using System.Collections.Generic;
 using Gameplay.BattleEncounter.Characters;
 using Gameplay.BattleEncounter.Characters.Behaviors;
 using Gameplay.BattleEncounter.Characters.Data;
+using Gameplay.BattleEncounter.Characters.Enums;
+using R3;
 using Spine.Unity;
 using UnityEngine;
 
@@ -10,11 +12,11 @@ namespace Gameplay.BattleEncounter.UI.Characters
     [RequireComponent(typeof(Collider2D))]
     public class EnemyView : MonoBehaviour
     {
-        [SerializeField] 
+        [SerializeField]
         private EnemyDefinition _definition;
-        [SerializeField] 
+        [SerializeField]
         private CharacterView _view;
-        [SerializeField] 
+        [SerializeField]
         private ActionIntentDatabase _intentDatabase;
         [SerializeField]
         private SkeletonRendererCustomMaterials _skeletonRenderer;
@@ -24,15 +26,37 @@ namespace Gameplay.BattleEncounter.UI.Characters
         public Enemy Enemy { get; private set; }
 
         private readonly List<GameObject> _intentInstances = new();
+        private readonly CompositeDisposable _scope = new();
 
         public Enemy Create()
         {
             Enemy = new Enemy(_definition);
             if (_view != null) _view.Bind(Enemy);
 
-            Enemy.PlanTurn();               
-            ShowIntent(Enemy.CurrentPlan); 
+            Enemy.Form.Skip(1).Subscribe(OnFormChanged).AddTo(_scope);
+            Enemy.Died.Subscribe(_ => OnDied()).AddTo(_scope);
+
+            Replan();
             return Enemy;
+        }
+
+        public void Replan()
+        {
+            if (Enemy == null || Enemy.IsDead) return;
+            Enemy.PlanTurn();
+            ShowIntent(Enemy.CurrentPlan);
+        }
+
+        private void OnFormChanged(SizeForm form)
+        {
+            if (form == SizeForm.Dead) return; 
+            Replan();
+        }
+
+        private void OnDied()
+        {
+            ClearIntent();
+            HighLight(false);
         }
 
         public void ShowIntent(IReadOnlyList<EnemyAction> plan)
@@ -59,5 +83,7 @@ namespace Gameplay.BattleEncounter.UI.Characters
             foreach (var go in _intentInstances) Destroy(go);
             _intentInstances.Clear();
         }
+
+        private void OnDestroy() => _scope.Dispose();
     }
 }

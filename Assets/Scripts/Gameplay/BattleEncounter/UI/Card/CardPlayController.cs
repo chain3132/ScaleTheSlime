@@ -43,6 +43,8 @@ namespace Gameplay.BattleEncounter.UI.Card
 
         public Observable<CardPlay> CardPlayed => _cardPlayed;
 
+        public bool Interactable { get; set; } = true;
+
         public void BeginDrag(Vector2 cardPosition,Data.Card card)
         {
             _currentCard = card;
@@ -60,7 +62,7 @@ namespace Gameplay.BattleEncounter.UI.Card
         {
             _arrowRT.gameObject.SetActive(false);
             _playZoneUI.SetActive(false);
-            ClearHover();   // ปล่อยแล้วปิดไฮไลต์
+            ClearHover();   
 
             if (IsValidPlay(_currentCard, mousePosition))
             {
