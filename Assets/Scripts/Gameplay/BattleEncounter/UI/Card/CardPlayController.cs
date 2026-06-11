@@ -1,6 +1,9 @@
 using System;
 using Cysharp.Threading.Tasks;
+using Gameplay.BattleEncounter.Battle;
+using Gameplay.BattleEncounter.Characters;
 using Gameplay.BattleEncounter.UI.Card.Enum;
+using Gameplay.BattleEncounter.UI.Characters;
 using LitMotion;
 using LitMotion.Extensions;
 using R3;
@@ -32,40 +35,65 @@ namespace Gameplay.BattleEncounter.UI.Card
 
         private Vector3 _origin;
         private Data.Card _currentCard;
-        private readonly Subject<Data.Card> _cardPlayed = new();
+        private Enemy _targetEnemy;
+        private EnemyView _hovered;
+        private readonly Subject<CardPlay> _cardPlayed = new();
 
         #endregion
 
-        public Observable<Data.Card> CardPlayed => _cardPlayed; 
-        
+        public Observable<CardPlay> CardPlayed => _cardPlayed;
+
+        public bool Interactable { get; set; } = true;
+
         public void BeginDrag(Vector2 cardPosition,Data.Card card)
         {
             _currentCard = card;
+            _targetEnemy = null;
             _origin = cardPosition;
             _arrowRT.gameObject.SetActive(true);
         }
         public void OnDrag(Vector2 mousePosition)
         {
-            
             UpdateArrow(mousePosition, _origin);
+            IsHoverEnemy(mousePosition);
             IfInPlayZone(mousePosition);
         }
         public bool EndDrag(Vector2 mousePosition)
         {
             _arrowRT.gameObject.SetActive(false);
             _playZoneUI.SetActive(false);
+            ClearHover();   
 
             if (IsValidPlay(_currentCard, mousePosition))
             {
-                _cardPlayed.OnNext(_currentCard);
+                _cardPlayed.OnNext(new CardPlay(_currentCard, _targetEnemy));
                 _currentCard = null;
+                _targetEnemy = null;
                 return true;
             }
             _currentCard = null;
+            _targetEnemy = null;
             return false;
 
         }
+        private void IsHoverEnemy(Vector2 mousePosition)
+        {
+            EnemyView view = null;
 
+            if (_currentCard != null && _currentCard.Definition.PlayTarget == CardTarget.Enemy)
+                TryGetEnemyUnderMouse(mousePosition, out view);
+
+            if (view == _hovered) return;                       
+            if (_hovered != null) _hovered.HighLight(false);    
+            _hovered = view;
+            if (_hovered != null) _hovered.HighLight(true);     
+        }
+
+        private void ClearHover()
+        {
+            if (_hovered != null) _hovered.HighLight(false);
+            _hovered = null;
+        }
         private bool IsValidPlay(Data.Card card, Vector2 mousePosition)
         {
             if (card == null) return false;
@@ -75,17 +103,34 @@ namespace Gameplay.BattleEncounter.UI.Card
                 case CardTarget.Background:
                     return RectTransformUtility.RectangleContainsScreenPoint(_playZoneRect, mousePosition, null);
                 case CardTarget.Enemy:
-                    return TryGetEnemyUnderMouse(mousePosition);; 
+                    return TryGetEnemyUnderMouse(mousePosition, out _targetEnemy);
                 default:
-                    return false; // None 
+                    return false; // None
             }
         }
-        private bool TryGetEnemyUnderMouse(Vector2 screenPos)
+        private bool TryGetEnemyUnderMouse(Vector2 screenPos, out EnemyView enemy)
         {
+            enemy = null;
             Vector2 world = Camera.main.ScreenToWorldPoint(screenPos);
             Collider2D hit = Physics2D.OverlapPoint(world);
-            if (hit == null || !hit.CompareTag("Enemy")) return false;   
-            return true;
+            if (hit != null && hit.TryGetComponent(out EnemyView view))
+            {
+                enemy = view;
+                return true;
+            }
+            return false;
+        }
+        private bool TryGetEnemyUnderMouse(Vector2 screenPos, out Enemy enemy)
+        {
+            enemy = null;
+            Vector2 world = Camera.main.ScreenToWorldPoint(screenPos);
+            Collider2D hit = Physics2D.OverlapPoint(world);
+            if (hit != null && hit.TryGetComponent(out EnemyView view))
+            {
+                enemy = view.Enemy;
+                return true;
+            }
+            return false;
         }
         private void UpdateArrow(Vector2 mousePosition, Vector2 cardPosition)
         {
@@ -110,7 +155,6 @@ namespace Gameplay.BattleEncounter.UI.Card
             else
             {
                 _playZoneUI.SetActive(false);
-
             }
             
         }

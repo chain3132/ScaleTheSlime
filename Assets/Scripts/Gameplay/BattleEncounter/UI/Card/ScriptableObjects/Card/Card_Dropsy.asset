@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Card_Dropsy
   m_EditorClassIdentifier: Assembly-CSharp::Gameplay.BattleEncounter.UI.Card.CardDefinition
   Id: 03
-  DisplayName: Study
+  DisplayName: Dropsy
   Art:
     CardBackground: {fileID: -1152778665, guid: 0a7e9a4d06787974da201bb5ad716a06, type: 3}
     CardArt: {fileID: -1979122721, guid: 3859bc2d80614b84089f2baa3fe46b57, type: 3}
@@ -27,11 +27,11 @@ MonoBehaviour:
   Effects:
   - Type: 1
     Target: 2
-    ValueSource: 2
+    ValueSource: 1
     CardValue: 1
     CustomSource: 3
   - Type: 4
     Target: 2
-    ValueSource: 2
+    ValueSource: 1
     CardValue: 1
     CustomSource: 3

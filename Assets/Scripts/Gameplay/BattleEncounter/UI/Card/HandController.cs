@@ -1,10 +1,10 @@
-using System.Collections.Generic;
+using System.Threading;
 using Cysharp.Threading.Tasks;
 using Gameplay.BattleEncounter.UI.Card.Data;
+using Gameplay.BattleEncounter.UI.Card.Enum;
 using Gameplay.BattleEncounter.UI.CardPlie;
 using R3;
 using UnityEngine;
-using UnityEngine.AddressableAssets;
 
 namespace Gameplay.BattleEncounter.UI.Card
 {
@@ -44,14 +44,31 @@ namespace Gameplay.BattleEncounter.UI.Card
             }
         }
 
+        public async UniTask NewTurnAsync(CancellationToken ct)
+        {
+            await _rack.DiscardHandAsync(IsRetain, ct);   
+            _deck.DiscardHandExcept(IsRetain);            
+
+            int toDraw = _startingHand - _deck.Hand.Count;
+            for (int i = 0; i < toDraw; i++)
+            {
+                Data.Card card = _deck.Draw();
+                if (card == null) break;
+                await _rack.DrawAsync(new CardViewModel(card), ct);
+            }
+        }
+
+        private static bool IsRetain(Data.Card card)
+            => (card.Definition.Keywords & CardKeyword.Retain) != 0;
+
         private void Bind()
         {
             _playController.CardPlayed
-                .SubscribeAwait(async (card, ct) =>
+                .SubscribeAwait(async (play, ct) =>
                 {
-                    await _rack.PlayCardAsync(card, ct);
-                    _deck.Discard(card);
-                }, AwaitOperation.Drop) 
+                    await _rack.PlayCardAsync(play.Card, ct);   
+                    _deck.Discard(play.Card);                    
+                }, AwaitOperation.Drop)
                 .AddTo(this);
         }
         

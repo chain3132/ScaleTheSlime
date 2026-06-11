@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5cabb589092a1a41be0e0ea20c407a4, type: 3}
+  m_Name: ActionIntentDatabase
+  m_EditorClassIdentifier: Assembly-CSharp::Gameplay.BattleEncounter.Characters.Behaviors.ActionIntentDatabase
+  _entries:
+  - Type: 0
+    Prefab: {fileID: 844969980593655280, guid: dac66972085dca04c991b63738dcc90d, type: 3}
+  - Type: 1
+    Prefab: {fileID: 844969980593655280, guid: bc0c692c501d42f4c9e6d886fa752a11, type: 3}

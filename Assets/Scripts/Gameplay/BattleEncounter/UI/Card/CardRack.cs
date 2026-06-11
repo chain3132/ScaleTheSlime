@@ -126,7 +126,7 @@ namespace Gameplay.BattleEncounter.UI.Card
 
             
             Destroy(view.gameObject);
-            // change this to object pooling 
+            // waiting for change this to object pooling 
         }
 
         
@@ -136,6 +136,35 @@ namespace Gameplay.BattleEncounter.UI.Card
             float step = StepFor(n);
             for (int i = 0; i < n; i++)
                 TweenToSlot(_hand[i], SlotT(i, n, step));
+        }
+
+        public async UniTask DiscardHandAsync(System.Func<Data.Card, bool> keep, CancellationToken ct)
+        {
+            var toDiscard = _hand.FindAll(v => keep == null || !keep(v.Card));
+            if (toDiscard.Count == 0) return;
+
+            foreach (var v in toDiscard) _hand.Remove(v);
+            Arrange();   
+
+            var tasks = new List<UniTask>(toDiscard.Count);
+            foreach (var v in toDiscard) tasks.Add(ToDiscardAsync(v, ct));
+            await UniTask.WhenAll(tasks);
+        }
+
+        private async UniTask ToDiscardAsync(CardView view, CancellationToken ct)
+        {
+            var rt = (RectTransform)view.transform;
+            var parent = (RectTransform)rt.parent;
+            RectTransformUtility.ScreenPointToLocalPointInRectangle(
+                parent, RectTransformUtility.WorldToScreenPoint(null, _discardPilePoint.position), null, out Vector2 discard);
+
+            await UniTask.WhenAll(
+                LMotion.Create(rt.anchoredPosition, discard, _toDiscardDuration)
+                    .WithEase(Ease.InCubic).BindToAnchoredPosition(rt).ToUniTask(ct),
+                LMotion.Create(rt.localScale, Vector3.one * 0.2f, _toDiscardDuration)
+                    .WithEase(Ease.InCubic).BindToLocalScale(rt).ToUniTask(ct));
+
+            Destroy(view.gameObject);
         }
 
         public async UniTask DrawManyAsync(IReadOnlyList<CardViewModel> vms, CancellationToken ct)

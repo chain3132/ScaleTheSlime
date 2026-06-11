@@ -58,6 +58,17 @@ namespace Gameplay.BattleEncounter.UI.Card.Data
             SyncCounts();
         }
 
+        public void DiscardHandExcept(Func<Card, bool> keep)
+        {
+            for (int i = _hand.Count - 1; i >= 0; i--)
+            {
+                if (keep != null && keep(_hand[i])) continue;
+                _discardPile.Add(_hand[i]);
+                _hand.RemoveAt(i);
+            }
+            SyncCounts();
+        }
+
         private void ReshuffleDiscardIntoDraw()
         {
             if (_discardPile.Count == 0) return;

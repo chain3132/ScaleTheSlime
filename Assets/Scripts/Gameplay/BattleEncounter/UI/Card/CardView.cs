@@ -85,7 +85,8 @@ namespace Gameplay.BattleEncounter.UI.Card
 
         public void OnBeginDrag(PointerEventData eventData)
         {
-            _isDragging = true;  
+            if (_cardPlayController != null && !_cardPlayController.Interactable) return;
+            _isDragging = true;
             _cardPlayController.BeginDrag(this.transform.position,_card);
             transform.SetAsLastSibling(); 
             if (_hoverMotion.IsActive()) _hoverMotion.Cancel();
