@@ -5195,7 +5195,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1409639704
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6265,7 +6265,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1753571482
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6340,7 +6340,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Gameplay.BattleEncounter.UI.Reward.RewardPanelView
   _root: {fileID: 451810184}
-  _slots: []
+  _slots:
+  - Card: {fileID: 0}
+    Button: {fileID: 0}
   _skipButton: {fileID: 2100386785}
 --- !u!1 &1762512330
 GameObject:
@@ -6845,6 +6847,7 @@ MonoBehaviour:
   _rewardPool: {fileID: 11400000, guid: b9bcaf17803133542ad1cc274dfe3607, type: 2}
   _rewardChoices: 3
   _seed: 6789
+  _skipReward: 1
 --- !u!4 &2045200357
 Transform:
   m_ObjectHideFlags: 0

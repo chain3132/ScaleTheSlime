@@ -15,6 +15,6 @@ MonoBehaviour:
   _sets:
   - NodeType: 1
     MinLayer: 0
-    MaxLayer: 0
+    MaxLayer: 99
     Enemies:
     - {fileID: 11400000, guid: 590a432cefd581c48b6c9c919382fe5c, type: 2}

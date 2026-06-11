@@ -12,8 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 524c939fe3ecbe747ba9e5fbdb2655e7, type: 3}
   m_Name: TestPlayer
   m_EditorClassIdentifier: Assembly-CSharp::Gameplay.BattleEncounter.Characters.Data.PlayerDefinition
-  DisplayName: 
-  Sprite: {fileID: 0}
   MaxHealth: 30
   StartSize: 5
   TinyPassive: {fileID: 0}
@@ -22,4 +20,4 @@ MonoBehaviour:
   Unique2: {fileID: 0}
   Unique5: {fileID: 0}
   Unique8: {fileID: 0}
-  StartingDeck: {fileID: 0}
+  StartingDeck: {fileID: 11400000, guid: 249893e5d38f8484aa159a640dc7c1f2, type: 2}

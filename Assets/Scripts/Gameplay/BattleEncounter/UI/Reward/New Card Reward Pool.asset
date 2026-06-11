@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d903d77961a851499b417d95a75ac7a, type: 3}
   m_Name: New Card Reward Pool
   m_EditorClassIdentifier: Assembly-CSharp::Gameplay.BattleEncounter.UI.Reward.CardRewardPool
-  _cards: []
+  _cards:
+  - {fileID: 0}
