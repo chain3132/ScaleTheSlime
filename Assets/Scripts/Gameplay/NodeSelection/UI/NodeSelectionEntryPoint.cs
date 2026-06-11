@@ -38,6 +38,7 @@ namespace Gameplay.NodeSelection.UI
         private bool _forceDefeat = false;
  
         private RunState _runState;
+        private RunProgress _runProgress;
         private PanelMenuViewModel _panelMenuVm;
         private AsyncOperationHandle<GameObject> _nodePrefabHandle;
         private GameObject _nodePrefab;
@@ -50,7 +51,7 @@ namespace Gameplay.NodeSelection.UI
             _cts = new CancellationTokenSource();
  
             _runState = new RunState();
- 
+            
             _nodePrefabHandle = Addressables.LoadAssetAsync<GameObject>(_nodePrefabAddress);
             _nodePrefab = await _nodePrefabHandle.ToUniTask(cancellationToken: _cts.Token);
             
