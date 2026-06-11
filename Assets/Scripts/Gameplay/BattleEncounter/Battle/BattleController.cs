@@ -57,17 +57,23 @@ namespace Gameplay.BattleEncounter.Battle
             }
         }
         public async UniTask<bool> RunAsync(RunProgress progress, CancellationToken ct)
+            => await RunAsync(progress, null, ct);
+
+        public async UniTask<bool> RunAsync(RunProgress progress,
+            IReadOnlyList<EnemyDefinition> enemyDefs, CancellationToken ct)
         {
-            Setup(progress);
+            if (_handController != null)
+                await _handController.SetupAsync(progress.Deck, ct);   
+            Setup(progress, enemyDefs);
 
             bool win = await _result.Task.AttachExternalCancellation(ct);
 
-            if (win) progress.SetHealth(_player.Health.Value);  
+            if (win) progress.SetHealth(_player.Health.Value);
             Teardown();
             return win;
         }
 
-        private void Setup(RunProgress progress)
+        private void Setup(RunProgress progress, IReadOnlyList<EnemyDefinition> enemyDefs)
         {
             _battleOver = false;
             _enemyPhase = false;
@@ -76,15 +82,27 @@ namespace Gameplay.BattleEncounter.Battle
             _player = new Player(_playerDefinition, progress.CurrentHealth);
             if (_playerView != null) _playerView.Bind(_player);
 
-            foreach (var ev in _enemyViews)
+            for (int i = 0; i < _enemyViews.Count; i++)
             {
+                var ev = _enemyViews[i];
                 if (ev == null) continue;
-                var enemy = ev.Create();
+
+                EnemyDefinition def = null;
+                if (enemyDefs != null)
+                {
+                    if (i >= enemyDefs.Count || enemyDefs[i] == null) { ev.Hide(); continue; }
+                    def = enemyDefs[i];
+                }
+
+                var enemy = ev.Setup(def);
+                if (enemy == null) { ev.Hide(); continue; }
+
                 _enemies.Add(enemy);
                 enemy.Died.Subscribe(_ => OnEnemyDied()).AddTo(_battleScope);
             }
 
-            _context = new BattleContext(_player, _enemies, null);
+            _context = new BattleContext(_player, _enemies,
+                _handController != null ? _handController.Deck : null);
             _executor = new CardEffectExecutor(_context);
             _player.Activate(_context);
 
@@ -105,7 +123,8 @@ namespace Gameplay.BattleEncounter.Battle
             foreach (var e in _enemies) e?.Dispose();
             _enemies.Clear();
             foreach (var ev in _enemyViews)
-                if (ev != null) ev.ClearIntent();
+                if (ev != null) ev.Clear();
+            _handController?.ClearBattle();
             _context = null;
             _executor = null;
         }

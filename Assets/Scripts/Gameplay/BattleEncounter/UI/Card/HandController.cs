@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using Gameplay.BattleEncounter.UI.Card.Data;
@@ -16,36 +17,48 @@ namespace Gameplay.BattleEncounter.UI.Card
         private CardPlayController _playController;
         [SerializeField]
         private CardPileView _pileView;
-        [SerializeField] 
-        private DeckDefinition _startingDeck;
-        [SerializeField] 
+        [SerializeField]
         private int _seed = 12345;
-        [SerializeField] 
+        [SerializeField]
         private int _startingHand = 5;
 
         private Deck _deck;
         private CardPileViewModel _pileViewModel;
-        
-        private async UniTaskVoid Start()
-        {
-            var ct = this.GetCancellationTokenOnDestroy();
 
-            await _rack.InitializeAsync(ct);
-            _deck =  new Deck(_startingDeck.Cards, _seed);
+        public Deck Deck => _deck;   
+
+        private void Start() => Bind();
+
+        public async UniTask SetupAsync(IReadOnlyList<CardDefinition> cards, CancellationToken ct)
+        {
+            await _rack.InitializeAsync(ct);   
+
+            ClearBattle();                     
+            _deck = new Deck(cards, _seed);
             _pileViewModel = new CardPileViewModel(_deck);
             _pileView.Bind(_pileViewModel);
-            Bind();
+
             for (int i = 0; i < _startingHand; i++)
             {
                 Data.Card card = _deck.Draw();
                 if (card == null) break;
-                var vm = new CardViewModel(card);
-                await _rack.DrawAsync(vm, ct);
+                await _rack.DrawAsync(new CardViewModel(card), ct);
             }
+        }
+
+        public void ClearBattle()
+        {
+            _rack.ClearHand();
+            _pileViewModel?.Dispose();
+            _pileViewModel = null;
+            _deck?.Dispose();
+            _deck = null;
         }
 
         public async UniTask NewTurnAsync(CancellationToken ct)
         {
+            if (_deck == null) return;
+
             await _rack.DiscardHandAsync(IsRetain, ct);   
             _deck.DiscardHandExcept(IsRetain);            
 
@@ -66,12 +79,11 @@ namespace Gameplay.BattleEncounter.UI.Card
             _playController.CardPlayed
                 .SubscribeAwait(async (play, ct) =>
                 {
-                    await _rack.PlayCardAsync(play.Card, ct);   
-                    _deck.Discard(play.Card);                    
+                    await _rack.PlayCardAsync(play.Card, ct);
+                    _deck?.Discard(play.Card);
                 }, AwaitOperation.Drop)
                 .AddTo(this);
         }
-        
 
         private void OnDestroy()
         {

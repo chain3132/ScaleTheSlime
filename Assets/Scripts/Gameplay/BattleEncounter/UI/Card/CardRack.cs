@@ -167,6 +167,13 @@ namespace Gameplay.BattleEncounter.UI.Card
             Destroy(view.gameObject);
         }
 
+        public void ClearHand()
+        {
+            foreach (var v in _hand)
+                if (v != null) Destroy(v.gameObject);
+            _hand.Clear();
+        }
+
         public async UniTask DrawManyAsync(IReadOnlyList<CardViewModel> vms, CancellationToken ct)
         {
             foreach (var vm in vms)

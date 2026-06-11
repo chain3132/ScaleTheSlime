@@ -13,7 +13,7 @@ namespace Gameplay.BattleEncounter.UI.Characters
     public class EnemyView : MonoBehaviour
     {
         [SerializeField]
-        private EnemyDefinition _definition;
+        private EnemyDefinition _definition;   
         [SerializeField]
         private CharacterView _view;
         [SerializeField]
@@ -26,18 +26,37 @@ namespace Gameplay.BattleEncounter.UI.Characters
         public Enemy Enemy { get; private set; }
 
         private readonly List<GameObject> _intentInstances = new();
-        private readonly CompositeDisposable _scope = new();
-
-        public Enemy Create()
+        private readonly CompositeDisposable _scope = new();   
+        public Enemy Setup(EnemyDefinition def = null)
         {
-            Enemy = new Enemy(_definition);
+            Clear();   
+
+            var d = def != null ? def : _definition;
+            if (d == null) return null;
+
+            Enemy = new Enemy(d);
             if (_view != null) _view.Bind(Enemy);
 
             Enemy.Form.Skip(1).Subscribe(OnFormChanged).AddTo(_scope);
             Enemy.Died.Subscribe(_ => OnDied()).AddTo(_scope);
 
+            gameObject.SetActive(true);
             Replan();
             return Enemy;
+        }
+
+        public void Hide()
+        {
+            Clear();
+            gameObject.SetActive(false);
+        }
+
+        public void Clear()
+        {
+            _scope.Clear();
+            ClearIntent();
+            HighLight(false);
+            Enemy = null;
         }
 
         public void Replan()
@@ -49,7 +68,7 @@ namespace Gameplay.BattleEncounter.UI.Characters
 
         private void OnFormChanged(SizeForm form)
         {
-            if (form == SizeForm.Dead) return; 
+            if (form == SizeForm.Dead) return;
             Replan();
         }
 
