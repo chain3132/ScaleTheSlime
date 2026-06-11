@@ -62,9 +62,9 @@ namespace Gameplay.BattleEncounter.Battle
         public async UniTask<bool> RunAsync(RunProgress progress,
             IReadOnlyList<EnemyDefinition> enemyDefs, CancellationToken ct)
         {
+            Setup(progress, enemyDefs);
             if (_handController != null)
                 await _handController.SetupAsync(progress.Deck, ct);   
-            Setup(progress, enemyDefs);
 
             bool win = await _result.Task.AttachExternalCancellation(ct);
 

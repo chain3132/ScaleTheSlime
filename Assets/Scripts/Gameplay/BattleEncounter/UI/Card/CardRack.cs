@@ -194,7 +194,8 @@ namespace Gameplay.BattleEncounter.UI.Card
             var rt = (RectTransform)card.transform;
             LMotion.Create(rt.anchoredPosition, SplineToAnchored(t), _arrangeDuration)
                 .WithEase(Ease.OutCubic)
-                .BindToAnchoredPosition(rt);
+                .BindToAnchoredPosition(rt)
+                .AddTo(card.gameObject);  
         }
 
         private Vector2 SplineToAnchored(float t)

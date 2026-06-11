@@ -85,7 +85,8 @@ namespace Gameplay.BattleEncounter.UI.Card
 
         public void OnBeginDrag(PointerEventData eventData)
         {
-            if (_cardPlayController != null && !_cardPlayController.Interactable) return;
+            if (_cardPlayController == null) return;   
+            if (!_cardPlayController.Interactable) return;
             _isDragging = true;
             _cardPlayController.BeginDrag(this.transform.position,_card);
             transform.SetAsLastSibling(); 
@@ -104,13 +105,14 @@ namespace Gameplay.BattleEncounter.UI.Card
 
         public void OnDrag(PointerEventData eventData)
         {
+            if (!_isDragging) return;
             _cardPlayController.OnDrag(eventData.position);
-            
         }
 
         public void OnEndDrag(PointerEventData eventData)
         {
-            _isDragging = false; 
+            if (!_isDragging) return;
+            _isDragging = false;
             bool played = _cardPlayController.EndDrag(eventData.position);
             if (!played) ResetDragVisual();
         }

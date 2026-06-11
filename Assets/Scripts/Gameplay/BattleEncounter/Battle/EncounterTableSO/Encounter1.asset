@@ -12,4 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c914342932b88042bd80a8ff0d1d430, type: 3}
   m_Name: Encounter1
   m_EditorClassIdentifier: Assembly-CSharp::Gameplay.BattleEncounter.Battle.EncounterTable
-  _sets: []
+  _sets:
+  - NodeType: 1
+    MinLayer: 0
+    MaxLayer: 0
+    Enemies:
+    - {fileID: 11400000, guid: 590a432cefd581c48b6c9c919382fe5c, type: 2}
