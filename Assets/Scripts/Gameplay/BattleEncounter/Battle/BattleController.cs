@@ -62,9 +62,9 @@ namespace Gameplay.BattleEncounter.Battle
         public async UniTask<bool> RunAsync(RunProgress progress,
             IReadOnlyList<EnemyDefinition> enemyDefs, CancellationToken ct)
         {
-            Setup(progress, enemyDefs);
             if (_handController != null)
                 await _handController.SetupAsync(progress.Deck, ct);   
+            Setup(progress, enemyDefs);
 
             bool win = await _result.Task.AttachExternalCancellation(ct);
 
@@ -101,7 +101,7 @@ namespace Gameplay.BattleEncounter.Battle
                 enemy.Died.Subscribe(_ => OnEnemyDied()).AddTo(_battleScope);
             }
 
-            _context = new BattleContext(_player, _enemies,
+            _context = new BattleContext(_player, _enemies, 
                 _handController != null ? _handController.Deck : null);
             _executor = new CardEffectExecutor(_context);
             _player.Activate(_context);
@@ -109,6 +109,34 @@ namespace Gameplay.BattleEncounter.Battle
             _playController.CardPlayed
                 .Subscribe(play => _executor.Execute(play.Card, play.Target))
                 .AddTo(_battleScope);
+
+            if (_handController != null)
+            {
+                _context.DrawRequested
+                    .SubscribeAwait(async (n, token) => await _handController.DrawCardsAsync(n, token),
+                        AwaitOperation.Sequential)
+                    .AddTo(_battleScope);
+                _context.DiscardRequested
+                    .SubscribeAwait(async (_, token) => await _handController.DiscardHandVisualAsync(token),
+                        AwaitOperation.Sequential)
+                    .AddTo(_battleScope);
+                _context.ChooseDiscardRequested
+                    .SubscribeAwait(async (n, token) =>
+                        {
+                            SetPlayerInput(false);
+                            try
+                            {
+                                await _handController.ChooseDiscardThenDrawAsync(n, token);
+                            }
+                            finally
+                            {
+                                _playController.SelectionMode = false;                     
+                                if (!_battleOver && !_enemyPhase) SetPlayerInput(true);
+                            }
+                        },
+                        AwaitOperation.Sequential)
+                    .AddTo(_battleScope);
+            }
 
             _player.Died.Subscribe(_ => EndBattle(false)).AddTo(_battleScope);
 
@@ -125,6 +153,7 @@ namespace Gameplay.BattleEncounter.Battle
             foreach (var ev in _enemyViews)
                 if (ev != null) ev.Clear();
             _handController?.ClearBattle();
+            _context?.Dispose();
             _context = null;
             _executor = null;
         }
@@ -217,6 +246,7 @@ namespace Gameplay.BattleEncounter.Battle
             _battleScope.Dispose();
             _player?.Dispose();
             foreach (var e in _enemies) e?.Dispose();
+            _context?.Dispose();
         }
     }
 }

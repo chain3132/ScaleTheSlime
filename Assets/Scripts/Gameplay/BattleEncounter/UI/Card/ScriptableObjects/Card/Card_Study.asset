@@ -25,7 +25,9 @@ MonoBehaviour:
   PlayTarget: 3
   Keywords: 8
   Effects:
-  - Type: 7
+  - Type: 8
+    StatusType: 0
+    StatusAmount: 0
     Target: 3
     ValueSource: 1
     CardValue: 1

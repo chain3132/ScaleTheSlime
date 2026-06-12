@@ -30,11 +30,14 @@ namespace Gameplay.BattleEncounter.Characters
             Form = Size.Select(SizeFormUtil.FormOf).ToReadOnlyReactiveProperty();
         }
 
-        public void TakeDamage(int amount)
+        public void TakeDamage(int amount, Character attacker = null)
         {
             if (IsDead || amount <= 0) return;
 
+            if (attacker != null)
+                amount = ModifiedDamage(amount, attacker);
             int remaining = amount;
+            if (amount <= 0) return;
             if (Shield.Value > 0)
             {
                 int absorbed = Mathf.Min(Shield.Value, remaining);
@@ -46,6 +49,14 @@ namespace Gameplay.BattleEncounter.Characters
 
             if (Health.Value <= 0) Die();
         }
+        private int ModifiedDamage(int baseValue, Character attacker)
+        {
+            float v = baseValue + attacker.Statuses.Get(StatusType.Strength);
+            v *= 1f + attacker.Statuses.Get(StatusType.DamagePercent) / 100f;
+            if (attacker.Statuses.Has(StatusType.Weak)) v *= 0.75f;
+            if (Statuses.Has(StatusType.Vulnerable)) v *= 1.5f;   
+            return Mathf.FloorToInt(v);
+        }
 
         public void Heal(int amount)
         {
@@ -56,13 +67,18 @@ namespace Gameplay.BattleEncounter.Characters
         public void GainShield(int amount)
         {
             if (IsDead || amount <= 0) return;
-            Shield.Value += amount;
+            Shield.Value += amount + Statuses.Get(StatusType.ShieldBonus);
         }
 
         public void ChangeSize(int delta)
         {
             if (IsDead || delta == 0) return;
             Size.Value = Mathf.Clamp(Size.Value + delta, 0, 10);
+        }
+        public void SetSize(int newSize)
+        {
+            if (IsDead) return;
+            Size.Value = Mathf.Clamp(newSize, 0, 10);
         }
 
         public void CheckSizeDeath()

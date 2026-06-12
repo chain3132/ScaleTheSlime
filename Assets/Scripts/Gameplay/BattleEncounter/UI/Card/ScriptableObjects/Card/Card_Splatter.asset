@@ -26,12 +26,16 @@ MonoBehaviour:
   Keywords: 8
   Effects:
   - Type: 0
+    StatusType: 0
+    StatusAmount: 0
     Target: 1
-    ValueSource: 2
-    CardValue: 7
+    ValueSource: 1
+    CardValue: 5
     CustomSource: 3
   - Type: 4
-    Target: 1
+    StatusType: 0
+    StatusAmount: 0
+    Target: 2
     ValueSource: 1
     CardValue: -2
     CustomSource: 3

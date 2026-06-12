@@ -10,16 +10,40 @@ namespace Gameplay.BattleEncounter.Battle
     public class CardEffectExecutor
     {
         private readonly BattleContext _ctx;
+        private int _discardedByThisCard;
+        private int _nextCardPlays = 1;
 
         public CardEffectExecutor(BattleContext ctx) => _ctx = ctx;
 
         public void Execute(Card card, Enemy selectedEnemy)
         {
-            foreach (var effect in card.Definition.Effects)
+            _discardedByThisCard = 0;
+            int plays = _nextCardPlays;
+            _nextCardPlays = 1;
+            for (int p = 0; p < plays; p++)
             {
-                var target = ResolveTarget(effect.Target, selectedEnemy);
-                int value = ResolveValue(effect, target);
-                Apply(effect.Type, target, value);
+                foreach (var effect in card.Definition.Effects)
+                {
+
+                    if (effect.Target == CardTarget.AllEnemies)
+                    {
+                        foreach (var enemy in _ctx.Enemies)
+                        {
+                            if (enemy == null || enemy.IsDead) continue;
+                            Apply(effect, enemy, ResolveValue(effect, enemy), card);
+                        }
+                    }
+                    else //single target
+                    {
+                        int times = Mathf.Max(1, effect.Repeat);
+                        for (int i = 0; i < times; i++)
+                        {
+                            var target = ResolveTarget(effect.Target, selectedEnemy);
+                            int value = ResolveValue(effect, target);
+                            Apply(effect, target, value, card);
+                        }
+                    }
+                }
             }
         }
 
@@ -38,7 +62,11 @@ namespace Gameplay.BattleEncounter.Battle
 
         private int ResolveValue(CardEffectData e, Character target) 
         {
-            switch (e.ValueSource)
+            if (e.Type == CardEffectType.GainStatus)
+            {
+                return e.StatusAmount;
+            }
+            switch (e.ValueSource)  
             {
                 case ValueSource.Card:
                     return e.CardValue;
@@ -47,8 +75,8 @@ namespace Gameplay.BattleEncounter.Battle
                     {
                         CustomValueSource.AliveEnemyCount => _ctx.AliveEnemyCount,
                         CustomValueSource.TargetSize => target?.Size.Value ?? 0,
-                        CustomValueSource.SelfSize => _ctx.Player.Size.Value,
-                        CustomValueSource.NumberOfCardsDiscardedByThisCard => 0, 
+                        CustomValueSource.SelfSize => _ctx.Player.Size.Value * e.CardValue,
+                        CustomValueSource.NumberOfCardsDiscardedByThisCard => _discardedByThisCard, 
                         _ => 0,
                     };
                 default:
@@ -56,12 +84,13 @@ namespace Gameplay.BattleEncounter.Battle
             }
         }
 
-        private void Apply(CardEffectType type, Character target, int value)
+        private void Apply(CardEffectData e, Character target, int value,Card playedCard)
         {
-            switch (type)
+            switch (e.Type)
             {
+                
                 case CardEffectType.Attack:     
-                    target?.TakeDamage(value); 
+                    target?.TakeDamage(value, _ctx.Player); 
                     break;
                 case CardEffectType.LoseHealth: 
                     target?.TakeDamage(value); 
@@ -75,14 +104,32 @@ namespace Gameplay.BattleEncounter.Battle
                 case CardEffectType.ChangeSize: 
                     target?.ChangeSize(value); 
                     break;
+                case CardEffectType.SetSize:    
+                    target?.SetSize(value); 
+                    break;
+                case CardEffectType.GainStatus:  
+                    target?.ApplyStatus(e.StatusType, value); 
+                    break;
                 case CardEffectType.HalveSize:
                     if (target != null) target.ChangeSize(-(target.Size.Value / 2));
                     break;
-                case CardEffectType.Stun:       
-                    target?.ApplyStatus(StatusType.Stun, Mathf.Max(1, value)); 
+                case CardEffectType.DrawCard:
+                    _ctx.RequestDraw(value);
                     break;
-
-
+                case CardEffectType.DiscardAllCard:
+                    if (_ctx.Deck != null)
+                        _discardedByThisCard = _ctx.Deck.DiscardHandExcept(c => c == playedCard);
+                    _ctx.RequestDiscard();  
+                    break;
+                case CardEffectType.AddCardToDrawPile:
+                    _ctx.Deck?.AddToDrawPile(e.CardToAdd, value);
+                    break;
+                case CardEffectType.PlayNextCardMultipleTimes:
+                    _nextCardPlays = Mathf.Max(1, value);
+                    break;
+                case CardEffectType.ChooseDiscardThenDraw:
+                    _ctx.RequestChooseDiscard(value);
+                    break;
                 default: break;
             }
         }

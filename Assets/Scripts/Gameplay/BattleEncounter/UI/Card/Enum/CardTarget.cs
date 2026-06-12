@@ -5,6 +5,7 @@ namespace Gameplay.BattleEncounter.UI.Card.Enum
         None,
         Enemy,
         Player,
-        Background
+        Background,
+        AllEnemies
     }
 }

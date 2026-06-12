@@ -10,32 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a8e900222d652fb4c93074220e2230b4, type: 3}
-  m_Name: Card_Chrysalis
+  m_Name: Card_Slimed
   m_EditorClassIdentifier: Assembly-CSharp::Gameplay.BattleEncounter.UI.Card.CardDefinition
-  Id: 02
-  DisplayName: Chrysalis
+  Id: 18
+  DisplayName: Slimed
   Art:
     CardBackground: {fileID: -1152778665, guid: 0a7e9a4d06787974da201bb5ad716a06, type: 3}
-    CardArt: {fileID: -520069314, guid: 3859bc2d80614b84089f2baa3fe46b57, type: 3}
+    CardArt: {fileID: 529474195, guid: 4914acca3de6f5f4c8e14849c20360e6, type: 3}
     CardHeader: {fileID: 885153838, guid: 0a7e9a4d06787974da201bb5ad716a06, type: 3}
     IsSpecialCard: 0
     CardIcon: {fileID: 0}
-    CardFrameLeft: {fileID: 0}
-    CardFrameRight: {fileID: 0}
-  PlayTarget: 2
-  Keywords: 8
-  Effects:
-  - Type: 1
-    StatusType: 0
-    StatusAmount: 0
-    Target: 2
-    ValueSource: 2
-    CardValue: 2
-    CustomSource: 3
-  - Type: 4
-    StatusType: 0
-    StatusAmount: 0
-    Target: 2
-    ValueSource: 1
-    CardValue: 1
-    CustomSource: 3
+    CardFrameLeft: {fileID: -1471174484, guid: 0a7e9a4d06787974da201bb5ad716a06, type: 3}
+    CardFrameRight: {fileID: -1471174484, guid: 0a7e9a4d06787974da201bb5ad716a06, type: 3}
+    CardBorderTop: {fileID: 0}
+  PlayTarget: 0
+  Keywords: 4
+  Effects: []

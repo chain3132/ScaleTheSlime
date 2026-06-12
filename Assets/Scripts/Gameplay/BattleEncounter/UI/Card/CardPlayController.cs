@@ -42,11 +42,14 @@ namespace Gameplay.BattleEncounter.UI.Card
         #endregion
 
         public Observable<CardPlay> CardPlayed => _cardPlayed;
+        public bool SelectionMode = false;
+        public Subject<Data.Card> CardClicked = new();
 
         public bool Interactable { get; set; } = true;
 
         public void BeginDrag(Vector2 cardPosition,Data.Card card)
         {
+            
             _currentCard = card;
             _targetEnemy = null;
             _origin = cardPosition;
@@ -101,6 +104,7 @@ namespace Gameplay.BattleEncounter.UI.Card
             {
                 case CardTarget.Player:
                 case CardTarget.Background:
+                case CardTarget.AllEnemies:
                     return RectTransformUtility.RectangleContainsScreenPoint(_playZoneRect, mousePosition, null);
                 case CardTarget.Enemy:
                     return TryGetEnemyUnderMouse(mousePosition, out _targetEnemy);
@@ -165,6 +169,7 @@ namespace Gameplay.BattleEncounter.UI.Card
             {
                 case CardTarget.Background:
                 case CardTarget.Player:
+                case CardTarget.AllEnemies: 
                     _playZoneUI.SetActive(true);
                     break;
                 default:
@@ -178,6 +183,7 @@ namespace Gameplay.BattleEncounter.UI.Card
         private void OnDestroy()
         {
             _cardPlayed.Dispose();
+            CardClicked.Dispose();
         }
     }
 }

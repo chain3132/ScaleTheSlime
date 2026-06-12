@@ -32,7 +32,6 @@ namespace Gameplay.BattleEncounter.Characters
             Form.Skip(1).Subscribe(OnFormChanged).AddTo(_scope);   
             Size.Skip(1).Subscribe(OnSizeChanged).AddTo(_scope);   
         }
-
         private void OnFormChanged(SizeForm form)
         {
             _currentPassive?.OnExit(this, _ctx);

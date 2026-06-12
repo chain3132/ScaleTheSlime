@@ -12,7 +12,7 @@ namespace Gameplay.BattleEncounter.Characters.Behaviors
             {
                 switch (a.Type)
                 {
-                    case EnemyActionType.Attack:       ctx.Player.TakeDamage(a.Value); break;
+                    case EnemyActionType.Attack:       ctx.Player.TakeDamage(a.Value,self); break;
                     case EnemyActionType.GainArmor:    self.GainShield(a.Value); break;
                     case EnemyActionType.GrowSize:     self.ChangeSize(a.Value); break;
                     case EnemyActionType.ShrinkSize:   self.ChangeSize(-a.Value); break;

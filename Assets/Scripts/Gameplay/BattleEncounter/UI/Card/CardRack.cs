@@ -3,6 +3,7 @@ using System.Threading;
 using Cysharp.Threading.Tasks;
 using LitMotion;
 using LitMotion.Extensions;
+using R3;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
@@ -50,7 +51,7 @@ namespace Gameplay.BattleEncounter.UI.Card
 
         #endregion
         
-
+        public int HandCount => _hand.Count;
         private readonly List<CardView> _hand = new();
         private AsyncOperationHandle<GameObject> _cardPrefabHandle;
         private GameObject _cardPrefab;
@@ -149,6 +150,14 @@ namespace Gameplay.BattleEncounter.UI.Card
             var tasks = new List<UniTask>(toDiscard.Count);
             foreach (var v in toDiscard) tasks.Add(ToDiscardAsync(v, ct));
             await UniTask.WhenAll(tasks);
+        }
+        public async UniTask DiscardOneAsync(Data.Card card, CancellationToken ct)
+        {
+            var view = _hand.Find(c => c.Card == card);
+            if (view == null) return;
+            _hand.Remove(view);
+            Arrange();   
+            await ToDiscardAsync(view, ct);
         }
 
         private async UniTask ToDiscardAsync(CardView view, CancellationToken ct)
