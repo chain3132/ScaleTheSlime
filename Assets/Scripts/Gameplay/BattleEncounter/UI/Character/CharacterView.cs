@@ -33,7 +33,11 @@ namespace Gameplay.BattleEncounter.UI.Characters
         private Image shieldIcon;
         [SerializeField]
         private Image healthIcon;
-        
+        [SerializeField]
+        private CharacterFxDatabase _fxDatabase;
+        [SerializeField]
+        private Transform _fxAnchor;   
+
 
         #endregion
 
@@ -53,10 +57,12 @@ namespace Gameplay.BattleEncounter.UI.Characters
         private readonly CompositeDisposable _bindings = new();
         private ParticleSystem[] _particles;
 
-
         public void Bind(Character c)
         {
             _bindings.Clear();
+
+            c.Fx.SubscribeAwait((fx, ct) => PlayFxAsync(fx, ct), AwaitOperation.Sequential)
+                .AddTo(_bindings);
 
             if (_hpText != null)
                 c.Health.Subscribe(h 
@@ -76,6 +82,18 @@ namespace Gameplay.BattleEncounter.UI.Characters
                         => UpdateShield(shield,ct))
                     .AddTo(_bindings);
         }
+        private async UniTask PlayFxAsync(CharacterFx type, CancellationToken ct)
+        {
+            if (_fxDatabase == null) return;
+            var prefab = _fxDatabase.PrefabFor(type);
+            if (prefab == null) return;
+
+            var pos = _fxAnchor != null ? _fxAnchor.position : transform.position;
+            var fx = Instantiate(prefab, pos, prefab.transform.rotation);
+
+            await UniTask.Delay(System.TimeSpan.FromSeconds(fx.main.duration), cancellationToken: ct);
+        }
+
         private async UniTask UpdateShield(int shield, CancellationToken ct)
         {
             healthIcon.gameObject.SetActive(false);

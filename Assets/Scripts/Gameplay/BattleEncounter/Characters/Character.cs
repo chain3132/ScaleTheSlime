@@ -21,6 +21,9 @@ namespace Gameplay.BattleEncounter.Characters
         private readonly Subject<Unit> _died = new();
         public Observable<Unit> Died => _died;
 
+        private readonly Subject<CharacterFx> _fx = new();
+        public Observable<CharacterFx> Fx => _fx;
+
         protected Character( int maxHealth, int startSize,int startHealth = -1)
         {
             MaxHealth = maxHealth;
@@ -47,7 +50,9 @@ namespace Gameplay.BattleEncounter.Characters
             if (remaining > 0)
                 Health.Value = Mathf.Max(0, Health.Value - remaining);
 
-            if (Health.Value <= 0) Die();
+            _fx.OnNext(remaining > 0 ? CharacterFx.Hit : CharacterFx.Block);
+
+            if (Health.Value <= 0) Die(CharacterFx.Death);
         }
         private int ModifiedDamage(int baseValue, Character attacker)
         {
@@ -73,18 +78,35 @@ namespace Gameplay.BattleEncounter.Characters
         public void ChangeSize(int delta)
         {
             if (IsDead || delta == 0) return;
-            Size.Value = Mathf.Clamp(Size.Value + delta, 0, 10);
+            ApplySize(Size.Value + delta);
         }
         public void SetSize(int newSize)
         {
             if (IsDead) return;
-            Size.Value = Mathf.Clamp(newSize, 0, 10);
+            ApplySize(newSize);
+        }
+
+        private void ApplySize(int newSize)
+        {
+            int old = Size.Value;
+            newSize = Mathf.Clamp(newSize, 0, 10);
+            if (newSize == old) return;
+
+            Size.Value = newSize;
+
+            var oldForm = SizeFormUtil.FormOf(old);
+            var newForm = SizeFormUtil.FormOf(newSize);
+            if (oldForm != newForm && newForm != SizeForm.Dead)
+                _fx.OnNext(newSize > old ? CharacterFx.FormChangeL : CharacterFx.FormChangeS);
+            else
+                _fx.OnNext(newSize > old ? CharacterFx.SizeUp : CharacterFx.SizeDown);
         }
 
         public void CheckSizeDeath()
         {
             if (IsDead) return;
-            if (IsLethalSize(Size.Value)) Die();
+            if (IsLethalSize(Size.Value))
+                Die(Size.Value >= 10 ? CharacterFx.DeathExcessSizeL : CharacterFx.DeathExcessSizeS);
         }
 
         protected virtual bool IsLethalSize(int size) => size <= 0 || size >= 10;
@@ -105,10 +127,13 @@ namespace Gameplay.BattleEncounter.Characters
             Statuses.ClearTemporary();
         }
 
-        protected virtual void Die()
+        protected virtual void Die() => Die(CharacterFx.Death);
+
+        protected void Die(CharacterFx cause)
         {
             if (IsDead) return;
             IsDead = true;
+            _fx.OnNext(cause);
             _died.OnNext(Unit.Default);
         }
 
@@ -120,6 +145,7 @@ namespace Gameplay.BattleEncounter.Characters
             Form.Dispose();
             Statuses.Dispose();
             _died.Dispose();
+            _fx.Dispose();
         }
     }
 }

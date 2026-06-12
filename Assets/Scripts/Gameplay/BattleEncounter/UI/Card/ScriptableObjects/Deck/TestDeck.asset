@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Gameplay.BattleEncounter.UI.Card.Data.DeckDefinition
   Cards:
   - {fileID: 11400000, guid: ed75cb8b7e1f5b7448f095b792a62b2e, type: 2}
-  - {fileID: 11400000, guid: ca04d6aa555e34f418809f3c74a293cb, type: 2}
+  - {fileID: 11400000, guid: 98fb66634b89d104f810062ce44a5e61, type: 2}
   - {fileID: 11400000, guid: 20c75c1b37202244292f9644305e6850, type: 2}
   - {fileID: 11400000, guid: 5eb00ec6a38520f4ba5346d087d92461, type: 2}
   - {fileID: 11400000, guid: 91e8547b89eba42469a20c32c2828328, type: 2}

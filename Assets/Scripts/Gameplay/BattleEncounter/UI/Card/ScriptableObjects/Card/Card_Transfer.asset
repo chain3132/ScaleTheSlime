@@ -15,10 +15,10 @@ MonoBehaviour:
   Id: 18
   DisplayName: Transfer
   Art:
-    CardBackground: {fileID: 1651503625, guid: 0a7e9a4d06787974da201bb5ad716a06, type: 3}
+    CardBackground: {fileID: -1152778665, guid: 0a7e9a4d06787974da201bb5ad716a06, type: 3}
     CardArt: {fileID: -1932726627, guid: 4914acca3de6f5f4c8e14849c20360e6, type: 3}
-    CardHeader: {fileID: 717840650, guid: 0a7e9a4d06787974da201bb5ad716a06, type: 3}
-    IsSpecialCard: 1
+    CardHeader: {fileID: 885153838, guid: 0a7e9a4d06787974da201bb5ad716a06, type: 3}
+    IsSpecialCard: 0
     CardIcon: {fileID: 0}
     CardFrameLeft: {fileID: 0}
     CardFrameRight: {fileID: 0}
