@@ -22,20 +22,25 @@ MonoBehaviour:
     CardIcon: {fileID: 0}
     CardFrameLeft: {fileID: 0}
     CardFrameRight: {fileID: 0}
+    CardBorderTop: {fileID: 0}
   PlayTarget: 2
-  Keywords: 8
+  Keywords: 0
   Effects:
   - Type: 5
     StatusType: 0
     StatusAmount: 0
     Target: 2
+    CardToAdd: {fileID: 0}
     ValueSource: 1
     CardValue: 5
+    Repeat: 1
     CustomSource: 3
   - Type: 7
     StatusType: 1
     StatusAmount: 2
     Target: 2
+    CardToAdd: {fileID: 0}
     ValueSource: 1
     CardValue: 1
+    Repeat: 1
     CustomSource: 3

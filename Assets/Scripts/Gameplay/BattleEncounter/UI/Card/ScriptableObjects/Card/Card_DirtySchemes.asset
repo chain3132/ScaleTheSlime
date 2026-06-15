@@ -24,7 +24,7 @@ MonoBehaviour:
     CardFrameRight: {fileID: 0}
     CardBorderTop: {fileID: 0}
   PlayTarget: 3
-  Keywords: 8
+  Keywords: 0
   Effects:
   - Type: 8
     StatusType: 0

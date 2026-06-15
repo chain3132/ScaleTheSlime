@@ -24,5 +24,5 @@ MonoBehaviour:
     CardFrameRight: {fileID: -1471174484, guid: 0a7e9a4d06787974da201bb5ad716a06, type: 3}
     CardBorderTop: {fileID: 0}
   PlayTarget: 0
-  Keywords: 4
+  Keywords: 0
   Effects: []

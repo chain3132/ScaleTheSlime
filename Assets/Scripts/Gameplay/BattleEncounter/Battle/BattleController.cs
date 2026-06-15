@@ -88,7 +88,7 @@ namespace Gameplay.BattleEncounter.Battle
             _result = new UniTaskCompletionSource<bool>();
 
             _player = new Player(_playerDefinition, progress.CurrentHealth);
-            if (_playerView != null) _playerView.Bind(_player);
+            if (_playerView != null) _playerView.Bind(_player, _playerDefinition);
 
             SpawnEnemies(enemyDefs);
 

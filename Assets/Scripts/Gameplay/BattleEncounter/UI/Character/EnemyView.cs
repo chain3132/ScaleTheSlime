@@ -35,7 +35,7 @@ namespace Gameplay.BattleEncounter.UI.Characters
             if (d == null) return null;
 
             Enemy = new Enemy(d);
-            if (_view != null) _view.Bind(Enemy);
+            if (_view != null) _view.Bind(Enemy, d);
 
             Enemy.Form.Skip(1).Subscribe(OnFormChanged).AddTo(_scope);
             Enemy.Died.Subscribe(_ => OnDied()).AddTo(_scope);

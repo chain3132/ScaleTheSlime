@@ -22,13 +22,16 @@ MonoBehaviour:
     CardIcon: {fileID: 0}
     CardFrameLeft: {fileID: 0}
     CardFrameRight: {fileID: 0}
+    CardBorderTop: {fileID: 0}
   PlayTarget: 1
-  Keywords: 8
+  Keywords: 0
   Effects:
   - Type: 0
     StatusType: 0
     StatusAmount: 0
     Target: 1
+    CardToAdd: {fileID: 0}
     ValueSource: 1
     CardValue: 3
+    Repeat: 1
     CustomSource: 3
