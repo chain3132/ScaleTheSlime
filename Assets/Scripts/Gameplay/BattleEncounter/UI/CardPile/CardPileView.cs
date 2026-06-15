@@ -3,7 +3,7 @@ using R3;
 using TMPro;
 using UnityEngine;
 
-namespace Gameplay.BattleEncounter.UI.CardPlie
+namespace Gameplay.BattleEncounter.UI.CardPile
 {
     public class CardPileView : MonoBehaviour
     {

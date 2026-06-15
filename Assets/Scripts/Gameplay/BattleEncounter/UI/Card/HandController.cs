@@ -4,7 +4,7 @@ using System.Threading;
 using Cysharp.Threading.Tasks;
 using Gameplay.BattleEncounter.UI.Card.Data;
 using Gameplay.BattleEncounter.UI.Card.Enum;
-using Gameplay.BattleEncounter.UI.CardPlie;
+using Gameplay.BattleEncounter.UI.CardPile;
 using R3;
 using UnityEngine;
 
