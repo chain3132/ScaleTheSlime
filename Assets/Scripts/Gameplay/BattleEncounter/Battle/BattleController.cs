@@ -25,14 +25,22 @@ namespace Gameplay.BattleEncounter.Battle
         private HandController _handController;
         [SerializeField]
         private Button _endTurnButton;
+        [Header("Enemy spawning")]
         [SerializeField]
-        private List<EnemyView> _enemyViews = new();
+        private EnemyView _enemyViewPrefab;
+        [SerializeField]
+        private Transform _enemyContainer;
+        [SerializeField]
+        private int _maxEnemies = 3;
+        [SerializeField]
+        private float _enemySpacing = 3f;   
         [SerializeField]
         private float _betweenEnemyDelay = 0.4f;
         [SerializeField]
-        private bool _autoStart = true;   
+        private bool _autoStart = true;
 
         private Player _player;
+        private readonly List<EnemyView> _enemyViews = new(); 
         private readonly List<Enemy> _enemies = new();
         private BattleContext _context;
         private CardEffectExecutor _executor;
@@ -62,9 +70,9 @@ namespace Gameplay.BattleEncounter.Battle
         public async UniTask<bool> RunAsync(RunProgress progress,
             IReadOnlyList<EnemyDefinition> enemyDefs, CancellationToken ct)
         {
+            Setup(progress, enemyDefs);
             if (_handController != null)
                 await _handController.SetupAsync(progress.Deck, ct);   
-            Setup(progress, enemyDefs);
 
             bool win = await _result.Task.AttachExternalCancellation(ct);
 
@@ -82,24 +90,7 @@ namespace Gameplay.BattleEncounter.Battle
             _player = new Player(_playerDefinition, progress.CurrentHealth);
             if (_playerView != null) _playerView.Bind(_player);
 
-            for (int i = 0; i < _enemyViews.Count; i++)
-            {
-                var ev = _enemyViews[i];
-                if (ev == null) continue;
-
-                EnemyDefinition def = null;
-                if (enemyDefs != null)
-                {
-                    if (i >= enemyDefs.Count || enemyDefs[i] == null) { ev.Hide(); continue; }
-                    def = enemyDefs[i];
-                }
-
-                var enemy = ev.Setup(def);
-                if (enemy == null) { ev.Hide(); continue; }
-
-                _enemies.Add(enemy);
-                enemy.Died.Subscribe(_ => OnEnemyDied()).AddTo(_battleScope);
-            }
+            SpawnEnemies(enemyDefs);
 
             _context = new BattleContext(_player, _enemies, 
                 _handController != null ? _handController.Deck : null);
@@ -148,6 +139,42 @@ namespace Gameplay.BattleEncounter.Battle
             SetPlayerInput(true);
         }
 
+        private void SpawnEnemies(IReadOnlyList<EnemyDefinition> enemyDefs)
+        {
+            if (_enemyViewPrefab == null) return;
+
+            var defs = new List<EnemyDefinition>();
+            if (enemyDefs == null)
+            {
+                defs.Add(null);
+            }
+            else
+            {
+                foreach (var d in enemyDefs)
+                {
+                    if (d == null) continue;
+                    defs.Add(d);
+                    if (defs.Count >= _maxEnemies) break;
+                }
+            }
+
+            int n = defs.Count;
+            var parent = _enemyContainer != null ? _enemyContainer : transform;
+
+            for (int i = 0; i < n; i++)
+            {
+                var ev = Instantiate(_enemyViewPrefab, parent);
+                ev.transform.localPosition = new Vector3((i - (n - 1) / 2f) * _enemySpacing, 0f, 0f);
+
+                var enemy = ev.Setup(defs[i]);
+                if (enemy == null) { Destroy(ev.gameObject); continue; }
+
+                _enemyViews.Add(ev);
+                _enemies.Add(enemy);
+                enemy.Died.Subscribe(_ => OnEnemyDied()).AddTo(_battleScope);
+            }
+        }
+
         private void Teardown()
         {
             _battleScope.Clear();
@@ -156,7 +183,8 @@ namespace Gameplay.BattleEncounter.Battle
             foreach (var e in _enemies) e?.Dispose();
             _enemies.Clear();
             foreach (var ev in _enemyViews)
-                if (ev != null) ev.Clear();
+                if (ev != null) Destroy(ev.gameObject);   
+            _enemyViews.Clear();
             _handController?.ClearBattle();
             _context?.Dispose();
             _context = null;
