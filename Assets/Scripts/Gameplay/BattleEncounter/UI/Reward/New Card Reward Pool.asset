@@ -13,4 +13,6 @@ MonoBehaviour:
   m_Name: New Card Reward Pool
   m_EditorClassIdentifier: Assembly-CSharp::Gameplay.BattleEncounter.UI.Reward.CardRewardPool
   _cards:
-  - {fileID: 0}
+  - {fileID: 11400000, guid: 9b542eae3696fa24cb329ce986da0b5b, type: 2}
+  - {fileID: 11400000, guid: 91e1b09e8a773344fa36e989aa3954f8, type: 2}
+  - {fileID: 11400000, guid: ca04d6aa555e34f418809f3c74a293cb, type: 2}

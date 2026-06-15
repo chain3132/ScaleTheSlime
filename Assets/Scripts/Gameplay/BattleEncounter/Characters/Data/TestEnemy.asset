@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c61101f0b481e754bafbbaa1daea1698, type: 3}
   m_Name: TestEnemy
   m_EditorClassIdentifier: Assembly-CSharp::Gameplay.BattleEncounter.Characters.Data.EnemyDefinition
-  DisplayName: Slime
-  Sprite: {fileID: 0}
-  MaxHealth: 30
+  MaxHealth: 12
   StartSize: 5
   TinyBehavior: {fileID: 11400000, guid: 9a819aed51267fc4e87c66eb38b6e540, type: 2}
   NormalBehavior: {fileID: 11400000, guid: 9a819aed51267fc4e87c66eb38b6e540, type: 2}
   GiantBehavior: {fileID: 11400000, guid: 9a819aed51267fc4e87c66eb38b6e540, type: 2}
+  _diesWhenTooSmall: 1
+  _diesWhenTooBig: 1

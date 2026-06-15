@@ -58,6 +58,19 @@ namespace Gameplay.BattleEncounter.UI.Card.Data
             SyncCounts();
         }
 
+        public Card AddToHand(CardDefinition def)
+        {
+            if (def == null) return null;
+            var card = new Card(def);
+            _hand.Add(card);
+            return card;
+        }
+        
+        public void RemoveFromHand(Card card)
+        {
+            _hand.Remove(card);
+        }
+
         public int DiscardHandExcept(Func<Card, bool> keep)
         {
             int discarded = 0;

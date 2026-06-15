@@ -136,6 +136,11 @@ namespace Gameplay.BattleEncounter.Battle
                         },
                         AwaitOperation.Sequential)
                     .AddTo(_battleScope);
+
+                _player.UniqueCardGranted
+                    .SubscribeAwait(async (def, token) => await _handController.AddUniqueCardAsync(def, token),
+                        AwaitOperation.Sequential)
+                    .AddTo(_battleScope);
             }
 
             _player.Died.Subscribe(_ => EndBattle(false)).AddTo(_battleScope);

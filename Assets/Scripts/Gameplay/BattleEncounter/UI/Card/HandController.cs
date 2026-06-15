@@ -33,6 +33,10 @@ namespace Gameplay.BattleEncounter.UI.Card
         {
             return (card.Definition.Keywords & CardKeyword.Retain) != 0;
         }
+        private static bool IsDestroyOnPlay(Data.Card card)
+        {
+            return (card.Definition.Keywords & CardKeyword.DestroyOnPlay) != 0;
+        }
 
         private void Bind()
         {
@@ -40,7 +44,10 @@ namespace Gameplay.BattleEncounter.UI.Card
                 .SubscribeAwait(async (play, ct) =>
                 {
                     await _rack.PlayCardAsync(play.Card, ct);
-                    _deck?.Discard(play.Card);
+                    if (IsDestroyOnPlay(play.Card))
+                        _deck?.RemoveFromHand(play.Card);   
+                    else
+                        _deck?.Discard(play.Card);
                 }, AwaitOperation.Drop)
                 .AddTo(this);
         }
@@ -84,10 +91,19 @@ namespace Gameplay.BattleEncounter.UI.Card
             for (int i = 0; i < count; i++)
             {
                 Data.Card card = _deck?.Draw();
-                if (card == null) break;  
+                if (card == null) break;
                 await _rack.DrawAsync(new CardViewModel(card), ct);
             }
         }
+
+        public async UniTask AddUniqueCardAsync(CardDefinition def, CancellationToken ct)
+        {
+            if (_deck == null || def == null) return;
+            var card = _deck.AddToHand(def);
+            if (card == null) return;
+            await _rack.DrawAsync(new CardViewModel(card), ct);
+        }
+
         public async UniTask DiscardHandVisualAsync(CancellationToken ct)
         {
             await _rack.DiscardHandAsync(null, ct);

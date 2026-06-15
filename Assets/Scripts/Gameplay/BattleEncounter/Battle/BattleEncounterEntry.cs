@@ -48,6 +48,7 @@ namespace Gameplay.BattleEncounter.Battle
                 if (_skipReward) return win ? EncounterResult.Victory : EncounterResult.Defeat;
                 if (win && _rewardPanel != null && _rewardPool != null)
                 {
+                    _rewardPanel.gameObject.SetActive(true);
                     var choices = _rewardPool.Roll(_rewardChoices, rng);
                     var picked = await _rewardPanel.ShowAsync(choices, ct);
                     if (picked != null) _progress.Deck.Add(picked);   
@@ -59,6 +60,7 @@ namespace Gameplay.BattleEncounter.Battle
             finally
             {
                 if (_battleRoot != null) _battleRoot.SetActive(false);
+                _rewardPanel.gameObject.SetActive(false);
             }
         }
     }

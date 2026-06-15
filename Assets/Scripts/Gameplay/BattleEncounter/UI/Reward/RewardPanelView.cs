@@ -13,8 +13,8 @@ namespace Gameplay.BattleEncounter.UI.Reward
         [Serializable]
         private class Slot
         {
-            public CardView Card;     
-            public Button Button;     
+            public CardRewardView Card;
+            public Button Button;
         }
 
         [SerializeField]
@@ -42,7 +42,7 @@ namespace Gameplay.BattleEncounter.UI.Reward
                 if (!has) continue;
 
                 var def = choices[i];
-                slot.Card.Bind(new CardViewModel(new Card.Data.Card(def)), null);
+                slot.Card.Bind(def);
                 slot.Button.onClick.RemoveAllListeners();
                 slot.Button.onClick.AddListener(() => _choice.TrySetResult(def));
             }
