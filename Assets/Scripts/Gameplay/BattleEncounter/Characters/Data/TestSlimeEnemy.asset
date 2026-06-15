@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c61101f0b481e754bafbbaa1daea1698, type: 3}
+  m_Name: TestSlimeEnemy
+  m_EditorClassIdentifier: Assembly-CSharp::Gameplay.BattleEncounter.Characters.Data.EnemyDefinition
+  MaxHealth: 15
+  StartSize: 5
+  TinySkeleton: {fileID: 11400000, guid: 85b014d5b0ccdb44d8b0a8e967241a6e, type: 2}
+  NormalSkeleton: {fileID: 11400000, guid: 55ce55b72ed3ece449640f3e4c50064b, type: 2}
+  GiantSkeleton: {fileID: 11400000, guid: ba51973d048d25142b7deccdbd6c92ba, type: 2}
+  TinyOffsetY: 90
+  NormalOffsetY: 145
+  GiantOffsetY: 250
+  TinyBehavior: {fileID: 11400000, guid: 9a819aed51267fc4e87c66eb38b6e540, type: 2}
+  NormalBehavior: {fileID: 11400000, guid: 9a819aed51267fc4e87c66eb38b6e540, type: 2}
+  GiantBehavior: {fileID: 11400000, guid: 9a819aed51267fc4e87c66eb38b6e540, type: 2}
+  _diesWhenTooSmall: 1
+  _diesWhenTooBig: 1

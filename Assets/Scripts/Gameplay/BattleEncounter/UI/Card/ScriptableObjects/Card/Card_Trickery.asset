@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8e900222d652fb4c93074220e2230b4, type: 3}
+  m_Name: Card_Trickery
+  m_EditorClassIdentifier: Assembly-CSharp::Gameplay.BattleEncounter.UI.Card.CardDefinition
+  Id: 16
+  DisplayName: Trickery
+  Art:
+    CardBackground: {fileID: 202224899, guid: 0a7e9a4d06787974da201bb5ad716a06, type: 3}
+    CardArt: {fileID: 1303746085, guid: 15ab22a9cf160184682b1ddc2a1465b5, type: 3}
+    CardHeader: {fileID: 709454930, guid: 0a7e9a4d06787974da201bb5ad716a06, type: 3}
+    IsSpecialCard: 1
+    CardIcon: {fileID: 795428872, guid: 0a7e9a4d06787974da201bb5ad716a06, type: 3}
+    CardFrameLeft: {fileID: 480329692, guid: 0a7e9a4d06787974da201bb5ad716a06, type: 3}
+    CardFrameRight: {fileID: 143086012, guid: 0a7e9a4d06787974da201bb5ad716a06, type: 3}
+    CardBorderTop: {fileID: 359627390, guid: 0a7e9a4d06787974da201bb5ad716a06, type: 3}
+  PlayTarget: 3
+  Keywords: 10
+  Effects:
+  - Type: 13
+    StatusType: 0
+    StatusAmount: 0
+    Target: 3
+    CardToAdd: {fileID: 0}
+    ValueSource: 1
+    CardValue: 2
+    Repeat: 0
+    CustomSource: 0

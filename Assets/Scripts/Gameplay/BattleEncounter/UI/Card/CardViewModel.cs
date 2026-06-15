@@ -1,5 +1,8 @@
+using Cysharp.Threading.Tasks;
 using Gameplay.BattleEncounter.UI.Card.Data;
 using UnityEngine;
+using LitMotion;
+using LitMotion.Extensions;
 
 namespace Gameplay.BattleEncounter.UI.Card
 {
@@ -14,5 +17,7 @@ namespace Gameplay.BattleEncounter.UI.Card
         {
             Card = card;
         }
+
+        
     }
 }

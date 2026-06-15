@@ -1,0 +1,25 @@
+{
+    "name": "Gameplay.NodeSelection",
+    "rootNamespace": "",
+    "references": [
+        "Gameplay.Core",
+        "Gameplay.BattleEncounter",
+        "UniTask",
+        "R3.Unity",
+        "LitMotion",
+        "LitMotion.Extensions",
+        "Unity.TextMeshPro",
+        "Unity.Addressables",
+        "Unity.ResourceManager",
+        "UniTask.Addressables"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

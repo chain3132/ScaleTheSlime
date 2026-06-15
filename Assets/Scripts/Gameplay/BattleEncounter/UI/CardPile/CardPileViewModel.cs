@@ -2,7 +2,7 @@ using System;
 using Gameplay.BattleEncounter.UI.Card.Data;
 using R3;
 
-namespace Gameplay.BattleEncounter.UI.CardPlie
+namespace Gameplay.BattleEncounter.UI.CardPile
 {
     public class CardPileViewModel : IDisposable
     {

@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8e900222d652fb4c93074220e2230b4, type: 3}
   m_Name: Card_Dropsy
   m_EditorClassIdentifier: Assembly-CSharp::Gameplay.BattleEncounter.UI.Card.CardDefinition
-  Id: 03
-  DisplayName: Study
+  Id: 05
+  DisplayName: Dropsy
   Art:
     CardBackground: {fileID: -1152778665, guid: 0a7e9a4d06787974da201bb5ad716a06, type: 3}
     CardArt: {fileID: -1979122721, guid: 3859bc2d80614b84089f2baa3fe46b57, type: 3}
@@ -22,11 +22,25 @@ MonoBehaviour:
     CardIcon: {fileID: 0}
     CardFrameLeft: {fileID: 0}
     CardFrameRight: {fileID: 0}
+    CardBorderTop: {fileID: 0}
   PlayTarget: 3
-  Keywords: 8
+  Keywords: 0
   Effects:
   - Type: 1
-    Target: 3
+    StatusType: 0
+    StatusAmount: 0
+    Target: 2
+    CardToAdd: {fileID: 0}
     ValueSource: 1
     CardValue: 1
+    Repeat: 1
+    CustomSource: 3
+  - Type: 5
+    StatusType: 0
+    StatusAmount: 0
+    Target: 2
+    CardToAdd: {fileID: 0}
+    ValueSource: 1
+    CardValue: 1
+    Repeat: 1
     CustomSource: 3

@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbc427aab55ef7041bac6adbe98d751e, type: 3}
+  m_Name: CharacterFxDatabase
+  m_EditorClassIdentifier: Assembly-CSharp::Gameplay.BattleEncounter.UI.Characters.CharacterFxDatabase
+  _entries:
+  - Type: 0
+    Prefab: {fileID: 1972841001429162825, guid: 741a705ffd9c0924b8235f9c02d3a455, type: 3}
+  - Type: 1
+    Prefab: {fileID: 4664055154539669787, guid: 3ae5c4a256fb1374c8d08f338c7f8ffc, type: 3}
+  - Type: 2
+    Prefab: {fileID: 8979077114980181949, guid: 22e7d47409f15a54c944f17422a09e2d, type: 3}
+  - Type: 3
+    Prefab: {fileID: 7953479495271016247, guid: 2b636c11da45bfb479cf50ca2c596ec5, type: 3}
+  - Type: 4
+    Prefab: {fileID: 7043684303366724405, guid: 79c1e55017017ce489752ff308cc1d43, type: 3}
+  - Type: 5
+    Prefab: {fileID: 9103261410721358131, guid: b91736e904dea664a8d6470d3ffe82d1, type: 3}
+  - Type: 6
+    Prefab: {fileID: 9201015027185655760, guid: 588e486426f98604ca598001500f7ce5, type: 3}
+  - Type: 7
+    Prefab: {fileID: 1135819082365606461, guid: 7a592e228faa101439e7574f8b3e36ac, type: 3}
+  - Type: 8
+    Prefab: {fileID: 8964900251706186517, guid: c9f88476acd64c147ba7b4533422a68c, type: 3}

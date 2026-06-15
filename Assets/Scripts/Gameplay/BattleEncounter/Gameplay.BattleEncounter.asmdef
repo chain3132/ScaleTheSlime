@@ -1,0 +1,30 @@
+{
+    "name": "Gameplay.BattleEncounter",
+    "rootNamespace": "",
+    "references": [
+        "Gameplay.Core",
+        "UniTask",
+        "R3.Unity",
+        "LitMotion",
+        "LitMotion.Extensions",
+        "Coffee.UIParticle",
+        "spine-unity",
+        "spine-csharp",
+        "Unity.TextMeshPro",
+        "NaughtyAttributes.Core",
+        "Unity.Addressables",
+        "Unity.ResourceManager",
+        "UniTask.Addressables",
+        "Unity.Splines",
+        "Unity.Mathematics"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8e900222d652fb4c93074220e2230b4, type: 3}
+  m_Name: Card_Rupture
+  m_EditorClassIdentifier: Assembly-CSharp::Gameplay.BattleEncounter.UI.Card.CardDefinition
+  Id: 06
+  DisplayName: Rupture
+  Art:
+    CardBackground: {fileID: -1152778665, guid: 0a7e9a4d06787974da201bb5ad716a06, type: 3}
+    CardArt: {fileID: 2029556798, guid: 3859bc2d80614b84089f2baa3fe46b57, type: 3}
+    CardHeader: {fileID: 885153838, guid: 0a7e9a4d06787974da201bb5ad716a06, type: 3}
+    IsSpecialCard: 0
+    CardIcon: {fileID: 0}
+    CardFrameLeft: {fileID: 0}
+    CardFrameRight: {fileID: 0}
+    CardBorderTop: {fileID: 0}
+  PlayTarget: 4
+  Keywords: 0
+  Effects:
+  - Type: 0
+    StatusType: 0
+    StatusAmount: 0
+    Target: 4
+    CardToAdd: {fileID: 0}
+    ValueSource: 1
+    CardValue: 5
+    Repeat: 1
+    CustomSource: 3
+  - Type: 5
+    StatusType: 0
+    StatusAmount: 0
+    Target: 2
+    CardToAdd: {fileID: 0}
+    ValueSource: 1
+    CardValue: -1
+    Repeat: 1
+    CustomSource: 3
