@@ -3,6 +3,7 @@ using Coffee.UIExtensions;
 using Cysharp.Threading.Tasks;
 using Gameplay.BattleEncounter.Characters;
 using Gameplay.BattleEncounter.Characters.Enums;
+using Gameplay.BattleEncounter.Status;
 using R3;
 using TMPro;
 using UnityEngine;
@@ -10,6 +11,7 @@ using UnityEngine.UI;
 using LitMotion;
 using LitMotion.Extensions;
 using Unity.VisualScripting;
+using UnityEngine.Serialization;
 
 namespace Gameplay.BattleEncounter.UI.Characters
 {
@@ -36,7 +38,10 @@ namespace Gameplay.BattleEncounter.UI.Characters
         [SerializeField]
         private CharacterFxDatabase _fxDatabase;
         [SerializeField]
-        private Transform _fxAnchor;   
+        private Transform _fxAnchor;
+        [FormerlySerializedAs("_statusStrip")] 
+        [SerializeField]
+        private StatusView status;
 
 
         #endregion
@@ -63,6 +68,8 @@ namespace Gameplay.BattleEncounter.UI.Characters
 
             c.Fx.SubscribeAwait((fx, ct) => PlayFxAsync(fx, ct), AwaitOperation.Sequential)
                 .AddTo(_bindings);
+
+            status?.Bind(c.Statuses);
 
             if (_hpText != null)
                 c.Health.Subscribe(h 

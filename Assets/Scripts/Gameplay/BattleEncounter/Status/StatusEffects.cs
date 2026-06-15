@@ -16,6 +16,18 @@ namespace Gameplay.BattleEncounter.Status
         public int Get(StatusType type) => GetValue(_retain, type) + GetValue(_temporary, type);
         public bool Has(StatusType type) => Get(type) > 0;
 
+        public IEnumerable<KeyValuePair<StatusType, int>> Active
+        {
+            get
+            {
+                foreach (var kv in _retain)
+                    yield return new(kv.Key, Get(kv.Key));   
+                foreach (var kv in _temporary)
+                    if (!_retain.ContainsKey(kv.Key))
+                        yield return kv;                   
+            }
+        }
+
         private static int GetValue(Dictionary<StatusType, int> dict, StatusType type)
             => dict.TryGetValue(type, out var v) ? v : 0;
 
