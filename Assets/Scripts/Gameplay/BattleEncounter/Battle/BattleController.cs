@@ -74,6 +74,7 @@ namespace Gameplay.BattleEncounter.Battle
         public async UniTask<bool> RunAsync(RunProgress progress,
             IReadOnlyList<EnemyDefinition> enemyDefs, CancellationToken ct)
         {
+            //request enemy prefab
             await LoadEnemyPrefabAsync(ct);
             Setup(progress, enemyDefs);
             if (_handController != null)
@@ -94,9 +95,9 @@ namespace Gameplay.BattleEncounter.Battle
 
             _player = new Player(_playerDefinition, progress.CurrentHealth);
             if (_playerView != null) _playerView.Bind(_player, _playerDefinition);
-
+            
+            //spawn enemy
             SpawnEnemies(enemyDefs);
-
             _context = new BattleContext(_player, _enemies, 
                 _handController != null ? _handController.Deck : null);
             _executor = new CardEffectExecutor(_context);

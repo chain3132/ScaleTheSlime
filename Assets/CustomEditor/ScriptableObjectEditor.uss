@@ -1,0 +1,59 @@
+VisualElement {
+    
+}
+.Header{
+    flex-direction: row;
+    border-bottom-color: #0a0303;
+    border-bottom-width: 1 ;
+}
+.row {
+    flex-direction: row;
+    border-bottom-width: 1px;
+    border-bottom-color: rgba(0, 0, 0, 0.3);
+}
+
+.row-odd {
+    background-color: rgba(255, 255, 255, 0.03);
+}
+
+.row:hover {
+    background-color: rgba(255, 255, 255, 0.08);
+}
+
+.cell {
+    padding-left: 4px;
+    padding-right: 4px;
+    border-right-width: 1px;
+    border-right-color: rgba(0, 0, 0, 0.3);
+}
+.nav{
+    background-color: #1b1f23;
+}
+
+.nav-folder{
+    background-color: #2b3137;
+    border-bottom-color: #2a65a0;
+    border-bottom-width: 2;
+
+}
+
+.nav-item {
+    padding-left: 14px;         
+    padding-top: 5px;
+    padding-bottom: 5px;
+    color: rgb(200, 200, 200);
+    background-color: #1b1f23;
+}
+.create-button{
+    background-color: #00bb00;
+    
+}
+.delete-button{
+    width: 20;
+    height: 20;
+    background-color: #b31d28;
+}
+
+.nav-item:hover {
+    background-color: rgba(255, 255, 255, 0.08);   
+}
