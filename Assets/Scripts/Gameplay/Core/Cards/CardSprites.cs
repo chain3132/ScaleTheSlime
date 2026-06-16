@@ -20,5 +20,8 @@ namespace Gameplay.BattleEncounter.UI.Card
         [ShowIf(nameof(IsSpecialCard))]
         [AllowNesting]
         public Sprite CardFrameRight;
+        [ShowIf(nameof(IsSpecialCard))]
+        [AllowNesting]
+        public Sprite CardBorderTop;
     }
 }

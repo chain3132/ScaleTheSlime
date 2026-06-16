@@ -2,14 +2,18 @@ using System.Threading;
 using Coffee.UIExtensions;
 using Cysharp.Threading.Tasks;
 using Gameplay.BattleEncounter.Characters;
+using Gameplay.BattleEncounter.Characters.Data;
 using Gameplay.BattleEncounter.Characters.Enums;
+using Gameplay.BattleEncounter.Status;
 using R3;
+using Spine.Unity;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using LitMotion;
 using LitMotion.Extensions;
 using Unity.VisualScripting;
+using UnityEngine.Serialization;
 
 namespace Gameplay.BattleEncounter.UI.Characters
 {
@@ -33,7 +37,22 @@ namespace Gameplay.BattleEncounter.UI.Characters
         private Image shieldIcon;
         [SerializeField]
         private Image healthIcon;
-        
+        [SerializeField]
+        private CharacterFxDatabase _fxDatabase;
+        [SerializeField]
+        private Transform _fxAnchor;
+        [FormerlySerializedAs("_statusStrip")]
+        [SerializeField]
+        private StatusView status;
+
+        [Header("Form visual")]
+        [SerializeField]
+        private SkeletonAnimation _skeleton;    
+        [SerializeField]
+        private RectTransform _sizeRoot;         
+        [SerializeField]
+        private string _idleAnimationName = "idle";
+
 
         #endregion
 
@@ -53,10 +72,17 @@ namespace Gameplay.BattleEncounter.UI.Characters
         private readonly CompositeDisposable _bindings = new();
         private ParticleSystem[] _particles;
 
-
-        public void Bind(Character c)
+        public void Bind(Character c, CharacterDefinition def = null)
         {
             _bindings.Clear();
+
+            c.Fx.SubscribeAwait((fx, ct) => PlayFxAsync(fx, ct), AwaitOperation.Sequential)
+                .AddTo(_bindings);
+
+            status?.Bind(c.Statuses);
+
+            if (def != null && (_skeleton != null || _sizeRoot != null))
+                c.Form.Subscribe(form => ApplyForm(form, def)).AddTo(_bindings);
 
             if (_hpText != null)
                 c.Health.Subscribe(h 
@@ -76,6 +102,39 @@ namespace Gameplay.BattleEncounter.UI.Characters
                         => UpdateShield(shield,ct))
                     .AddTo(_bindings);
         }
+        private void ApplyForm(SizeForm form, CharacterDefinition def)
+        {
+            if (form == SizeForm.Dead) return;   
+
+            if (_skeleton != null)
+            {
+                var data = def.SkeletonFor(form);
+                if (data != null && _skeleton.skeletonDataAsset != data)
+                {
+                    _skeleton.skeletonDataAsset = data;
+                    _skeleton.Initialize(true);
+                    if (!string.IsNullOrEmpty(_idleAnimationName))
+                        _skeleton.AnimationState.SetAnimation(0, _idleAnimationName, true);
+                }
+            }
+
+            if (_sizeRoot != null)
+                _sizeRoot.anchoredPosition =
+                    new Vector2(_sizeRoot.anchoredPosition.x, def.OffsetYFor(form));
+        }
+
+        private async UniTask PlayFxAsync(CharacterFx type, CancellationToken ct)
+        {
+            if (_fxDatabase == null) return;
+            var prefab = _fxDatabase.PrefabFor(type);
+            if (prefab == null) return;
+
+            var pos = _fxAnchor != null ? _fxAnchor.position : transform.position;
+            var fx = Instantiate(prefab, pos, prefab.transform.rotation);
+
+            await UniTask.Delay(System.TimeSpan.FromSeconds(fx.main.duration), cancellationToken: ct);
+        }
+
         private async UniTask UpdateShield(int shield, CancellationToken ct)
         {
             healthIcon.gameObject.SetActive(false);

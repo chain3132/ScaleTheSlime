@@ -3,7 +3,7 @@ using R3;
 using TMPro;
 using UnityEngine;
 
-namespace Gameplay.BattleEncounter.UI.CardPlie
+namespace Gameplay.BattleEncounter.UI.CardPile
 {
     public class CardPileView : MonoBehaviour
     {
@@ -18,6 +18,7 @@ namespace Gameplay.BattleEncounter.UI.CardPlie
 
         public void Bind(CardPileViewModel vm)
         {
+            _disposables.Clear();   
             vm.DrawPileCount.Subscribe(count => drawPileCountText.text = $"{count}").AddTo(_disposables);
             vm.DiscardPileCount.Subscribe(count => discardPileCountText.text = $"{count}").AddTo(_disposables);
         }

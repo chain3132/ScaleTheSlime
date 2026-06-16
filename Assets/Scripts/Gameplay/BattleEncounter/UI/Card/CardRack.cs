@@ -3,6 +3,7 @@ using System.Threading;
 using Cysharp.Threading.Tasks;
 using LitMotion;
 using LitMotion.Extensions;
+using R3;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
@@ -50,7 +51,7 @@ namespace Gameplay.BattleEncounter.UI.Card
 
         #endregion
         
-
+        public int HandCount => _hand.Count;
         private readonly List<CardView> _hand = new();
         private AsyncOperationHandle<GameObject> _cardPrefabHandle;
         private GameObject _cardPrefab;
@@ -150,6 +151,14 @@ namespace Gameplay.BattleEncounter.UI.Card
             foreach (var v in toDiscard) tasks.Add(ToDiscardAsync(v, ct));
             await UniTask.WhenAll(tasks);
         }
+        public async UniTask DiscardOneAsync(Data.Card card, CancellationToken ct)
+        {
+            var view = _hand.Find(c => c.Card == card);
+            if (view == null) return;
+            _hand.Remove(view);
+            Arrange();   
+            await ToDiscardAsync(view, ct);
+        }
 
         private async UniTask ToDiscardAsync(CardView view, CancellationToken ct)
         {
@@ -165,6 +174,13 @@ namespace Gameplay.BattleEncounter.UI.Card
                     .WithEase(Ease.InCubic).BindToLocalScale(rt).ToUniTask(ct));
 
             Destroy(view.gameObject);
+        }
+
+        public void ClearHand()
+        {
+            foreach (var v in _hand)
+                if (v != null) Destroy(v.gameObject);
+            _hand.Clear();
         }
 
         public async UniTask DrawManyAsync(IReadOnlyList<CardViewModel> vms, CancellationToken ct)
@@ -187,7 +203,8 @@ namespace Gameplay.BattleEncounter.UI.Card
             var rt = (RectTransform)card.transform;
             LMotion.Create(rt.anchoredPosition, SplineToAnchored(t), _arrangeDuration)
                 .WithEase(Ease.OutCubic)
-                .BindToAnchoredPosition(rt);
+                .BindToAnchoredPosition(rt)
+                .AddTo(card.gameObject);  
         }
 
         private Vector2 SplineToAnchored(float t)

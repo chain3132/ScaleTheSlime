@@ -18,8 +18,8 @@ namespace Gameplay.BattleEncounter.Characters
         private Passive _currentPassive;
         private BattleContext _ctx;
 
-        public Player(PlayerDefinition def)
-            : base(def.DisplayName, def.MaxHealth, def.StartSize)
+        public Player(PlayerDefinition def,int startHealth = -1)
+            : base( def.MaxHealth, def.StartSize,startHealth)
         {
             _def = def;
         }
@@ -32,7 +32,6 @@ namespace Gameplay.BattleEncounter.Characters
             Form.Skip(1).Subscribe(OnFormChanged).AddTo(_scope);   
             Size.Skip(1).Subscribe(OnSizeChanged).AddTo(_scope);   
         }
-
         private void OnFormChanged(SizeForm form)
         {
             _currentPassive?.OnExit(this, _ctx);

@@ -12,14 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 524c939fe3ecbe747ba9e5fbdb2655e7, type: 3}
   m_Name: TestPlayer
   m_EditorClassIdentifier: Assembly-CSharp::Gameplay.BattleEncounter.Characters.Data.PlayerDefinition
-  DisplayName: 
-  Sprite: {fileID: 0}
   MaxHealth: 30
-  StartSize: 5
+  StartSize: 6
+  TinySkeleton: {fileID: 11400000, guid: c134d216bbddd3b4faa4be8bca676911, type: 2}
+  NormalSkeleton: {fileID: 11400000, guid: b689e6f353bb9e749aeb8bed1664d5a1, type: 2}
+  GiantSkeleton: {fileID: 11400000, guid: 49136f9f091649a40879432e3bcfd645, type: 2}
+  TinyOffsetY: 110
+  NormalOffsetY: 241
+  GiantOffsetY: 295
   TinyPassive: {fileID: 0}
   NormalPassive: {fileID: 0}
   GiantPassive: {fileID: 0}
-  Unique2: {fileID: 0}
-  Unique5: {fileID: 0}
-  Unique8: {fileID: 0}
-  StartingDeck: {fileID: 0}
+  Unique2: {fileID: 11400000, guid: ca04d6aa555e34f418809f3c74a293cb, type: 2}
+  Unique5: {fileID: 11400000, guid: 20c75c1b37202244292f9644305e6850, type: 2}
+  Unique8: {fileID: 11400000, guid: ed75cb8b7e1f5b7448f095b792a62b2e, type: 2}
+  StartingDeck: {fileID: 11400000, guid: 249893e5d38f8484aa159a640dc7c1f2, type: 2}

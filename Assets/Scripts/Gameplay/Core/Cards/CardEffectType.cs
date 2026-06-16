@@ -7,7 +7,8 @@ namespace Gameplay.BattleEncounter.UI.Card
         Attack, 
         GainShield,
         Heal, 
-        LoseHealth,        
+        LoseHealth,
+        SetSize,
         ChangeSize, 
         HalveSize,                      
         GainStatus,                                  
@@ -21,5 +22,6 @@ namespace Gameplay.BattleEncounter.UI.Card
         Flee, 
         Suicide,
         SummonEnemy,  
+        ChooseDiscardThenDraw ,
     }
 }

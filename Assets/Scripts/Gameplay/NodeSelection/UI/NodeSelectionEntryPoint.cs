@@ -1,5 +1,9 @@
+using System.Collections.Generic;
 using System.Threading;
 using Cysharp.Threading.Tasks;
+using Gameplay.BattleEncounter.Battle;
+using Gameplay.BattleEncounter.Characters.Data;
+using Gameplay.BattleEncounter.UI.Card;
 using Gameplay.NodeSelection.Encounter;
 using Gameplay.NodeSelection.UI.Map;
 using Gameplay.NodeSelection.UI.Map.MapGenerator;
@@ -14,10 +18,14 @@ namespace Gameplay.NodeSelection.UI
     public class NodeSelectionEntryPoint : MonoBehaviour
     {
         [Header("Scene Views")]
-        [SerializeField] 
+        [SerializeField]
         private MapView _mapView;
-        [SerializeField] 
+        [SerializeField]
         private PanelMenuView _panelMenuView;
+        [SerializeField]
+        private BattleEncounterEntry _battleEncounter;   
+        [SerializeField]
+        private PlayerDefinition _playerDefinition;       
 
         [Header("Config")]
         [SerializeField] 
@@ -27,7 +35,7 @@ namespace Gameplay.NodeSelection.UI
         [SerializeField] 
         private string _playerName = "Slime Queen";
         [SerializeField] 
-        private string _nodePrefabAddress = "NodeView"; // Addressables key
+        private string _nodePrefabAddress = "NodeView";
         [SerializeField] 
         private int _seed = 12345;
         
@@ -58,8 +66,21 @@ namespace Gameplay.NodeSelection.UI
             _panelMenuVm = new PanelMenuViewModel(_playerName, _runState);
             _panelMenuView.Bind(_panelMenuVm);
             
-            //for testing
-            IEncounter encounter = new EncounterEntry(_forceDefeat);
+            IEncounter encounter;
+            if (_battleEncounter != null && _playerDefinition != null)
+            {
+                var startingCards = _playerDefinition.StartingDeck != null
+                    ? new List<CardDefinition>(_playerDefinition.StartingDeck.Cards)
+                    : new List<CardDefinition>();
+                _runProgress = new RunProgress(_playerDefinition.MaxHealth, startingCards);
+                _battleEncounter.Initialize(_runProgress);
+                encounter = _battleEncounter;
+            }
+            else
+            {
+                encounter = new EncounterEntry(_forceDefeat);   
+            }
+
             _flow = new GameFlowController(_mapView, _runState, encounter,
                 _mapConfig, _nodeDatabase, _nodePrefab, _seed, _walkOnly);
             _flow.BuildRunMap();

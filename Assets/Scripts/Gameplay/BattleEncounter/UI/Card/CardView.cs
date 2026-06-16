@@ -9,7 +9,7 @@ using UnityEngine.UI;
 
 namespace Gameplay.BattleEncounter.UI.Card
 {
-    public class CardView : MonoBehaviour ,IPointerEnterHandler,IPointerExitHandler,IBeginDragHandler, IDragHandler, IEndDragHandler
+    public class CardView : MonoBehaviour ,IPointerEnterHandler,IPointerExitHandler,IBeginDragHandler, IDragHandler, IEndDragHandler,IPointerClickHandler
     {
         #region CardView References
         [Header("Card View References")]
@@ -24,7 +24,9 @@ namespace Gameplay.BattleEncounter.UI.Card
         [SerializeField]
         private Image cardFrameLeft;
         [SerializeField]
-        private Image cardIconRight;
+        private Image cardFrameRight;
+        [SerializeField]
+        private Image cardBorderTop;
         [SerializeField]
         private TMP_Text headerText;
         [SerializeField]
@@ -55,7 +57,8 @@ namespace Gameplay.BattleEncounter.UI.Card
 
             Apply(cardIcon, s.CardIcon, s.IsSpecialCard);
             Apply(cardFrameLeft, s.CardFrameLeft, s.IsSpecialCard);
-            Apply(cardIconRight, s.CardFrameRight, s.IsSpecialCard);
+            Apply(cardFrameRight, s.CardFrameRight, s.IsSpecialCard);
+                Apply(cardBorderTop, s.CardBorderTop, s.IsSpecialCard);
         }
 
         private static void Apply(Image image, Sprite sprite, bool visible)
@@ -76,6 +79,13 @@ namespace Gameplay.BattleEncounter.UI.Card
                     .BindToLocalScale(rtRectTransform);
             }
         }
+        public void OnPointerClick(PointerEventData eventData)
+        {
+            if (_cardPlayController.SelectionMode)
+            {
+                _cardPlayController.CardClicked?.OnNext(_card);
+            }
+        }
 
         public void OnPointerExit(PointerEventData eventData)
         {
@@ -85,7 +95,9 @@ namespace Gameplay.BattleEncounter.UI.Card
 
         public void OnBeginDrag(PointerEventData eventData)
         {
-            if (_cardPlayController != null && !_cardPlayController.Interactable) return;
+            if (_cardPlayController.SelectionMode) return;
+            if (_cardPlayController == null) return;   
+            if (!_cardPlayController.Interactable) return;
             _isDragging = true;
             _cardPlayController.BeginDrag(this.transform.position,_card);
             transform.SetAsLastSibling(); 
@@ -104,13 +116,14 @@ namespace Gameplay.BattleEncounter.UI.Card
 
         public void OnDrag(PointerEventData eventData)
         {
+            if (!_isDragging) return;
             _cardPlayController.OnDrag(eventData.position);
-            
         }
 
         public void OnEndDrag(PointerEventData eventData)
         {
-            _isDragging = false; 
+            if (!_isDragging) return;
+            _isDragging = false;
             bool played = _cardPlayController.EndDrag(eventData.position);
             if (!played) ResetDragVisual();
         }
@@ -134,5 +147,7 @@ namespace Gameplay.BattleEncounter.UI.Card
         {
             if (_hoverMotion.IsActive()) _hoverMotion.Cancel();
         }
+
+        
     }
 }

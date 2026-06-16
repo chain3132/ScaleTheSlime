@@ -50,23 +50,39 @@ namespace Gameplay.BattleEncounter.UI.Card.Data
             SyncCounts();
 
         }
-
-        public void DiscardHand()
+        public void AddToDrawPile(CardDefinition def, int count = 1)
         {
-            _discardPile.AddRange(_hand);
-            _hand.Clear();
+            if (def == null) return;
+            for (int i = 0; i < count; i++)
+                _drawPile.Insert(_rng.Next(_drawPile.Count + 1), new Card(def));
             SyncCounts();
         }
 
-        public void DiscardHandExcept(Func<Card, bool> keep)
+        public Card AddToHand(CardDefinition def)
         {
+            if (def == null) return null;
+            var card = new Card(def);
+            _hand.Add(card);
+            return card;
+        }
+        
+        public void RemoveFromHand(Card card)
+        {
+            _hand.Remove(card);
+        }
+
+        public int DiscardHandExcept(Func<Card, bool> keep)
+        {
+            int discarded = 0;
             for (int i = _hand.Count - 1; i >= 0; i--)
             {
                 if (keep != null && keep(_hand[i])) continue;
                 _discardPile.Add(_hand[i]);
                 _hand.RemoveAt(i);
+                discarded++;
             }
             SyncCounts();
+            return discarded;
         }
 
         private void ReshuffleDiscardIntoDraw()
