@@ -1053,7 +1053,7 @@ MonoBehaviour:
   _playController: {fileID: 2079019087}
   _handController: {fileID: 579890437}
   _endTurnButton: {fileID: 111889341}
-  _enemyViewPrefab: {fileID: 6287057851178322327, guid: 14981c1fa9aec384bb1fa8a116b4092c, type: 3}
+  _enemyViewAddress: Assets/Prefabs/Characters/Slime.prefab
   _enemyContainer: {fileID: 316775565}
   _maxEnemies: 3
   _enemySpacing: 3
