@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Gameplay.BattleEncounter.UI.Card.CardDefinition
   Id: 08
   DisplayName: SleepingBeauty
+  Description: "Discard all card in your hand. \nIncrease Size equal to number of
+    cards discarded. \nHeal equal to number of cards discarded."
   Art:
     CardBackground: {fileID: -1152778665, guid: 0a7e9a4d06787974da201bb5ad716a06, type: 3}
     CardArt: {fileID: -425429068, guid: 3859bc2d80614b84089f2baa3fe46b57, type: 3}

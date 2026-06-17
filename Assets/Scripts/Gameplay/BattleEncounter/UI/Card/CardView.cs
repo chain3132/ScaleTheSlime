@@ -29,6 +29,9 @@ namespace Gameplay.BattleEncounter.UI.Card
         private Image cardBorderTop;
         [SerializeField]
         private TMP_Text headerText;
+
+        [SerializeField] 
+        private TMP_Text descriptionText;
         [SerializeField]
         private RectTransform rtRectTransform;
 
@@ -54,6 +57,8 @@ namespace Gameplay.BattleEncounter.UI.Card
             Apply(cardArt, s.CardArt, true);
             Apply(cardHeader, s.CardHeader, true);
             if (headerText != null) headerText.text = vm.DisplayName;
+            if (descriptionText != null) descriptionText.text = vm.Description;
+           
 
             Apply(cardIcon, s.CardIcon, s.IsSpecialCard);
             Apply(cardFrameLeft, s.CardFrameLeft, s.IsSpecialCard);

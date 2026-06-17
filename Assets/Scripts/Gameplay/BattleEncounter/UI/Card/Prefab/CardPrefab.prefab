@@ -482,7 +482,7 @@ GameObject:
   - component: {fileID: 4868541068813929876}
   - component: {fileID: 2840117121178963396}
   m_Layer: 5
-  m_Name: Desciption_Text
+  m_Name: DescriptionText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -918,6 +918,7 @@ MonoBehaviour:
   cardFrameRight: {fileID: 5716728501789634781}
   cardBorderTop: {fileID: 3481371444683080415}
   headerText: {fileID: 728548125939806986}
+  descriptionText: {fileID: 2840117121178963396}
   rtRectTransform: {fileID: 7262689853895157852}
 --- !u!1 &7829149154009303226
 GameObject:

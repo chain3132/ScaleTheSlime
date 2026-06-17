@@ -34,9 +34,22 @@ VisualElement {
     background-color: #2b3137;
     border-bottom-color: #2a65a0;
     border-bottom-width: 2;
-
 }
-
+.box-card-preview{
+    width: 70;
+    height: 90;
+    flex-shrink: initial;
+}
+.preview-text{
+    font-size: 7px;                
+    color: rgb(60, 40, 30);         
+    -unity-font-style: bold;
+    white-space: normal;
+    position: absolute;
+}
+.img-card{
+    position: absolute;
+}
 .nav-item {
     padding-left: 14px;         
     padding-top: 5px;
