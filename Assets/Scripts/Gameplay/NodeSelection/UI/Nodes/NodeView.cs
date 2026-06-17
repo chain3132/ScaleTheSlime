@@ -14,8 +14,6 @@ namespace Gameplay.NodeSelection.UI.Nodes
         [SerializeField] 
         private Button _button;
         [SerializeField] 
-        private Image _nodeTypeIcon;
-        [SerializeField] 
         private Image  _glow;
         [SerializeField]
         private SerializableMotionSettings<Color,NoOptions> _glowSettings;
@@ -25,11 +23,8 @@ namespace Gameplay.NodeSelection.UI.Nodes
         private readonly CompositeDisposable _bindings = new();
 
         
-        public void Bind(NodeViewModel vm,
-            Sprite icon)
+        public void Bind(NodeViewModel vm)
         {
-            _nodeTypeIcon.sprite = icon;
-        
             vm.IsReachable.Subscribe(on =>
             {
                 _button.interactable = on;

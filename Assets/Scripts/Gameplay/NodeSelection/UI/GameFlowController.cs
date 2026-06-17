@@ -21,7 +21,6 @@ namespace Gameplay.NodeSelection.UI
         private readonly IEncounter _encounter;
         private readonly MapGenerationConfig _config;
         private readonly NodeDatabase _database;
-        private readonly GameObject _nodePrefab;
         private readonly int _seed;
         private readonly bool _walkOnly;
         private MapViewModel _mapVm;
@@ -30,19 +29,17 @@ namespace Gameplay.NodeSelection.UI
         public GameFlowController(MapView mapView,
             RunState runState, 
             IEncounter encounter,
-            MapGenerationConfig config, 
+            MapGenerationConfig config,
             NodeDatabase database,
-            GameObject nodePrefab,
-            int seed, 
+            int seed,
             bool walkOnly)
         {
             _mapView = mapView;
-            _runState = runState; 
+            _runState = runState;
             _encounter = encounter;
-            _config = config; 
-            _database = database; 
-            _nodePrefab = nodePrefab;
-            _seed = seed; 
+            _config = config;
+            _database = database;
+            _seed = seed;
             _walkOnly = walkOnly;
         }
         
@@ -53,7 +50,7 @@ namespace Gameplay.NodeSelection.UI
             MapData map = generator.Generate();
 
             _mapVm = new MapViewModel(map, _runState);
-            _mapView.Initialize(_mapVm, _nodePrefab, _database);
+            _mapView.Initialize(_mapVm, _database);
             _mapView.Show();
 
             _mapVm.NodeSelected

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3289906618741673695}
   - component: {fileID: 581648871921532436}
   m_Layer: 0
-  m_Name: NodeView
+  m_Name: NodeView_Start
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -137,7 +137,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NodeView
   _button: {fileID: 3289906618741673695}
-  _nodeTypeIcon: {fileID: 7484479039579167508}
   _glow: {fileID: 1968034748884203985}
   _glowSettings:
     startValue: {r: 1, g: 0.95686275, b: 0, a: 1}
@@ -211,8 +210,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 83.203125, y: 66.796875}
+  m_AnchoredPosition: {x: 2.5, y: 18}
+  m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1887840639102773712
 CanvasRenderer:
@@ -235,16 +234,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.9137255, g: 0.6784314, b: 0.8901961, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -1926980523379391844, guid: 9fb98cbc131be7f49929723c5ec7dab2, type: 3}
+  m_Sprite: {fileID: 1359514067, guid: f1ea75f43fbc1cd4193f621585726355, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -361,8 +360,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -43}
-  m_SizeDelta: {x: 100, y: 60}
+  m_AnchoredPosition: {x: 0, y: -30.5}
+  m_SizeDelta: {x: 206.45161, y: 206.45161}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7315481035403567910
 CanvasRenderer:
@@ -392,7 +391,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 10e42dec5e99c1f46a4ea1a768fc750e, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

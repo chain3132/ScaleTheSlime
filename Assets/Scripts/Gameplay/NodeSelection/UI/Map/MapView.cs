@@ -47,7 +47,6 @@ namespace Gameplay.NodeSelection.UI.Map
 
         #region fields
 
-        private GameObject _nodePrefab;
         private NodeDatabase _database;
         private MapViewModel _vm;
         private readonly Dictionary<int, Vector2> _positions = new();
@@ -62,11 +61,9 @@ namespace Gameplay.NodeSelection.UI.Map
         
         // Called by the entry point
         public void Initialize(MapViewModel vm,
-            GameObject nodePrefab,
             NodeDatabase database)
         {
             _vm = vm;
-            _nodePrefab = nodePrefab;
             _database = database;
             Build();
         }
@@ -142,10 +139,13 @@ namespace Gameplay.NodeSelection.UI.Map
         {
             foreach (var nodeVm in _vm.Nodes)
             {
-                var go = Instantiate(_nodePrefab, _nodeLayer);
+                var prefab = _database.PrefabFor(nodeVm.Type);
+                if (prefab == null) continue;
+
+                var go = Instantiate(prefab, _nodeLayer);
                 var rt = (RectTransform)go.transform;
                 rt.anchoredPosition = _positions[nodeVm.Id];
-                go.GetComponent<NodeView>().Bind(nodeVm,_database.SpriteFor(nodeVm.Type));
+                go.GetComponent<NodeView>().Bind(nodeVm);
                 _spawned.Add(go);
             }
         }

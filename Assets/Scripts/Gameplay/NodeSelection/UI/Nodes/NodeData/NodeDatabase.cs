@@ -23,10 +23,10 @@ namespace Gameplay.NodeSelection.UI.Nodes
             return _byType.TryGetValue(type, out var def) ? def : null;
         }
  
-        public Sprite SpriteFor(NodeType type)
+        public GameObject PrefabFor(NodeType type)
         {
             var def = Get(type);
-            return def != null ? def.Sprite : null;
+            return def != null ? def.Prefab : null;
         }
  
         
