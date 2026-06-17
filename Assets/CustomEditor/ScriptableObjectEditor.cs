@@ -80,6 +80,8 @@ namespace CustomEditor
             detail.Clear();
             if (typeName == "CardDefinition")
                 detail.Add(new CardTableView());
+            else if (typeName == "NodeDefinition")
+                detail.Add(new NodeTableView());
             else
                 detail.Add(new Label($"not available {typeName}"));  }
 
