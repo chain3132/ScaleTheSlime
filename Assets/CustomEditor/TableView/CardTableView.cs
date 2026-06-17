@@ -61,7 +61,9 @@ namespace CustomEditor.TableView
 
             var create = new ToolbarButton(CreateNewCard) { text = "+ New" };
             create.AddToClassList("create-button");
+            var refresh = new ToolbarButton(ShowCards) { text = "Refresh" };
             bar.Add(create);
+            bar.Add(refresh);
             bar.Add(new ToolbarButton(CollapseAllCards) {text = "Collapse All"});
             var search = new ToolbarSearchField();
             search.RegisterValueChangedCallback(e =>
@@ -71,6 +73,7 @@ namespace CustomEditor.TableView
             });
             bar.Add(search);
             bar.Add(MakeFilter());
+            
             return bar;
         }
 
