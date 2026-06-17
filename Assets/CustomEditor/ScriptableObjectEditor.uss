@@ -1,10 +1,10 @@
-VisualElement {
+    VisualElement {
     
 }
 .Header{
     flex-direction: row;
     border-bottom-color: #0a0303;
-    border-bottom-width: 1 ;
+    border-bottom-width: 1px ;
 }
 .row {
     flex-direction: row;
