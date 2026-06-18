@@ -42,6 +42,6 @@ MonoBehaviour:
     Target: 2
     CardToAdd: {fileID: 0}
     ValueSource: 1
-    CardValue: -1
+    CardValue: -3
     Repeat: 1
     CustomSource: 3

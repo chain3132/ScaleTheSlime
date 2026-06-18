@@ -36,7 +36,7 @@ MonoBehaviour:
     CardValue: 2
     Repeat: 1
     CustomSource: 3
-  - Type: 4
+  - Type: 5
     StatusType: 0
     StatusAmount: 0
     Target: 1
@@ -45,7 +45,7 @@ MonoBehaviour:
     CardValue: -1
     Repeat: 1
     CustomSource: 3
-  - Type: 4
+  - Type: 5
     StatusType: 0
     StatusAmount: 0
     Target: 2

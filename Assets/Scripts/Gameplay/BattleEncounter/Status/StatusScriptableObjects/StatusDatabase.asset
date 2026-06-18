@@ -16,3 +16,9 @@ MonoBehaviour:
   - Type: 1
     Icon: {fileID: -139519365, guid: cf746e92101f2d149921440b394666bb, type: 3}
     DisplayName: 
+  - Type: 5
+    Icon: {fileID: 1240024824, guid: cf746e92101f2d149921440b394666bb, type: 3}
+    DisplayName: 
+  - Type: 4
+    Icon: {fileID: 1467504536, guid: cf746e92101f2d149921440b394666bb, type: 3}
+    DisplayName: 

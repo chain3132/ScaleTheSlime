@@ -115,6 +115,7 @@ namespace Gameplay.BattleEncounter.Characters
         {
             if (IsDead) return;
             Statuses.Add(type, amount, persistent);
+            
         }
 
         public void ClearShield()
