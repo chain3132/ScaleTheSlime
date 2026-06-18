@@ -1,13 +1,16 @@
 ﻿<Solution>
   <Project Path="Unity.ShaderGraph.Editor.csproj" />
+  <Project Path="Gameplay.BattleEncounter.csproj" />
   <Project Path="AmplifyShaderEditor.csproj" />
   <Project Path="spine-unity-examples.csproj" />
   <Project Path="Assembly-CSharp-Editor.csproj" />
   <Project Path="spine-unity-editor.csproj" />
   <Project Path="spine-csharp.csproj" />
   <Project Path="spine-unity.csproj" />
-  <Project Path="Assembly-CSharp.csproj" />
+  <Project Path="Gameplay.NodeSelection.csproj" />
+  <Project Path="Gameplay.Core.csproj" />
   <Project Path="spine-unity-examples-editor.csproj" />
+  <Project Path="Assembly-CSharp.csproj" />
   <Project Path="Unity.UI.Shaders.Sample.csproj" />
   <Project Path="Unity.UI.Shaders.Sample.Editor.csproj" />
 </Solution>
