@@ -73,7 +73,7 @@ Shader "/_Kass_/SH_VFX_SimplePremult_VertexAnim"
 	{
 		PackageRequirements
 		{
-			"com.unity.render-pipelines.universal": "[17.0,18.0]"
+			"com.unity.render-pipelines.universal": "17.0"
 		}
 
 		

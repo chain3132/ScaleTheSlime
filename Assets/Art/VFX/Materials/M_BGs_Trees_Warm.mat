@@ -16,7 +16,7 @@ Material:
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
+  m_CustomRenderQueue: 3000
   stringTagMap: {}
   disabledShaderPasses: []
   m_LockedProperties: 
@@ -115,7 +115,7 @@ Material:
     - _ColorRotation: -13.1
     - _CoreIntensity: 1
     - _CorePower: 0.33
-    - _Cull: 0
+    - _Cull: 1
     - _CustomData1XAffectsStrength: 0.487
     - _CustomData1YAffectsSpeed: 0.872
     - _Cutoff: 0.5
