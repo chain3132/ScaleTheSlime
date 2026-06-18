@@ -25,11 +25,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 14981c1fa9aec384bb1fa8a116b4092c
-    m_Address: Assets/Prefabs/Characters/Slime.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 1b069bf0e93f3dd44b2bb3fb68438118
     m_Address: Assets/Art/Sprites/Character/princess/princess_L.skel.bytes
     m_ReadOnly: 0

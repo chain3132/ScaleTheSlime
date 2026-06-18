@@ -31,6 +31,9 @@ namespace Gameplay.BattleEncounter.Battle
         [SerializeField]
         private string _enemyViewAddress = "EnemyView";
         [SerializeField]
+        private EnemyView _enemyViewPrefab;
+
+        [SerializeField]
         private Transform _enemyContainer;
         [SerializeField]
         private int _maxEnemies = 3;
@@ -42,6 +45,7 @@ namespace Gameplay.BattleEncounter.Battle
         private bool _autoStart = true;
 
         private Player _player;
+        
         private AsyncOperationHandle<GameObject> _enemyPrefabHandle;
         private GameObject _enemyPrefab;
         private readonly List<EnemyView> _enemyViews = new();
@@ -75,7 +79,6 @@ namespace Gameplay.BattleEncounter.Battle
             IReadOnlyList<EnemyDefinition> enemyDefs, CancellationToken ct)
         {
             //request enemy prefab
-            await LoadEnemyPrefabAsync(ct);
             Setup(progress, enemyDefs);
             if (_handController != null)
                 await _handController.SetupAsync(progress.Deck, ct);
@@ -154,7 +157,8 @@ namespace Gameplay.BattleEncounter.Battle
 
         private void SpawnEnemies(IReadOnlyList<EnemyDefinition> enemyDefs)
         {
-            if (_enemyPrefab == null) return;
+            if (_enemyViewPrefab == null) return;
+            //if (_enemyPrefab == null) return;
 
             var defs = new List<EnemyDefinition>();
             if (enemyDefs == null)
@@ -176,7 +180,7 @@ namespace Gameplay.BattleEncounter.Battle
 
             for (int i = 0; i < n; i++)
             {
-                var go = Instantiate(_enemyPrefab, parent);
+                var go = Instantiate(_enemyViewPrefab, parent);
                 var ev = go.GetComponent<EnemyView>();
                 if (ev == null) { Destroy(go); continue; }
                 ev.transform.localPosition = new Vector3((i - (n - 1) / 2f) * _enemySpacing, 0f, 0f);
@@ -296,8 +300,8 @@ namespace Gameplay.BattleEncounter.Battle
             foreach (var e in _enemies) e?.Dispose();
             _context?.Dispose();
 
-            if (_enemyPrefabHandle.IsValid())
-                Addressables.Release(_enemyPrefabHandle);
+            // if (_enemyPrefabHandle.IsValid())
+            //     Addressables.Release(_enemyPrefabHandle);
         }
     }
 }

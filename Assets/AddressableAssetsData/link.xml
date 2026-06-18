@@ -3,19 +3,11 @@
     <type fullname="Coffee.UIExtensions.UIParticle" preserve="all" />
   </assembly>
   <assembly fullname="Gameplay.BattleEncounter, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
-    <type fullname="Gameplay.BattleEncounter.Characters.Behaviors.ActionIntentDatabase" preserve="all" />
-    <type fullname="Gameplay.BattleEncounter.Characters.Behaviors.MultiActionBehavior" preserve="all" />
-    <type fullname="Gameplay.BattleEncounter.Characters.Data.EnemyDefinition" preserve="all" />
-    <type fullname="Gameplay.BattleEncounter.Status.StatusDatabase" preserve="all" />
     <type fullname="Gameplay.BattleEncounter.Status.StatusView" preserve="all" />
     <type fullname="Gameplay.BattleEncounter.UI.Card.CardView" preserve="all" />
     <type fullname="Gameplay.BattleEncounter.UI.Characters.CharacterFxDatabase" preserve="all" />
     <type fullname="Gameplay.BattleEncounter.UI.Characters.CharacterView" preserve="all" />
-    <type fullname="Gameplay.BattleEncounter.UI.Characters.EnemyView" preserve="all" />
     <type fullname="StatusIconView" preserve="all" />
-    <type fullname="Gameplay.BattleEncounter.Characters.Behaviors.ActionIntentDatabase/Entry" preserve="nothing" serialized="true" />
-    <type fullname="Gameplay.BattleEncounter.Characters.Behaviors.EnemyAction" preserve="nothing" serialized="true" />
-    <type fullname="Gameplay.BattleEncounter.Status.StatusDatabase/StatusEntry" preserve="nothing" serialized="true" />
     <type fullname="Gameplay.BattleEncounter.UI.Characters.CharacterFxDatabase/Entry" preserve="nothing" serialized="true" />
   </assembly>
   <assembly fullname="Gameplay.NodeSelection, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
@@ -27,12 +19,10 @@
     <type fullname="Spine.Unity.SkeletonAnimation" preserve="all" />
     <type fullname="Spine.Unity.SkeletonDataAsset" preserve="all" />
     <type fullname="Spine.Unity.SkeletonRenderer" preserve="all" />
-    <type fullname="Spine.Unity.SkeletonRendererCustomMaterials" preserve="all" />
     <type fullname="Spine.Unity.SpineAtlasAsset" preserve="all" />
     <type fullname="Spine.Unity.BlendModeMaterials" preserve="nothing" serialized="true" />
     <type fullname="Spine.Unity.MeshGenerator/Settings" preserve="nothing" serialized="true" />
     <type fullname="Spine.Unity.SettingsTriState" preserve="nothing" serialized="true" />
-    <type fullname="Spine.Unity.SkeletonRendererCustomMaterials/AtlasMaterialOverride" preserve="nothing" serialized="true" />
   </assembly>
   <assembly fullname="Unity.Addressables, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" preserve="all">
     <type fullname="UnityEngine.AddressableAssets.Addressables" preserve="all" />
@@ -77,9 +67,6 @@
     <type fullname="UnityEngine.ParticleSystem" preserve="all" />
     <type fullname="UnityEngine.ParticleSystemRenderer" preserve="all" />
   </assembly>
-  <assembly fullname="UnityEngine.Physics2DModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
-    <type fullname="UnityEngine.BoxCollider2D" preserve="all" />
-  </assembly>
   <assembly fullname="UnityEngine.TextRenderingModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
     <type fullname="UnityEngine.Font" preserve="all" />
   </assembly>
@@ -88,7 +75,6 @@
     <type fullname="UnityEngine.UI.CanvasScaler" preserve="all" />
     <type fullname="UnityEngine.UI.GraphicRaycaster" preserve="all" />
     <type fullname="UnityEngine.UI.GridLayoutGroup" preserve="all" />
-    <type fullname="UnityEngine.UI.HorizontalLayoutGroup" preserve="all" />
     <type fullname="UnityEngine.UI.Image" preserve="all" />
     <type fullname="UnityEngine.UI.AnimationTriggers" preserve="nothing" serialized="true" />
     <type fullname="UnityEngine.UI.Button/ButtonClickedEvent" preserve="nothing" serialized="true" />
