@@ -50,6 +50,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2d866b498e7cbb5459c6225559479b84
+    m_Address: Assets/Art/VFX/Materials/M_BGs_Flat.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 34fe0f0a74095c549a638a159925676f
     m_Address: Assets/Art/Sprites/Character/slime/slime_S_AnimationReferences.asset
     m_ReadOnly: 0
