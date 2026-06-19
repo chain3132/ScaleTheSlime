@@ -119,8 +119,12 @@ namespace Gameplay.BattleEncounter.UI.Card
 
         private void ClearHover()
         {
-            if (_hovered != null) _hovered.HighLight(false);
-            _hovered.View.ClearDamagePreview();
+            if (_hovered != null)
+            {
+                _hovered.HighLight(false);
+                _hovered.View.ClearDamagePreview();
+
+            }
             _hovered = null;
         }
         private bool IsValidPlay(Data.Card card, Vector2 mousePosition)

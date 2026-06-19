@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using Gameplay.BattleEncounter.Characters;
 using Gameplay.BattleEncounter.Characters.Behaviors;
 using Gameplay.BattleEncounter.Characters.Data;
@@ -22,6 +24,8 @@ namespace Gameplay.BattleEncounter.UI.Characters
         private SkeletonRendererCustomMaterials _skeletonRenderer;
         [SerializeField]
         private Transform _intentRoot;
+        [SerializeField]
+        private float _hideDelayOnDeath = 0.6f;
 
         public Enemy Enemy { get; private set; }
         public CharacterView View => _view;
@@ -77,6 +81,16 @@ namespace Gameplay.BattleEncounter.UI.Characters
         {
             ClearIntent();
             HighLight(false);
+            foreach (var col in GetComponents<Collider2D>()) col.enabled = false;
+            HideAfterDeathAsync().Forget();
+        }
+
+        private async UniTaskVoid HideAfterDeathAsync()
+        {
+            if (_hideDelayOnDeath > 0f)
+                await UniTask.Delay(TimeSpan.FromSeconds(_hideDelayOnDeath),
+                    cancellationToken: destroyCancellationToken);
+            gameObject.SetActive(false);
         }
 
         public void ShowIntent(IReadOnlyList<EnemyAction> plan)
