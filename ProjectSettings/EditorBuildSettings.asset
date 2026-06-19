@@ -5,10 +5,10 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/BattleEncounter.unity
     guid: ba69b7605fe051b4eb2bc6969f8ac3c2
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/BattleLayout.unity
     guid: f69476c4ce7b0e94eb365ed8ab3fe429
   m_configObjects:
