@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: NodeDefinition_Start
   m_EditorClassIdentifier: Assembly-CSharp::Gameplay.NodeSelection.UI.Nodes.NodeDefinition
   Type: 0
-  Sprite: {fileID: -793614697037651533, guid: 9fb98cbc131be7f49929723c5ec7dab2, type: 3}
+  Prefab: {fileID: 4063700499909332322, guid: 13b6e848458469a4b88aacfbee6b4556, type: 3}
   Weight: 0
   MinLayer: 0

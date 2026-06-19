@@ -7,7 +7,7 @@ using UnityEngine;
 namespace Gameplay.BattleEncounter.Characters.Data
 {
     [CreateAssetMenu(menuName = "Battle/PlayerDefinition")]
-    public class PlayerDefinition : CharacterDefinition
+    public class PlayerDefinition : CharacterDefinition, IPassiveProvider
     {
         [Header("Passive")]
         public Passive TinyPassive;

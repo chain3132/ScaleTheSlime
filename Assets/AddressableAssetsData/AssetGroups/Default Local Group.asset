@@ -15,13 +15,148 @@ MonoBehaviour:
   m_GroupName: Default Local Group
   m_GUID: a415d580278b3e742b84d46e8cd8bf1f
   m_SerializeEntries:
+  - m_GUID: 0adb41c243e09094da0ecc969806ecfd
+    m_Address: Assets/Art/Sprites/Character/slime/slime_L.skel.bytes
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 13b6e848458469a4b88aacfbee6b4556
     m_Address: Assets/Scripts/Gameplay/NodeSelection/UI/Prefabs/NodeView.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1b069bf0e93f3dd44b2bb3fb68438118
+    m_Address: Assets/Art/Sprites/Character/princess/princess_L.skel.bytes
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 23ee6d3635d783a43b683e18c3d86a4b
+    m_Address: Assets/Prefabs/Characters/Player(Princess).prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 26c33c7ca48c6e7469cbee770d6fdee0
+    m_Address: Assets/Art/Sprites/Character/princess/princess.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 27e5f504000e2fe4598e7da79400654f
+    m_Address: Assets/Art/Sprites/Character/slime/slime_MaterialOutline.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 29fdbe140e25a3d4c92eb22b039069f4
+    m_Address: Assets/Art/Sprites/Character/slime/slime_Atlas.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2d866b498e7cbb5459c6225559479b84
+    m_Address: Assets/Art/VFX/Materials/M_BGs_Flat.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 34fe0f0a74095c549a638a159925676f
+    m_Address: Assets/Art/Sprites/Character/slime/slime_S_AnimationReferences.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 49136f9f091649a40879432e3bcfd645
+    m_Address: Assets/Art/Sprites/Character/princess/princess_L_SkeletonData.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 517599f6203c09548a9995a6d911e409
+    m_Address: Assets/Art/Sprites/Character/slime/slime.atlas.txt
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 55ce55b72ed3ece449640f3e4c50064b
+    m_Address: Assets/Art/Sprites/Character/slime/slime_M_SkeletonData.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 67c1e51bb0e84934fb6e24059f42522d
+    m_Address: Assets/Art/Sprites/Character/princess/princess_S.skel.bytes
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6b1f8557d8f94ad4889927acc11eb4ef
+    m_Address: Assets/Art/Sprites/Character/princess/princess.atlas.txt
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 802c448e055a5004abe516c1e666baa0
+    m_Address: Assets/Art/Sprites/Character/slime/slime_M.skel.bytes
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8287ca37ff8266549b46dba7a93b3bfb
+    m_Address: Assets/Art/Sprites/Character/slime/slime.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 85b014d5b0ccdb44d8b0a8e967241a6e
+    m_Address: Assets/Art/Sprites/Character/slime/slime_S_SkeletonData.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 87c4ecb49d8e02840ace693fa916d245
+    m_Address: Assets/Art/Sprites/Character/slime/slime_M_AnimationReferences.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 89b265d9940877645919ad82db12008d
+    m_Address: Assets/Art/Sprites/Character/slime/slime_S.skel.bytes
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b689e6f353bb9e749aeb8bed1664d5a1
+    m_Address: Assets/Art/Sprites/Character/princess/princess_M_SkeletonData.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ba51973d048d25142b7deccdbd6c92ba
+    m_Address: Assets/Art/Sprites/Character/slime/slime_L_SkeletonData.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: bf4d5177d2fa15f418f564dbf35dfab6
+    m_Address: Assets/Art/Sprites/Character/princess/princess_Material.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c134d216bbddd3b4faa4be8bca676911
+    m_Address: Assets/Art/Sprites/Character/princess/princess_S_SkeletonData.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c92ed930215ac5741a33d28e8b2fd737
+    m_Address: Assets/Art/Sprites/Character/slime/slime_Material.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: cce6ed48209ee5e40aa2898226471478
     m_Address: Assets/Scripts/Gameplay/BattleEncounter/UI/Card/Prefab/CardPrefab.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d4fd6385a2a93f3458f3de9a49ec311d
+    m_Address: Assets/Art/Sprites/Character/princess/princess_M.skel.bytes
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d749658a096076245b851f32b1cf218c
+    m_Address: Assets/Art/Sprites/Character/slime/slime_L_AnimationReferences.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f580321eefde53347a9414603194d73d
+    m_Address: Assets/Art/Sprites/Character/princess/princess_MaterialOutline.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f6eaa96c4bdece446bd6f432d9d49420
+    m_Address: Assets/Art/Sprites/Character/princess/princess_Atlas.asset
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

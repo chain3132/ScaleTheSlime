@@ -2,6 +2,7 @@ using System;
 using Cysharp.Threading.Tasks;
 using LitMotion;
 using LitMotion.Extensions;
+using R3;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -29,6 +30,9 @@ namespace Gameplay.BattleEncounter.UI.Card
         private Image cardBorderTop;
         [SerializeField]
         private TMP_Text headerText;
+
+        [SerializeField] 
+        private TMP_Text descriptionText;
         [SerializeField]
         private RectTransform rtRectTransform;
 
@@ -40,12 +44,18 @@ namespace Gameplay.BattleEncounter.UI.Card
         private MotionHandle _hoverMotion;
         private CardPlayController _cardPlayController;
         private Data.Card _card;
+        private CardViewModel _vm;
+        private IDisposable _statusSub;
         private bool _isDragging;
         #endregion
 
         public void Bind(CardViewModel vm,CardPlayController playController)
         {
+            _statusSub?.Dispose();
+            _statusSub = null;
+
             _cardPlayController = playController;
+            _vm = vm;
             _card = vm.Card;
             var s = vm.Definition.Art;
             if (s == null) return;
@@ -54,11 +64,23 @@ namespace Gameplay.BattleEncounter.UI.Card
             Apply(cardArt, s.CardArt, true);
             Apply(cardHeader, s.CardHeader, true);
             if (headerText != null) headerText.text = vm.DisplayName;
+            RefreshDescription();
+
+            
+            if (vm.Context != null)
+                _statusSub = vm.Context.Player.Statuses.Changed
+                    .Subscribe(_ => RefreshDescription());
 
             Apply(cardIcon, s.CardIcon, s.IsSpecialCard);
             Apply(cardFrameLeft, s.CardFrameLeft, s.IsSpecialCard);
             Apply(cardFrameRight, s.CardFrameRight, s.IsSpecialCard);
                 Apply(cardBorderTop, s.CardBorderTop, s.IsSpecialCard);
+        }
+
+        private void RefreshDescription()
+        {
+            if (descriptionText != null && _vm != null)
+                descriptionText.text = _vm.Description;
         }
 
         private static void Apply(Image image, Sprite sprite, bool visible)
@@ -145,6 +167,7 @@ namespace Gameplay.BattleEncounter.UI.Card
 
         private void OnDestroy()
         {
+            _statusSub?.Dispose();
             if (_hoverMotion.IsActive()) _hoverMotion.Cancel();
         }
 

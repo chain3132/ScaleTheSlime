@@ -32,9 +32,9 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ColorTexture:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
+        m_Texture: {fileID: 2800000, guid: 9892daa83302d5c4ab261498f4df5b95, type: 3}
+        m_Scale: {x: 0.5, y: 0.5}
+        m_Offset: {x: 0, y: 0.17}
     - _DetailAlbedoMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -129,7 +129,7 @@ Material:
     - _ClampDisplacement: 0
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
-    - _ColorRotation: 0
+    - _ColorRotation: -90
     - _CoreIntensity: 0
     - _CorePower: 0
     - _Cull: 0

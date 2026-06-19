@@ -9,6 +9,8 @@ using Gameplay.BattleEncounter.UI.Characters;
 using Gameplay.NodeSelection.UI;
 using R3;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
+using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.UI;
 
 namespace Gameplay.BattleEncounter.Battle
@@ -27,7 +29,10 @@ namespace Gameplay.BattleEncounter.Battle
         private Button _endTurnButton;
         [Header("Enemy spawning")]
         [SerializeField]
+        private string _enemyViewAddress = "EnemyView";
+        [SerializeField]
         private EnemyView _enemyViewPrefab;
+
         [SerializeField]
         private Transform _enemyContainer;
         [SerializeField]
@@ -40,7 +45,10 @@ namespace Gameplay.BattleEncounter.Battle
         private bool _autoStart = true;
 
         private Player _player;
-        private readonly List<EnemyView> _enemyViews = new(); 
+        
+        private AsyncOperationHandle<GameObject> _enemyPrefabHandle;
+        private GameObject _enemyPrefab;
+        private readonly List<EnemyView> _enemyViews = new();
         private readonly List<Enemy> _enemies = new();
         private BattleContext _context;
         private CardEffectExecutor _executor;
@@ -70,9 +78,10 @@ namespace Gameplay.BattleEncounter.Battle
         public async UniTask<bool> RunAsync(RunProgress progress,
             IReadOnlyList<EnemyDefinition> enemyDefs, CancellationToken ct)
         {
+            //request enemy prefab
             Setup(progress, enemyDefs);
             if (_handController != null)
-                await _handController.SetupAsync(progress.Deck, ct);   
+                await _handController.SetupAsync(progress.Deck, ct);
 
             bool win = await _result.Task.AttachExternalCancellation(ct);
 
@@ -88,13 +97,21 @@ namespace Gameplay.BattleEncounter.Battle
             _result = new UniTaskCompletionSource<bool>();
 
             _player = new Player(_playerDefinition, progress.CurrentHealth);
-            if (_playerView != null) _playerView.Bind(_player, _playerDefinition);
-
+            if (_playerView != null)
+            {
+                _playerView.Bind(_player, _playerDefinition);
+                var passiveTip = _playerView.GetComponentInChildren<UI.Tooltip.PassiveTooltipTrigger>(true);
+                if (passiveTip != null) passiveTip.SetProvider(_playerDefinition);
+            }
+            
+            //spawn enemy
             SpawnEnemies(enemyDefs);
-
-            _context = new BattleContext(_player, _enemies, 
+            _context = new BattleContext(_player, _enemies,
                 _handController != null ? _handController.Deck : null);
             _executor = new CardEffectExecutor(_context);
+            if (_handController != null) _handController.SetContext(_context);
+            if (_playController != null) _playController.SetContext(_context);
+            
             _player.Activate(_context);
 
             _playController.CardPlayed
@@ -139,9 +156,17 @@ namespace Gameplay.BattleEncounter.Battle
             SetPlayerInput(true);
         }
 
+        private async UniTask LoadEnemyPrefabAsync(CancellationToken ct)
+        {
+            if (_enemyPrefab != null) return;
+            _enemyPrefabHandle = Addressables.LoadAssetAsync<GameObject>(_enemyViewAddress);
+            _enemyPrefab = await _enemyPrefabHandle.ToUniTask(cancellationToken: ct);
+        }
+
         private void SpawnEnemies(IReadOnlyList<EnemyDefinition> enemyDefs)
         {
             if (_enemyViewPrefab == null) return;
+            //if (_enemyPrefab == null) return;
 
             var defs = new List<EnemyDefinition>();
             if (enemyDefs == null)
@@ -163,15 +188,19 @@ namespace Gameplay.BattleEncounter.Battle
 
             for (int i = 0; i < n; i++)
             {
-                var ev = Instantiate(_enemyViewPrefab, parent);
+                var go = Instantiate(_enemyViewPrefab, parent);
+                var ev = go.GetComponent<EnemyView>();
+                if (ev == null) { Destroy(go); continue; }
                 ev.transform.localPosition = new Vector3((i - (n - 1) / 2f) * _enemySpacing, 0f, 0f);
 
                 var enemy = ev.Setup(defs[i]);
+                
                 if (enemy == null) { Destroy(ev.gameObject); continue; }
 
                 _enemyViews.Add(ev);
                 _enemies.Add(enemy);
                 enemy.Died.Subscribe(_ => OnEnemyDied()).AddTo(_battleScope);
+                enemy.Active(_context);
             }
         }
 
@@ -201,7 +230,7 @@ namespace Gameplay.BattleEncounter.Battle
         {
             _enemyPhase = true;
             SetPlayerInput(false);
-
+            _player.TickTurnEnd();   
             _player.CheckSizeDeath();
             if (_battleOver) { _enemyPhase = false; return; }
 
@@ -225,8 +254,10 @@ namespace Gameplay.BattleEncounter.Battle
                 if (enemy == null || enemy.IsDead) continue;
 
                 await enemy.ActAsync(_context);
+                enemy.TickTurnEnd();    
+                enemy.CheckSizeDeath();
+                if (enemy.IsDead) { ev.ClearIntent(); continue; }
                 ev.ClearIntent();
-
                 if (_player.IsDead) { EndBattle(false); return; }
                 await UniTask.Delay(TimeSpan.FromSeconds(_betweenEnemyDelay), cancellationToken: ct);
             }
@@ -234,9 +265,6 @@ namespace Gameplay.BattleEncounter.Battle
 
         private async UniTask BeginNewTurnAsync(CancellationToken ct)
         {
-            foreach (var ev in _enemyViews)
-                if (ev != null && ev.Enemy != null) ev.Enemy.CheckSizeDeath();
-
             if (_context.AliveEnemyCount == 0) { EndBattle(true); return; }
 
             _player.ClearShield();
@@ -280,6 +308,9 @@ namespace Gameplay.BattleEncounter.Battle
             _player?.Dispose();
             foreach (var e in _enemies) e?.Dispose();
             _context?.Dispose();
+
+            // if (_enemyPrefabHandle.IsValid())
+            //     Addressables.Release(_enemyPrefabHandle);
         }
     }
 }

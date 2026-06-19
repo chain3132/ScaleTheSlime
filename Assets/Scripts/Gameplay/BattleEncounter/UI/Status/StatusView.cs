@@ -28,7 +28,6 @@ namespace Gameplay.BattleEncounter.Status
 
         private void Rebuild(StatusEffects statuses)
         {
-            Debug.Log("Rebuilding status view");
             foreach (var v in _spawned)
                 if (v != null) Destroy(v.gameObject);
             _spawned.Clear();
@@ -37,7 +36,7 @@ namespace Gameplay.BattleEncounter.Status
             foreach (var kv in statuses.Active)
             {
                 var icon = Instantiate(_iconPrefab, parent);
-                icon.SetData(_database != null ? _database.IconFor(kv.Key) : null, kv.Value);
+                icon.SetData(kv.Key, _database != null ? _database.IconFor(kv.Key) : null, kv.Value);
                 _spawned.Add(icon);
             }
         }

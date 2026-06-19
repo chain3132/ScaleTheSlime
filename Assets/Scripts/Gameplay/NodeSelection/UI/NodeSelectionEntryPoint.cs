@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Threading;
-using Cysharp.Threading.Tasks;
 using Gameplay.BattleEncounter.Battle;
 using Gameplay.BattleEncounter.Characters.Data;
 using Gameplay.BattleEncounter.UI.Card;
@@ -10,8 +9,6 @@ using Gameplay.NodeSelection.UI.Map.MapGenerator;
 using Gameplay.NodeSelection.UI.Nodes;
 using R3;
 using UnityEngine;
-using UnityEngine.AddressableAssets;
-using UnityEngine.ResourceManagement.AsyncOperations;
 
 namespace Gameplay.NodeSelection.UI
 {
@@ -32,11 +29,9 @@ namespace Gameplay.NodeSelection.UI
         private MapGenerationConfig _mapConfig = new();
         [SerializeField] 
         private NodeDatabase _nodeDatabase;
-        [SerializeField] 
+        [SerializeField]
         private string _playerName = "Slime Queen";
-        [SerializeField] 
-        private string _nodePrefabAddress = "NodeView";
-        [SerializeField] 
+        [SerializeField]
         private int _seed = 12345;
         
         [Header("Debug")]
@@ -48,21 +43,16 @@ namespace Gameplay.NodeSelection.UI
         private RunState _runState;
         private RunProgress _runProgress;
         private PanelMenuViewModel _panelMenuVm;
-        private AsyncOperationHandle<GameObject> _nodePrefabHandle;
-        private GameObject _nodePrefab;
         private CancellationTokenSource _cts;
         private GameFlowController _flow;
         private readonly CompositeDisposable _runScope = new();
  
-        private async UniTaskVoid Start()
+        private void Start()
         {
             _cts = new CancellationTokenSource();
- 
+
             _runState = new RunState();
-            
-            _nodePrefabHandle = Addressables.LoadAssetAsync<GameObject>(_nodePrefabAddress);
-            _nodePrefab = await _nodePrefabHandle.ToUniTask(cancellationToken: _cts.Token);
-            
+
             _panelMenuVm = new PanelMenuViewModel(_playerName, _runState);
             _panelMenuView.Bind(_panelMenuVm);
             
@@ -82,7 +72,7 @@ namespace Gameplay.NodeSelection.UI
             }
 
             _flow = new GameFlowController(_mapView, _runState, encounter,
-                _mapConfig, _nodeDatabase, _nodePrefab, _seed, _walkOnly);
+                _mapConfig, _nodeDatabase, _seed, _walkOnly);
             _flow.BuildRunMap();
         }
         
@@ -97,9 +87,6 @@ namespace Gameplay.NodeSelection.UI
             _runScope.Dispose();
             _flow?.Dispose();
             _runState?.Dispose();
- 
-            if (_nodePrefabHandle.IsValid())
-                Addressables.Release(_nodePrefabHandle);
         }
     }
 }

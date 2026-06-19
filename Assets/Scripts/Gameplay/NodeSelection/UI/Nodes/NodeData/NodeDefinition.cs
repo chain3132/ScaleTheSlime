@@ -7,7 +7,7 @@ namespace Gameplay.NodeSelection.UI.Nodes
     public class NodeDefinition : ScriptableObject
     {
         public NodeType Type;
-        public Sprite Sprite;
+        public GameObject Prefab;
  
         [Header("Random spawn — ignored for Start and Boss")]
         [Min(0)] 

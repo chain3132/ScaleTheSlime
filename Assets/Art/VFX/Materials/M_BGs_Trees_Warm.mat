@@ -52,7 +52,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _GradientMap:
-        m_Texture: {fileID: 2800000, guid: 1035043bfc274bc469e48265ec33a00d, type: 3}
+        m_Texture: {fileID: 2800000, guid: 9892daa83302d5c4ab261498f4df5b95, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _GradientShape:
@@ -60,7 +60,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 2cc8ef4c666918b42a534c4951cfab6e, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -84,9 +84,9 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _VertexDisplacementNoise:
-        m_Texture: {fileID: 2800000, guid: 83bf2ee34aaeb8a47b3e24188a04acde, type: 3}
-        m_Scale: {x: 0.1, y: 0.1}
-        m_Offset: {x: 2.73, y: 5.69}
+        m_Texture: {fileID: 2800000, guid: 2fc07fb131043d148a982f88ceb36d7b, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -107,22 +107,22 @@ Material:
     - _AlphaToMask: 0
     - _Blend: 0
     - _BlendModePreserveSpecular: 1
-    - _Brightness: 1.06
+    - _Brightness: 1
     - _BumpScale: 1
     - _ClampDisplacement: 0
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
-    - _ColorRotation: -13.1
-    - _CoreIntensity: 1
-    - _CorePower: 0.33
+    - _ColorRotation: 0
+    - _CoreIntensity: 0.33
+    - _CorePower: 0
     - _Cull: 0
-    - _CustomData1XAffectsStrength: 0.487
-    - _CustomData1YAffectsSpeed: 0.872
+    - _CustomData1XAffectsStrength: 0.526
+    - _CustomData1YAffectsSpeed: 0.52
     - _Cutoff: 0.5
     - _DepthFadeDivide: 1
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
-    - _DifferentCoreColor: 0.3
+    - _DifferentCoreColor: 0.64
     - _Dst: 10
     - _DstBlend: 0
     - _DstBlendAlpha: 0
@@ -132,7 +132,7 @@ Material:
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
-    - _GradientMapDisplacement: -0.02
+    - _GradientMapDisplacement: -0.33
     - _GradientShapeRotation: 0
     - _InvertGradient: 1
     - _Metallic: 0
@@ -150,29 +150,30 @@ Material:
     - _Surface: 0
     - _TextureRotation: 0
     - _UVBasedDisplacementMaskDisplacement: -0.63
-    - _UVBasedDisplacementMaskSoften: 5.46
+    - _UVBasedDisplacementMaskSoften: 2
     - _UVSinWaveFrequency: 1
-    - _UVSinWaveSpeed: 1.25
+    - _UVSinWaveSpeed: 1.5
     - _UseDepthFade: 1
     - _UseVertexNormals: 0
     - _VertexDisplacementNoiseRotation: 0
-    - _VertexDisplacementNoiseStrength: 0.8
+    - _VertexDisplacementNoiseStrength: 0
     - _WorkflowMode: 1
     - _ZTest: 2
     - _ZWrite: 0
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _CoreColor: {r: 0.28773582, g: 0.4753982, b: 1, a: 1}
+    - _CoreColor: {r: 0.47899607, g: 0.539496, b: 0.8679245, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _GradientShapeChannel: {r: 0, g: 1, b: 0, a: 0}
+    - _RendererColor: {r: 0, g: 0, b: 0, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
     - _TextureChannel: {r: 1, g: 0, b: 0, a: 0}
-    - _UVBasedDisplacementMaskChannel: {r: 0, g: 0.8, b: 0, a: 0}
+    - _UVBasedDisplacementMaskChannel: {r: 0, g: 1, b: 0, a: 0}
     - _UVSinWaveStrength: {r: 0, g: 10, b: 0, a: 0}
-    - _VertexDisplacementAmount: {r: 14.5, g: 1, b: 0, a: 0}
-    - _VertexDisplacementNoiseChannel: {r: 0, g: 1, b: 0, a: 0}
-    - _VertexDisplacementNoisePanSpeed: {r: 0, g: 1, b: 0, a: 0}
+    - _VertexDisplacementAmount: {r: 0.5, g: 0, b: 0, a: 0}
+    - _VertexDisplacementNoiseChannel: {r: 0, g: 0, b: 0, a: 0}
+    - _VertexDisplacementNoisePanSpeed: {r: 0, g: 1.34, b: 0, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
 --- !u!114 &6184326343352367262

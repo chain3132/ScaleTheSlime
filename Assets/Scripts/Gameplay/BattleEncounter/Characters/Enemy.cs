@@ -4,6 +4,8 @@ using Cysharp.Threading.Tasks;
 using Gameplay.BattleEncounter.Battle;
 using Gameplay.BattleEncounter.Characters.Behaviors;
 using Gameplay.BattleEncounter.Characters.Data;
+using Gameplay.BattleEncounter.Characters.Enums;
+using Gameplay.BattleEncounter.Characters.Passives;
 
 namespace Gameplay.BattleEncounter.Characters
 {
@@ -22,13 +24,27 @@ namespace Gameplay.BattleEncounter.Characters
 
         protected override bool IsLethalSize(int size)
             => (_def.DiesWhenTooSmall && size <= 0) || (_def.DiesWhenTooBig && size >= 10);
+        
+        private Passive _currentPassive;
+        private BattleContext _ctx;
+
+        public void Active(BattleContext ctx)
+        {
+            _ctx = ctx;
+            ApplyPassive(Form.CurrentValue);                       
+
+        }
 
         public void PlanTurn()
         {
             var behavior = _def.BehaviorFor(Form.CurrentValue);
             CurrentPlan = behavior != null ? behavior.PlanTurn() : Array.Empty<EnemyAction>();
         }
-
+        private void ApplyPassive(SizeForm form)
+        {
+            _currentPassive = _def.PassiveFor(form);
+            _currentPassive?.OnEnter(this, _ctx);
+        }
         public UniTask ActAsync(BattleContext ctx)
         {
             if (IsDead) return UniTask.CompletedTask;

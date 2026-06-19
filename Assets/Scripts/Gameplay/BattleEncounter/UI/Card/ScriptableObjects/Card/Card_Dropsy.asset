@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Gameplay.BattleEncounter.UI.Card.CardDefinition
   Id: 05
   DisplayName: Dropsy
+  Description: "Gain 1 Shield. \nSize +1."
   Art:
     CardBackground: {fileID: -1152778665, guid: 0a7e9a4d06787974da201bb5ad716a06, type: 3}
     CardArt: {fileID: -1979122721, guid: 3859bc2d80614b84089f2baa3fe46b57, type: 3}

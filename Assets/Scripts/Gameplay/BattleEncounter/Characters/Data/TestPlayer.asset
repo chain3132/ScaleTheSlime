@@ -20,9 +20,9 @@ MonoBehaviour:
   TinyOffsetY: 110
   NormalOffsetY: 241
   GiantOffsetY: 295
-  TinyPassive: {fileID: 0}
+  TinyPassive: {fileID: 11400000, guid: 9e061e997aa8bff479b782b36e289847, type: 2}
   NormalPassive: {fileID: 0}
-  GiantPassive: {fileID: 0}
+  GiantPassive: {fileID: 11400000, guid: 1b8a4722bdd33de47a3128df4300c477, type: 2}
   Unique2: {fileID: 11400000, guid: ca04d6aa555e34f418809f3c74a293cb, type: 2}
   Unique5: {fileID: 11400000, guid: 20c75c1b37202244292f9644305e6850, type: 2}
   Unique8: {fileID: 11400000, guid: ed75cb8b7e1f5b7448f095b792a62b2e, type: 2}

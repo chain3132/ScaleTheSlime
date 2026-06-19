@@ -30,7 +30,7 @@ namespace Gameplay.BattleEncounter.Battle
                         foreach (var enemy in _ctx.Enemies)
                         {
                             if (enemy == null || enemy.IsDead) continue;
-                            Apply(effect, enemy, ResolveValue(effect, enemy), card);
+                            Apply(effect, enemy, ResolveValue(effect, _ctx, enemy, _discardedByThisCard), card);
                         }
                     }
                     else //single target
@@ -39,7 +39,7 @@ namespace Gameplay.BattleEncounter.Battle
                         for (int i = 0; i < times; i++)
                         {
                             var target = ResolveTarget(effect.Target, selectedEnemy);
-                            int value = ResolveValue(effect, target);
+                            int value = ResolveValue(effect, _ctx, target, _discardedByThisCard);
                             Apply(effect, target, value, card);
                         }
                     }
@@ -60,28 +60,42 @@ namespace Gameplay.BattleEncounter.Battle
             }
         }
 
-        private int ResolveValue(CardEffectData e, Character target) 
+        
+        public static int ResolveValue(CardEffectData e, BattleContext ctx, Character target,
+            int discardedByThisCard = 0)
         {
             if (e.Type == CardEffectType.GainStatus)
             {
                 return e.StatusAmount;
             }
-            switch (e.ValueSource)  
+            switch (e.ValueSource)
             {
                 case ValueSource.Card:
                     return e.CardValue;
                 case ValueSource.Custom:
                     return e.CustomSource switch
                     {
-                        CustomValueSource.AliveEnemyCount => _ctx.AliveEnemyCount,
+                        CustomValueSource.AliveEnemyCount => ctx.AliveEnemyCount,
                         CustomValueSource.TargetSize => target?.Size.Value ?? 0,
-                        CustomValueSource.SelfSize => _ctx.Player.Size.Value * e.CardValue,
-                        CustomValueSource.NumberOfCardsDiscardedByThisCard => _discardedByThisCard, 
+                        CustomValueSource.SelfSize => ctx.Player.Size.Value * e.CardValue,
+                        CustomValueSource.NumberOfCardsDiscardedByThisCard => discardedByThisCard,
                         _ => 0,
                     };
                 default:
                     return 0;
             }
+        }
+
+        
+        public static int PreviewDisplay(CardEffectData e, BattleContext ctx, Character target)
+        {
+            int raw = ResolveValue(e, ctx, target);
+            return e.Type switch
+            {
+                CardEffectType.Attack     => ctx.Player.PreviewOutgoingDamage(raw, target),
+                CardEffectType.GainShield => raw + ctx.Player.Statuses.Get(StatusType.ShieldBonus),
+                _ => raw,
+            };
         }
 
         private void Apply(CardEffectData e, Character target, int value,Card playedCard)

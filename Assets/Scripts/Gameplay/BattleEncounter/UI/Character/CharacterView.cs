@@ -31,6 +31,10 @@ namespace Gameplay.BattleEncounter.UI.Characters
         private Image _sizeFill;
         [SerializeField]
         private Image _hpFill;
+        [SerializeField] 
+        private Image _hpFillBackground;
+        [SerializeField] 
+        private RectTransform _hpIndicator;
         [SerializeField]
         private UIParticle shieldGainEffect;
         [SerializeField]
@@ -71,6 +75,8 @@ namespace Gameplay.BattleEncounter.UI.Characters
 
         private readonly CompositeDisposable _bindings = new();
         private ParticleSystem[] _particles;
+        private int _currentHealth;
+        private int _maxHealth;
 
         public void Bind(Character c, CharacterDefinition def = null)
         {
@@ -78,6 +84,7 @@ namespace Gameplay.BattleEncounter.UI.Characters
 
             c.Fx.SubscribeAwait((fx, ct) => PlayFxAsync(fx, ct), AwaitOperation.Sequential)
                 .AddTo(_bindings);
+            _maxHealth = c.MaxHealth;
 
             status?.Bind(c.Statuses);
 
@@ -157,13 +164,54 @@ namespace Gameplay.BattleEncounter.UI.Characters
         }
         private void UpdateHealth(int health, int maxHealth)
         {
+            _currentHealth = health;
             _hpText.text = $"{health}/{maxHealth}";
+            if (_hpFillBackground != null)
+            {
+                LMotion.Create(_hpFillBackground.fillAmount, (float)health / maxHealth, 0.25f)
+                    .BindToFillAmount(_hpFillBackground)
+                    .AddTo(_bindings);
+            }
             if (_hpFill != null)
             {
                 LMotion.Create(_hpFill.fillAmount, (float)health / maxHealth, 0.2f)
                     .BindToFillAmount(_hpFill)
                     .AddTo(_bindings);
             }
+            if (_hpIndicator != null) _hpIndicator.gameObject.SetActive(false);
+        }
+
+        public void ShowDamagePreview(int predictedDamage)
+        {
+            int previewHp = Mathf.Max(0, _currentHealth - predictedDamage);
+            var fillAmount = (float)previewHp / _maxHealth;
+            LMotion.Create(_hpFill.fillAmount, fillAmount, 0.2f)
+                .BindToFillAmount(_hpFill)
+                .AddTo(_bindings);
+            UpdatePositionIndicator(fillAmount);
+            if (_hpIndicator != null)
+            {
+                _hpIndicator.gameObject.SetActive(predictedDamage > 0);
+            }
+            
+        }
+
+        public void ClearDamagePreview()
+        {
+            float f = (float)_currentHealth / _maxHealth;
+            LMotion.Create(_hpFill.fillAmount, f, 0.12f).BindToFillAmount(_hpFill).AddTo(_bindings);
+            if (_hpIndicator != null) _hpIndicator.gameObject.SetActive(false);
+        }
+
+        public void UpdatePositionIndicator(float fillAmount)
+        {
+            var min = _hpIndicator.anchorMin;
+            min.x = fillAmount; 
+            _hpIndicator.anchorMin = min;
+            var max = _hpIndicator.anchorMax; 
+            max.x = fillAmount; 
+            _hpIndicator.anchorMax = max;
+            _hpIndicator.anchoredPosition = new Vector2(0f, _hpIndicator.anchoredPosition.y);
         }
 
         private void UpdateSizeText(int size)
