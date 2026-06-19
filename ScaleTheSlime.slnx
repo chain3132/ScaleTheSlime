@@ -8,9 +8,9 @@
   <Project Path="spine-csharp.csproj" />
   <Project Path="spine-unity.csproj" />
   <Project Path="Gameplay.NodeSelection.csproj" />
+  <Project Path="Assembly-CSharp.csproj" />
   <Project Path="Gameplay.Core.csproj" />
   <Project Path="spine-unity-examples-editor.csproj" />
-  <Project Path="Assembly-CSharp.csproj" />
   <Project Path="Unity.UI.Shaders.Sample.csproj" />
   <Project Path="Unity.UI.Shaders.Sample.Editor.csproj" />
   <Project Path="CustomEditor.csproj" />
