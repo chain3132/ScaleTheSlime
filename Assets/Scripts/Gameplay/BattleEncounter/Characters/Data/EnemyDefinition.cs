@@ -19,8 +19,10 @@ namespace Gameplay.BattleEncounter.Characters.Data
         public Passive GiantPassive;
 
         [Header("Size Death")]
-        [SerializeField] private bool _diesWhenTooSmall = true;   // size = 0 → ตาย
-        [SerializeField] private bool _diesWhenTooBig = true;     // size = 10 → ตาย
+        [SerializeField] 
+        private bool _diesWhenTooSmall = true;   // size = 0 → ตาย
+        [SerializeField] 
+        private bool _diesWhenTooBig = true;     // size = 10 → ตาย
         public bool DiesWhenTooSmall => _diesWhenTooSmall;
         public bool DiesWhenTooBig => _diesWhenTooBig;
 

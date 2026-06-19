@@ -27,6 +27,11 @@ namespace Gameplay.BattleEncounter.UI.Characters
         [SerializeField]
         private float _hideDelayOnDeath = 0.6f;
 
+        [SerializeField] 
+        private GameObject diesWhenTooSmallIcon;
+        [SerializeField] 
+        private GameObject diesWhenTooBigIcon;
+
         public Enemy Enemy { get; private set; }
         public CharacterView View => _view;
 
@@ -38,13 +43,13 @@ namespace Gameplay.BattleEncounter.UI.Characters
 
             var d = def != null ? def : _definition;
             if (d == null) return null;
-
+            diesWhenTooSmallIcon.gameObject.SetActive(d.DiesWhenTooSmall);
+            diesWhenTooBigIcon.gameObject.SetActive(d.DiesWhenTooBig);
             Enemy = new Enemy(d);
             if (_view != null) _view.Bind(Enemy, d);
-
+        
             Enemy.Form.Skip(1).Subscribe(OnFormChanged).AddTo(_scope);
             Enemy.Died.Subscribe(_ => OnDied()).AddTo(_scope);
-
             gameObject.SetActive(true);
             Replan();
             return Enemy;
