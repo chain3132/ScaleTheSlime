@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c61101f0b481e754bafbbaa1daea1698, type: 3}
+  m_Name: tentacle
+  m_EditorClassIdentifier: Gameplay.BattleEncounter::Gameplay.BattleEncounter.Characters.Data.EnemyDefinition
+  MaxHealth: 30
+  StartSize: 5
+  TinySkeleton: {fileID: 11400000, guid: 136571c5ed8182743a008370176de9bd, type: 2}
+  NormalSkeleton: {fileID: 11400000, guid: 11d3db6bb5c8d4140b4271165cb73bc4, type: 2}
+  GiantSkeleton: {fileID: 11400000, guid: 9851043f1c1c09e4c93b025514d37918, type: 2}
+  TinyOffsetY: 90
+  NormalOffsetY: 145
+  GiantOffsetY: 250
+  TinyBehavior: {fileID: 11400000, guid: d4dc7ab937c54ae4db5b5fac124d8d3f, type: 2}
+  NormalBehavior: {fileID: 11400000, guid: ffbbb19c1ad70424d9c4faa601446f33, type: 2}
+  GiantBehavior: {fileID: 11400000, guid: a1bf90b40eda76643bd5f1fb1e0258a5, type: 2}
+  TinyPassive: {fileID: 0}
+  NormalPassive: {fileID: 0}
+  GiantPassive: {fileID: 0}
+  _diesWhenTooSmall: 1
+  _diesWhenTooBig: 1

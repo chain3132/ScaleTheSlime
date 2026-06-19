@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c61101f0b481e754bafbbaa1daea1698, type: 3}
+  m_Name: pufferfish
+  m_EditorClassIdentifier: Gameplay.BattleEncounter::Gameplay.BattleEncounter.Characters.Data.EnemyDefinition
+  MaxHealth: 30
+  StartSize: 5
+  TinySkeleton: {fileID: 11400000, guid: 3688d4f03f6059e49b9a5d1d8974cd5c, type: 2}
+  NormalSkeleton: {fileID: 11400000, guid: b2cbfbc07f4653e458cb9b37b5f09b4b, type: 2}
+  GiantSkeleton: {fileID: 11400000, guid: af35ac7948e4734428fdd227ace20cd8, type: 2}
+  TinyOffsetY: 90
+  NormalOffsetY: 145
+  GiantOffsetY: 250
+  TinyBehavior: {fileID: 11400000, guid: 2af63085a7d543e4d91de5853b27c4d7, type: 2}
+  NormalBehavior: {fileID: 11400000, guid: 779f37eb9b1531744a02c32dc5094311, type: 2}
+  GiantBehavior: {fileID: 11400000, guid: f80c34045922b40469b5ee1bd037de49, type: 2}
+  TinyPassive: {fileID: 0}
+  NormalPassive: {fileID: 0}
+  GiantPassive: {fileID: 0}
+  _diesWhenTooSmall: 1
+  _diesWhenTooBig: 1

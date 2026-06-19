@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c61101f0b481e754bafbbaa1daea1698, type: 3}
+  m_Name: witch
+  m_EditorClassIdentifier: Gameplay.BattleEncounter::Gameplay.BattleEncounter.Characters.Data.EnemyDefinition
+  MaxHealth: 30
+  StartSize: 5
+  TinySkeleton: {fileID: 11400000, guid: 9124b212dd2a0e24b957ffb0709870e3, type: 2}
+  NormalSkeleton: {fileID: 11400000, guid: 4a6d63f6225abe442b84a9b3fb54d73c, type: 2}
+  GiantSkeleton: {fileID: 11400000, guid: 8f2e9683751fb1941b211c50d5a07667, type: 2}
+  TinyOffsetY: 90
+  NormalOffsetY: 145
+  GiantOffsetY: 250
+  TinyBehavior: {fileID: 11400000, guid: 78def28ea141a65419f593ce3e11e555, type: 2}
+  NormalBehavior: {fileID: 11400000, guid: e9a02a774c3606546970cc49e9b3e73e, type: 2}
+  GiantBehavior: {fileID: 11400000, guid: 5f9d34d1f1abd1b4d8b69085c2e996ae, type: 2}
+  TinyPassive: {fileID: 0}
+  NormalPassive: {fileID: 0}
+  GiantPassive: {fileID: 0}
+  _diesWhenTooSmall: 1
+  _diesWhenTooBig: 1

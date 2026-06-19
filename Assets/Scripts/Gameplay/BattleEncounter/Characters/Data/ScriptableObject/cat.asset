@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c61101f0b481e754bafbbaa1daea1698, type: 3}
+  m_Name: cat
+  m_EditorClassIdentifier: Gameplay.BattleEncounter::Gameplay.BattleEncounter.Characters.Data.EnemyDefinition
+  MaxHealth: 30
+  StartSize: 5
+  TinySkeleton: {fileID: 11400000, guid: 7beab61eb1f2e5044bccf359a55f13ec, type: 2}
+  NormalSkeleton: {fileID: 11400000, guid: 87edcf4983d8f3343bffd54eff12053c, type: 2}
+  GiantSkeleton: {fileID: 11400000, guid: 47275caf8be24d84b8a991bd1d707de7, type: 2}
+  TinyOffsetY: 90
+  NormalOffsetY: 145
+  GiantOffsetY: 250
+  TinyBehavior: {fileID: 11400000, guid: cfb5c0d47bc512d48a1c740d0b667cca, type: 2}
+  NormalBehavior: {fileID: 11400000, guid: aa5d988e09972f64c91bb37c2f8f4df1, type: 2}
+  GiantBehavior: {fileID: 11400000, guid: b9b2cf8c6c97d524c861944bb3955d3c, type: 2}
+  TinyPassive: {fileID: 0}
+  NormalPassive: {fileID: 0}
+  GiantPassive: {fileID: 0}
+  _diesWhenTooSmall: 1
+  _diesWhenTooBig: 1
