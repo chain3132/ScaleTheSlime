@@ -22,3 +22,12 @@ MonoBehaviour:
   - Type: 4
     Icon: {fileID: 1467504536, guid: cf746e92101f2d149921440b394666bb, type: 3}
     DisplayName: 
+  - Type: 2
+    Icon: {fileID: -5379215314323685206, guid: 01e36ea0f5a53574cac9f34ba0014888, type: 3}
+    DisplayName: 
+  - Type: 6
+    Icon: {fileID: -828211296, guid: cf746e92101f2d149921440b394666bb, type: 3}
+    DisplayName: 
+  - Type: 7
+    Icon: {fileID: 1693384911, guid: cf746e92101f2d149921440b394666bb, type: 3}
+    DisplayName: 

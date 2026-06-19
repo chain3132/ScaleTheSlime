@@ -1244,17 +1244,6 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 5
   m_TargetDisplay: 0
---- !u!114 &266673811 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2635811165068794271, guid: 23ee6d3635d783a43b683e18c3d86a4b, type: 3}
-  m_PrefabInstance: {fileID: 6538770214513655042}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 86ed26f35fb7ac44a82a382ab549106d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Gameplay.BattleEncounter.Status.StatusView
 --- !u!1 &285451194
 GameObject:
   m_ObjectHideFlags: 0
@@ -1392,11 +1381,6 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!224 &292050720 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 9060195914600747151, guid: 23ee6d3635d783a43b683e18c3d86a4b, type: 3}
-  m_PrefabInstance: {fileID: 6538770214513655042}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &316775564
 GameObject:
   m_ObjectHideFlags: 0
@@ -5711,18 +5695,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 939366540}
     m_Modifications:
-    - target: {fileID: 1874812064437660159, guid: 23ee6d3635d783a43b683e18c3d86a4b, type: 3}
-      propertyPath: m_Name
-      value: SizeRoot
+    - target: {fileID: 848610417815427814, guid: 23ee6d3635d783a43b683e18c3d86a4b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1841934726927533179, guid: 23ee6d3635d783a43b683e18c3d86a4b, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2351170071916209833, guid: 23ee6d3635d783a43b683e18c3d86a4b, type: 3}
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 0}
-    - target: {fileID: 2635811165068794271, guid: 23ee6d3635d783a43b683e18c3d86a4b, type: 3}
-      propertyPath: _database
-      value: 
-      objectReference: {fileID: 11400000, guid: f131419001bc14c4c98f449d9b567720, type: 2}
+    - target: {fileID: 2681253056847926088, guid: 23ee6d3635d783a43b683e18c3d86a4b, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2792580760639803664, guid: 23ee6d3635d783a43b683e18c3d86a4b, type: 3}
       propertyPath: m_LocalPosition.x
       value: -8.207359
@@ -5763,18 +5751,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2823336849035578454, guid: 23ee6d3635d783a43b683e18c3d86a4b, type: 3}
-      propertyPath: status
-      value: 
-      objectReference: {fileID: 266673811}
-    - target: {fileID: 2823336849035578454, guid: 23ee6d3635d783a43b683e18c3d86a4b, type: 3}
-      propertyPath: _sizeRoot
-      value: 
-      objectReference: {fileID: 292050720}
-    - target: {fileID: 2823336849035578454, guid: 23ee6d3635d783a43b683e18c3d86a4b, type: 3}
-      propertyPath: _skeleton
-      value: 
-      objectReference: {fileID: 6538770214513655045}
     - target: {fileID: 2831393475163335597, guid: 23ee6d3635d783a43b683e18c3d86a4b, type: 3}
       propertyPath: m_LocalScale.x
       value: 0
@@ -5791,9 +5767,29 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 563470670}
+    - target: {fileID: 5580707773083927101, guid: 23ee6d3635d783a43b683e18c3d86a4b, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5580707773083927101, guid: 23ee6d3635d783a43b683e18c3d86a4b, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5580707773083927101, guid: 23ee6d3635d783a43b683e18c3d86a4b, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6081385624409026556, guid: 23ee6d3635d783a43b683e18c3d86a4b, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6634114845535902936, guid: 23ee6d3635d783a43b683e18c3d86a4b, type: 3}
       propertyPath: m_Name
       value: Player(Princess)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7524938190322693895, guid: 23ee6d3635d783a43b683e18c3d86a4b, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5805,17 +5801,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2792580760639803664, guid: 23ee6d3635d783a43b683e18c3d86a4b, type: 3}
   m_PrefabInstance: {fileID: 6538770214513655042}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &6538770214513655045 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7982772667018659074, guid: 23ee6d3635d783a43b683e18c3d86a4b, type: 3}
-  m_PrefabInstance: {fileID: 6538770214513655042}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d247ba06193faa74d9335f5481b2b56c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: spine-unity::Spine.Unity.SkeletonAnimation
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

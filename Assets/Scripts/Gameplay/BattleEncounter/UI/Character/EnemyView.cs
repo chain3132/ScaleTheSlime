@@ -24,6 +24,7 @@ namespace Gameplay.BattleEncounter.UI.Characters
         private Transform _intentRoot;
 
         public Enemy Enemy { get; private set; }
+        public CharacterView View => _view;
 
         private readonly List<GameObject> _intentInstances = new();
         private readonly CompositeDisposable _scope = new();   

@@ -46,6 +46,11 @@ namespace Gameplay.BattleEncounter.UI.Card
         public Subject<Data.Card> CardClicked = new();
 
         public bool Interactable { get; set; } = true;
+        private BattleContext _context;
+        public void SetContext(BattleContext context)
+        {
+            _context = context;
+        }
 
         public void BeginDrag(Vector2 cardPosition,Data.Card card)
         {
@@ -58,14 +63,14 @@ namespace Gameplay.BattleEncounter.UI.Card
         public void OnDrag(Vector2 mousePosition)
         {
             UpdateArrow(mousePosition, _origin);
-            IsHoverEnemy(mousePosition);
+            UpdateHoverEnemy(mousePosition);
             IfInPlayZone(mousePosition);
         }
         public bool EndDrag(Vector2 mousePosition)
         {
             _arrowRT.gameObject.SetActive(false);
             _playZoneUI.SetActive(false);
-            ClearHover();   
+                ClearHover();   
 
             if (IsValidPlay(_currentCard, mousePosition))
             {
@@ -79,22 +84,43 @@ namespace Gameplay.BattleEncounter.UI.Card
             return false;
 
         }
-        private void IsHoverEnemy(Vector2 mousePosition)
+        private void UpdateHoverEnemy(Vector2 mousePosition)
         {
             EnemyView view = null;
 
             if (_currentCard != null && _currentCard.Definition.PlayTarget == CardTarget.Enemy)
                 TryGetEnemyUnderMouse(mousePosition, out view);
 
-            if (view == _hovered) return;                       
-            if (_hovered != null) _hovered.HighLight(false);    
+            if (view == _hovered) return;
+            if (_hovered != null)
+            {
+                _hovered.HighLight(false);
+                _hovered.View.ClearDamagePreview();
+
+            }    
             _hovered = view;
-            if (_hovered != null) _hovered.HighLight(true);     
+            if (_hovered != null) _hovered.HighLight(true);
+            if (_hovered != null)
+            {
+                _hovered.View.ShowDamagePreview(PreviewUIFor(_currentCard,_hovered.Enemy));
+            }
+            
+            
+        }
+        private int PreviewUIFor(Data.Card card, Enemy target)
+        {
+            if (_context == null) return 0;
+            int total = 0;
+            foreach (var e in card.Definition.Effects)
+                if (e.Type == CardEffectType.Attack)
+                    total += CardEffectExecutor.PreviewDisplay(e, _context, target) * Mathf.Max(1, e.Repeat);
+            return total;
         }
 
         private void ClearHover()
         {
             if (_hovered != null) _hovered.HighLight(false);
+            _hovered.View.ClearDamagePreview();
             _hovered = null;
         }
         private bool IsValidPlay(Data.Card card, Vector2 mousePosition)
