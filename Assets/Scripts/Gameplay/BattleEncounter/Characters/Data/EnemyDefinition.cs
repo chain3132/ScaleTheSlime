@@ -6,7 +6,7 @@ using UnityEngine;
 namespace Gameplay.BattleEncounter.Characters.Data
 {
     [CreateAssetMenu(menuName = "Battle/EnemyDefinition")]
-    public class EnemyDefinition : CharacterDefinition
+    public class EnemyDefinition : CharacterDefinition, IPassiveProvider
     {
         [Header("Behavior ")]
         public EnemyBehavior TinyBehavior;

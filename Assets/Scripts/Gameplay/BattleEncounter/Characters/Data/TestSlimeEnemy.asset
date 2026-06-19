@@ -26,5 +26,5 @@ MonoBehaviour:
   TinyPassive: {fileID: 0}
   NormalPassive: {fileID: 11400000, guid: 0df3ab586aff67e4fbbbee662f0b97a8, type: 2}
   GiantPassive: {fileID: 0}
-  _diesWhenTooSmall: 1
+  _diesWhenTooSmall: 0
   _diesWhenTooBig: 1
