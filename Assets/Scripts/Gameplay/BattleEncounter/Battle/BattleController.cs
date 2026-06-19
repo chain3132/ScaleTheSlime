@@ -101,9 +101,10 @@ namespace Gameplay.BattleEncounter.Battle
             
             //spawn enemy
             SpawnEnemies(enemyDefs);
-            _context = new BattleContext(_player, _enemies, 
+            _context = new BattleContext(_player, _enemies,
                 _handController != null ? _handController.Deck : null);
             _executor = new CardEffectExecutor(_context);
+            if (_handController != null) _handController.SetContext(_context);
             _player.Activate(_context);
 
             _playController.CardPlayed
@@ -186,11 +187,13 @@ namespace Gameplay.BattleEncounter.Battle
                 ev.transform.localPosition = new Vector3((i - (n - 1) / 2f) * _enemySpacing, 0f, 0f);
 
                 var enemy = ev.Setup(defs[i]);
+                
                 if (enemy == null) { Destroy(ev.gameObject); continue; }
 
                 _enemyViews.Add(ev);
                 _enemies.Add(enemy);
                 enemy.Died.Subscribe(_ => OnEnemyDied()).AddTo(_battleScope);
+                enemy.Active(_context);
             }
         }
 
@@ -220,7 +223,7 @@ namespace Gameplay.BattleEncounter.Battle
         {
             _enemyPhase = true;
             SetPlayerInput(false);
-
+            _player.TickTurnEnd();   
             _player.CheckSizeDeath();
             if (_battleOver) { _enemyPhase = false; return; }
 
@@ -244,8 +247,10 @@ namespace Gameplay.BattleEncounter.Battle
                 if (enemy == null || enemy.IsDead) continue;
 
                 await enemy.ActAsync(_context);
+                enemy.TickTurnEnd();    
+                enemy.CheckSizeDeath();
+                if (enemy.IsDead) { ev.ClearIntent(); continue; }
                 ev.ClearIntent();
-
                 if (_player.IsDead) { EndBattle(false); return; }
                 await UniTask.Delay(TimeSpan.FromSeconds(_betweenEnemyDelay), cancellationToken: ct);
             }
@@ -253,9 +258,6 @@ namespace Gameplay.BattleEncounter.Battle
 
         private async UniTask BeginNewTurnAsync(CancellationToken ct)
         {
-            foreach (var ev in _enemyViews)
-                if (ev != null && ev.Enemy != null) ev.Enemy.CheckSizeDeath();
-
             if (_context.AliveEnemyCount == 0) { EndBattle(true); return; }
 
             _player.ClearShield();

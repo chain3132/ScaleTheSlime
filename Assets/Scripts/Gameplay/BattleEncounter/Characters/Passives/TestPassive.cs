@@ -4,21 +4,24 @@ using UnityEngine;
 
 namespace Gameplay.BattleEncounter.Characters.Passives
 {
-    [CreateAssetMenu(menuName = "Battle/Passive/TinyPassive")]
-
-    public class TinyPassive : Passive
+    [CreateAssetMenu(menuName = "Battle/Passive/TestThornPassive")]
+    public class TestPassive : Passive
     {
         [SerializeField]
-        private int _amount = 1;
-        
+        private int _amount = 2;
+
         public override void OnEnter(Character character, BattleContext ctx)
         {
-            character.ApplyStatus(StatusType.ShieldBonus,_amount,persistent:true);
+            
+            character.ApplyStatus(StatusType.Unstable,_amount,persistent:false);
+            
         }
 
         public override void OnExit(Character character, BattleContext ctx)
         {
-            character.ApplyStatus(StatusType.ShieldBonus,-_amount,persistent:true);        
+            
+            character.ApplyStatus(StatusType.Unstable,-_amount,persistent:false);
+            
         }
     }
 }

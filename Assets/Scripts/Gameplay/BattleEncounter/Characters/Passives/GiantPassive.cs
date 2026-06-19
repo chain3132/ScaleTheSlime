@@ -7,22 +7,24 @@ namespace Gameplay.BattleEncounter.Characters.Passives
     [CreateAssetMenu(menuName = "Battle/Passive/GiantPassive")]
     public class GiantPassive : Passive
     {
-        [SerializeField] private int _amount = 2;
+        [SerializeField] 
+        private int _amount = 2;
+        
 
-        public override void OnEnter(Player player, BattleContext ctx)
+        public override void OnEnter(Character character, BattleContext ctx)
         {
             foreach (var enemy in ctx.Enemies)
             {
                 enemy.ApplyStatus(StatusType.Vulnerable,_amount,persistent:true);
             }
         }
-        public override void OnExit(Player player, BattleContext ctx)
+
+        public override void OnExit(Character character, BattleContext ctx)
         {
             foreach (var enemy in ctx.Enemies)
             {
                 enemy.ApplyStatus(StatusType.Vulnerable,-_amount,persistent:true);
-            }        
+            }      
         }
-        
     }
 }

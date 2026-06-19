@@ -8,6 +8,7 @@ namespace Gameplay.BattleEncounter.Status
         DamagePercent,
         ShieldBonus,
         Vulnerable,  
-        Stun,        
+        Thorn,
+        Unstable,        
     }
 }

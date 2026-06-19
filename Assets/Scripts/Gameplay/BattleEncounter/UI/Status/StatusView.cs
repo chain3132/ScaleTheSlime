@@ -28,7 +28,6 @@ namespace Gameplay.BattleEncounter.Status
 
         private void Rebuild(StatusEffects statuses)
         {
-            Debug.Log("Rebuilding status view");
             foreach (var v in _spawned)
                 if (v != null) Destroy(v.gameObject);
             _spawned.Clear();

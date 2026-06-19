@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 using Cysharp.Threading.Tasks;
+using Gameplay.BattleEncounter.Battle;
 using Gameplay.BattleEncounter.UI.Card.Data;
 using Gameplay.BattleEncounter.UI.Card.Enum;
 using Gameplay.BattleEncounter.UI.CardPile;
@@ -25,8 +26,11 @@ namespace Gameplay.BattleEncounter.UI.Card
 
         private Deck _deck;
         private CardPileViewModel _pileViewModel;
+        private BattleContext _context;
 
-        public Deck Deck => _deck;   
+        public Deck Deck => _deck;
+
+        public void SetContext(BattleContext context) => _context = context;
 
         private void Start() => Bind();
         private static bool IsRetain(Data.Card card)
@@ -92,7 +96,7 @@ namespace Gameplay.BattleEncounter.UI.Card
             {
                 Data.Card card = _deck?.Draw();
                 if (card == null) break;
-                await _rack.DrawAsync(new CardViewModel(card), ct);
+                await _rack.DrawAsync(new CardViewModel(card, _context), ct);
             }
         }
 
@@ -101,7 +105,7 @@ namespace Gameplay.BattleEncounter.UI.Card
             if (_deck == null || def == null) return;
             var card = _deck.AddToHand(def);
             if (card == null) return;
-            await _rack.DrawAsync(new CardViewModel(card), ct);
+            await _rack.DrawAsync(new CardViewModel(card, _context), ct);
         }
 
         public async UniTask DiscardHandVisualAsync(CancellationToken ct)

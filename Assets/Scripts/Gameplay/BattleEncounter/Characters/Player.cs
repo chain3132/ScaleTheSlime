@@ -27,7 +27,6 @@ namespace Gameplay.BattleEncounter.Characters
         public void Activate(BattleContext ctx)
         {
             _ctx = ctx;
-
             ApplyPassive(Form.CurrentValue);                       
             Form.Skip(1).Subscribe(OnFormChanged).AddTo(_scope);   
             Size.Skip(1).Subscribe(OnSizeChanged).AddTo(_scope);   

@@ -3,6 +3,7 @@ using Gameplay.BattleEncounter.Characters.Enums;
 using Gameplay.BattleEncounter.Status;
 using R3;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Gameplay.BattleEncounter.Characters
 {
@@ -41,6 +42,10 @@ namespace Gameplay.BattleEncounter.Characters
                 amount = ModifiedDamage(amount, attacker);
             int remaining = amount;
             if (amount <= 0) return;
+            if (Statuses.Has(StatusType.Thorn))
+            {
+                attacker!.TakeDamage(Statuses.Get(StatusType.Thorn),null);
+            }
             if (Shield.Value > 0)
             {
                 int absorbed = Mathf.Min(Shield.Value, remaining);
@@ -55,11 +60,16 @@ namespace Gameplay.BattleEncounter.Characters
             if (Health.Value <= 0) Die(CharacterFx.Death);
         }
         private int ModifiedDamage(int baseValue, Character attacker)
+            => attacker.PreviewOutgoingDamage(baseValue, this);
+
+        
+        public int PreviewOutgoingDamage(int baseValue, Character target = null)
         {
-            float v = baseValue + attacker.Statuses.Get(StatusType.Strength);
-            v *= 1f + attacker.Statuses.Get(StatusType.DamagePercent) / 100f;
-            if (attacker.Statuses.Has(StatusType.Weak)) v *= 0.75f;
-            if (Statuses.Has(StatusType.Vulnerable)) v *= 1.5f;   
+            if (baseValue <= 0) return baseValue;
+            float v = baseValue + Statuses.Get(StatusType.Strength);
+            v *= 1f + Statuses.Get(StatusType.DamagePercent) / 100f;
+            if (Statuses.Has(StatusType.Weak)) v *= 0.75f;
+            if (target != null && target.Statuses.Has(StatusType.Vulnerable)) v *= 1.5f;
             return Mathf.FloorToInt(v);
         }
 
@@ -122,9 +132,22 @@ namespace Gameplay.BattleEncounter.Characters
         {
             if (Shield.Value != 0) Shield.Value = 0;
         }
+        public void TickTurnEnd()
+        {
+            if (IsDead) return;
+            if (!Statuses.Has(StatusType.Unstable)) return;
+           
+            int x = Statuses.Get(StatusType.Unstable);
+            if (x > 0)
+            {
+                int delta = Random.Range(-x, x + 1); 
+                ChangeSize(delta);                    
+            }
+        }
 
         public void ClearTemporaryStatuses()
         {
+            
             Statuses.ClearTemporary();
         }
 
