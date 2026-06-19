@@ -681,8 +681,22 @@ PlayerSettings:
   webWasm2023: 0
   webEnableSubmoduleStrippingCompatibility: 0
   scriptingDefineSymbols:
-    Android: AMPLIFY_SHADER_EDITOR
-    Standalone: AMPLIFY_SHADER_EDITOR
+    Android: AMPLIFY_SHADER_EDITOR;SORTIFY
+    EmbeddedLinux: SORTIFY
+    GameCoreScarlett: SORTIFY
+    GameCoreXboxOne: SORTIFY
+    Kepler: SORTIFY
+    LinuxHeadlessSimulation: SORTIFY
+    Nintendo Switch: SORTIFY
+    Nintendo Switch 2: SORTIFY
+    PS4: SORTIFY
+    PS5: SORTIFY
+    QNX: SORTIFY
+    Standalone: AMPLIFY_SHADER_EDITOR;SORTIFY
+    VisionOS: SORTIFY
+    WebGL: SORTIFY
+    XboxOne: SORTIFY
+    tvOS: SORTIFY
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend:
