@@ -185,6 +185,7 @@ namespace Gameplay.BattleEncounter.UI.Characters
         {
             int previewHp = Mathf.Max(0, _currentHealth - predictedDamage);
             var fillAmount = (float)previewHp / _maxHealth;
+            _hpText.text = $"{previewHp}/{_maxHealth}";
             LMotion.Create(_hpFill.fillAmount, fillAmount, 0.2f)
                 .BindToFillAmount(_hpFill)
                 .AddTo(_bindings);
@@ -199,6 +200,8 @@ namespace Gameplay.BattleEncounter.UI.Characters
         public void ClearDamagePreview()
         {
             float f = (float)_currentHealth / _maxHealth;
+            _hpText.text = $"{_currentHealth}/{_maxHealth}";
+
             LMotion.Create(_hpFill.fillAmount, f, 0.12f).BindToFillAmount(_hpFill).AddTo(_bindings);
             if (_hpIndicator != null) _hpIndicator.gameObject.SetActive(false);
         }
