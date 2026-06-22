@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c61101f0b481e754bafbbaa1daea1698, type: 3}
   m_Name: cat
   m_EditorClassIdentifier: Gameplay.BattleEncounter::Gameplay.BattleEncounter.Characters.Data.EnemyDefinition
-  MaxHealth: 30
+  MaxHealth: 50
   StartSize: 5
   TinySkeleton: {fileID: 11400000, guid: 7beab61eb1f2e5044bccf359a55f13ec, type: 2}
   NormalSkeleton: {fileID: 11400000, guid: 87edcf4983d8f3343bffd54eff12053c, type: 2}

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c61101f0b481e754bafbbaa1daea1698, type: 3}
   m_Name: tentacle
   m_EditorClassIdentifier: Gameplay.BattleEncounter::Gameplay.BattleEncounter.Characters.Data.EnemyDefinition
-  MaxHealth: 30
+  MaxHealth: 300
   StartSize: 5
   TinySkeleton: {fileID: 11400000, guid: 136571c5ed8182743a008370176de9bd, type: 2}
   NormalSkeleton: {fileID: 11400000, guid: 11d3db6bb5c8d4140b4271165cb73bc4, type: 2}
