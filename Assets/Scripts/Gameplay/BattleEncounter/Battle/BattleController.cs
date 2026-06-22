@@ -84,6 +84,8 @@ namespace Gameplay.BattleEncounter.Battle
                 await _handController.SetupAsync(progress.Deck, ct);
 
             bool win = await _result.Task.AttachExternalCancellation(ct);
+            
+            await UniTask.Yield(ct);
 
             if (win) progress.SetHealth(_player.Health.Value);
             Teardown();

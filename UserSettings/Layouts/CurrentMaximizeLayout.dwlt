@@ -98,7 +98,7 @@ MonoBehaviour:
     m_HSlider: 0
     m_VSlider: 0
     m_IgnoreScrollWheelUntilClicked: 0
-    m_EnableMouseInput: 0
+    m_EnableMouseInput: 1
     m_EnableSliderZoomHorizontal: 0
     m_EnableSliderZoomVertical: 0
     m_UniformScale: 1
@@ -2477,6 +2477,7 @@ MonoBehaviour:
     - m_Data: 65384
     - m_Data: 65388
     - m_Data: 65390
+    - m_Data: 65522
     - m_Data: 65586
     - m_Data: 65606
     - m_Data: 65608
@@ -2488,6 +2489,9 @@ MonoBehaviour:
     - m_Data: 73478
     - m_Data: 73482
     - m_Data: 118214
+    - m_Data: 217500
+    - m_Data: 221434
+    - m_Data: 2147483647
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -2626,6 +2630,7 @@ MonoBehaviour:
     - m_Data: 65384
     - m_Data: 65388
     - m_Data: 65390
+    - m_Data: 65522
     - m_Data: 65586
     - m_Data: 65608
     - m_Data: 69934
@@ -2830,7 +2835,7 @@ MonoBehaviour:
   m_ObjectsLockedBeforeSerialization: []
   m_InstanceIDsLockedBeforeSerialization: 
   m_PreviewResizer:
-    m_CachedPref: 151
+    m_CachedPref: -151
     m_ControlHash: -371814159
     m_PrefName: Preview_InspectorPreview
   m_LastInspectedObjectInstanceID: -1
