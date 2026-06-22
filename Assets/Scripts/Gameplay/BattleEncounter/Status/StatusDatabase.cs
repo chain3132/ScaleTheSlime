@@ -14,6 +14,8 @@ namespace Gameplay.BattleEncounter.Status
             public StatusType Type;
             public Sprite Icon;
             public string DisplayName;
+            [TextArea]
+            public string Description;
         }
 
         [SerializeField] 
@@ -33,6 +35,11 @@ namespace Gameplay.BattleEncounter.Status
         public string NameFor(StatusType type)
         {
             return Map.TryGetValue(type, out var e) ? e.DisplayName : type.ToString();
+        }
+
+        public string DescriptionFor(StatusType type)
+        {
+            return Map.TryGetValue(type, out var e) ? e.Description : string.Empty;
         }
     }
 }

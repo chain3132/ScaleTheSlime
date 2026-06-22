@@ -5,6 +5,7 @@ using Gameplay.BattleEncounter.Characters;
 using Gameplay.BattleEncounter.Characters.Behaviors;
 using Gameplay.BattleEncounter.Characters.Data;
 using Gameplay.BattleEncounter.Characters.Enums;
+using Gameplay.BattleEncounter.UI.Tooltip;
 using R3;
 using Spine.Unity;
 using UnityEngine;
@@ -47,6 +48,9 @@ namespace Gameplay.BattleEncounter.UI.Characters
             diesWhenTooBigIcon.gameObject.SetActive(d.DiesWhenTooBig);
             Enemy = new Enemy(d);
             if (_view != null) _view.Bind(Enemy, d);
+
+            var passiveTip = GetComponentInChildren<PassiveTooltipTrigger>(true);
+            if (passiveTip != null) passiveTip.SetProvider(d);
         
             Enemy.Form.Skip(1).Subscribe(OnFormChanged).AddTo(_scope);
             Enemy.Died.Subscribe(_ => OnDied()).AddTo(_scope);
@@ -106,8 +110,12 @@ namespace Gameplay.BattleEncounter.UI.Characters
             foreach (var a in plan)
             {
                 var prefab = _intentDatabase.PrefabFor(a.Type);
-                if (prefab != null)
-                    _intentInstances.Add(Instantiate(prefab, _intentRoot));
+                if (prefab == null) continue;
+
+                var inst = Instantiate(prefab, _intentRoot);
+                var tip = inst.GetComponentInChildren<IntentTooltipTrigger>(true);
+                if (tip != null) tip.SetAction(a);
+                _intentInstances.Add(inst);
             }
         }
 

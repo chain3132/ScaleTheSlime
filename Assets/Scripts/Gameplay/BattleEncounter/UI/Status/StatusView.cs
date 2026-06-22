@@ -36,7 +36,7 @@ namespace Gameplay.BattleEncounter.Status
             foreach (var kv in statuses.Active)
             {
                 var icon = Instantiate(_iconPrefab, parent);
-                icon.SetData(_database != null ? _database.IconFor(kv.Key) : null, kv.Value);
+                icon.SetData(kv.Key, _database != null ? _database.IconFor(kv.Key) : null, kv.Value);
                 _spawned.Add(icon);
             }
         }

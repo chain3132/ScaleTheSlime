@@ -97,7 +97,12 @@ namespace Gameplay.BattleEncounter.Battle
             _result = new UniTaskCompletionSource<bool>();
 
             _player = new Player(_playerDefinition, progress.CurrentHealth);
-            if (_playerView != null) _playerView.Bind(_player, _playerDefinition);
+            if (_playerView != null)
+            {
+                _playerView.Bind(_player, _playerDefinition);
+                var passiveTip = _playerView.GetComponentInChildren<UI.Tooltip.PassiveTooltipTrigger>(true);
+                if (passiveTip != null) passiveTip.SetProvider(_playerDefinition);
+            }
             
             //spawn enemy
             SpawnEnemies(enemyDefs);

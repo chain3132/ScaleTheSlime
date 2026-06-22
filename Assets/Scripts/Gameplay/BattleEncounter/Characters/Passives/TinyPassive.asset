@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02b4ebd350d7cfb42b515c92c2edcd1d, type: 3}
   m_Name: TinyPassive
   m_EditorClassIdentifier: Gameplay.BattleEncounter::Gameplay.BattleEncounter.Characters.Passives.TinyPassive
+  _description: Increase Shield gained from cards by 1.
   _amount: 1

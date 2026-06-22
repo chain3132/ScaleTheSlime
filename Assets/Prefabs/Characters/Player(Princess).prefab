@@ -3578,7 +3578,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8818193431628525103}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 90}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4301,15 +4301,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 517197606236292304, guid: d317e790c52c9fa42936bd07b8621558, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 517197606236292304, guid: d317e790c52c9fa42936bd07b8621558, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 517197606236292304, guid: d317e790c52c9fa42936bd07b8621558, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 517197606236292304, guid: d317e790c52c9fa42936bd07b8621558, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4361,11 +4361,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2178247280758974737, guid: d317e790c52c9fa42936bd07b8621558, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2464083859822359018, guid: d317e790c52c9fa42936bd07b8621558, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3040890373826108806, guid: d317e790c52c9fa42936bd07b8621558, type: 3}
       propertyPath: m_IsActive
@@ -4377,7 +4377,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4726812516353432587, guid: d317e790c52c9fa42936bd07b8621558, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5306039859318473777, guid: d317e790c52c9fa42936bd07b8621558, type: 3}
       propertyPath: m_IsActive
@@ -4385,11 +4385,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6039329013148713622, guid: d317e790c52c9fa42936bd07b8621558, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8028340535356921253, guid: d317e790c52c9fa42936bd07b8621558, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

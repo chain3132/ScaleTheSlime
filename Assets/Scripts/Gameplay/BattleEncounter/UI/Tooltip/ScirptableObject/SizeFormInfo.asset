@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a17e7f7132afa0f4eab3a86829e24eae, type: 3}
+  m_Name: SizeFormInfo
+  m_EditorClassIdentifier: Gameplay.BattleEncounter::Gameplay.BattleEncounter.UI.Tooltip.SizeFormInfoDatabase
+  _entries:
+  - Form: 1
+    Badge: S
+    Color: {r: 0, g: 0.8913369, b: 1, a: 1}
+    Title: SIZE 2 GAIN CARD TRICKERY
+    Description: 'Next card is played 2 times.
+
+      Cannot be discarded.
+
+      Destroy.'
+  - Form: 2
+    Badge: M
+    Color: {r: 0.33962262, g: 0.33962262, b: 0.33962262, a: 1}
+    Title: SIZE 5 GAIN CARD STRATEGIZE
+    Description: 'Discard 1 cards and draw the same amount.
+
+      Cannot be discarded.
+
+      Destroy.'
+  - Form: 3
+    Badge: L
+    Color: {r: 1, g: 0.41844082, b: 0, a: 1}
+    Title: SIZE 8 GAIN CARD STOMP
+    Description: 'Deal 10 damage to all enemies.
+
+      All enemies size -1.
+
+      Cannot
+      be discarded.
+
+      Destroy.'
