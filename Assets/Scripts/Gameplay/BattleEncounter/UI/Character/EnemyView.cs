@@ -113,6 +113,10 @@ namespace Gameplay.BattleEncounter.UI.Characters
                 if (prefab == null) continue;
 
                 var inst = Instantiate(prefab, _intentRoot);
+
+                var view = inst.GetComponentInChildren<EnemyIntentView>(true);
+                if (view != null) view.Bind(a, Enemy);
+
                 var tip = inst.GetComponentInChildren<IntentTooltipTrigger>(true);
                 if (tip != null) tip.SetAction(a);
                 _intentInstances.Add(inst);
