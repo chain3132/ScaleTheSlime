@@ -112,7 +112,11 @@ namespace Gameplay.BattleEncounter.Battle
                 _handController != null ? _handController.Deck : null);
             _executor = new CardEffectExecutor(_context);
             if (_handController != null) _handController.SetContext(_context);
-            if (_playController != null) _playController.SetContext(_context);
+            if (_playController != null)
+            {
+                _playController.SetContext(_context);
+                _playController.SetEnemyViews(_enemyViews);
+            }
             
             _player.Activate(_context);
 

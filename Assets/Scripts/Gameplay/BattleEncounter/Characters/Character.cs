@@ -25,6 +25,9 @@ namespace Gameplay.BattleEncounter.Characters
         private readonly Subject<CharacterFx> _fx = new();
         public Observable<CharacterFx> Fx => _fx;
 
+        private readonly Subject<CharacterAnim> _anim = new();
+        public Observable<CharacterAnim> Anim => _anim;
+
         protected Character( int maxHealth, int startSize,int startHealth = -1)
         {
             MaxHealth = maxHealth;
@@ -39,7 +42,10 @@ namespace Gameplay.BattleEncounter.Characters
             if (IsDead || amount <= 0) return;
 
             if (attacker != null)
+            {
+                attacker.PlayAttack();   
                 amount = ModifiedDamage(amount, attacker);
+            }
             int remaining = amount;
             if (amount <= 0) return;
             if (Statuses.Has(StatusType.Thorn))
@@ -56,6 +62,7 @@ namespace Gameplay.BattleEncounter.Characters
                 Health.Value = Mathf.Max(0, Health.Value - remaining);
 
             _fx.OnNext(remaining > 0 ? CharacterFx.Hit : CharacterFx.Block);
+            if (remaining > 0) _anim.OnNext(CharacterAnim.Hit);   
 
             if (Health.Value <= 0) Die(CharacterFx.Death);
         }
@@ -77,6 +84,12 @@ namespace Gameplay.BattleEncounter.Characters
         {
             if (IsDead || amount <= 0) return;
             Health.Value = Mathf.Min(MaxHealth, Health.Value + amount);
+        }
+
+        public void PlayAttack()
+        {
+            if (IsDead) return;
+            _anim.OnNext(CharacterAnim.Attack);
         }
 
         public void GainShield(int amount)
@@ -170,6 +183,7 @@ namespace Gameplay.BattleEncounter.Characters
             Statuses.Dispose();
             _died.Dispose();
             _fx.Dispose();
+            _anim.Dispose();
         }
     }
 }

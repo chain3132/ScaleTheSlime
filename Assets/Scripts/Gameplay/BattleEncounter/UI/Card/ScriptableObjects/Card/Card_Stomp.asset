@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Gameplay.BattleEncounter.UI.Card.CardDefinition
   Id: 17
   DisplayName: Stomp
-  Description: "Deal 2 Damage to all enemies. \nAll enemies Size -1. \nCannot be
-    discarded. Destroy."
+  Description: "Deal {damage} Damage to all enemies. \nAll enemies Size -1. \nCannot
+    be discarded. Destroy."
   Art:
     CardBackground: {fileID: 1651503625, guid: 0a7e9a4d06787974da201bb5ad716a06, type: 3}
     CardArt: {fileID: 1236236576, guid: 15ab22a9cf160184682b1ddc2a1465b5, type: 3}

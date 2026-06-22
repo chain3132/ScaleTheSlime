@@ -56,6 +56,10 @@ namespace Gameplay.BattleEncounter.UI.Characters
         private RectTransform _sizeRoot;         
         [SerializeField]
         private string _idleAnimationName = "idle";
+        [SerializeField]
+        private string _attackAnimationName = "attack";
+        [SerializeField]
+        private string _hitAnimationName = "hit";
 
 
         #endregion
@@ -84,6 +88,10 @@ namespace Gameplay.BattleEncounter.UI.Characters
 
             c.Fx.SubscribeAwait((fx, ct) => PlayFxAsync(fx, ct), AwaitOperation.Sequential)
                 .AddTo(_bindings);
+
+            if (_skeleton != null)
+                c.Anim.Subscribe(PlayAnim).AddTo(_bindings);
+
             _maxHealth = c.MaxHealth;
 
             status?.Bind(c.Statuses);
@@ -128,6 +136,31 @@ namespace Gameplay.BattleEncounter.UI.Characters
             if (_sizeRoot != null)
                 _sizeRoot.anchoredPosition =
                     new Vector2(_sizeRoot.anchoredPosition.x, def.OffsetYFor(form));
+        }
+
+        private void PlayAnim(CharacterAnim anim)
+        {
+            switch (anim)
+            {
+                case CharacterAnim.Attack: 
+                    PlayOneShot(_attackAnimationName); break;
+                case CharacterAnim.Hit:    
+                    PlayOneShot(_hitAnimationName);    break;
+            }
+        }
+
+        
+        public void PlayOneShot(string animName)
+        {
+            if (_skeleton == null || string.IsNullOrEmpty(animName)) return;
+
+            var state = _skeleton.AnimationState;
+            if (state == null) return;
+            if (_skeleton.Skeleton.Data.FindAnimation(animName) == null) return;
+
+            state.SetAnimation(0, animName, false);
+            if (!string.IsNullOrEmpty(_idleAnimationName))
+                state.AddAnimation(0, _idleAnimationName, true, 0f);
         }
 
         private async UniTask PlayFxAsync(CharacterFx type, CancellationToken ct)

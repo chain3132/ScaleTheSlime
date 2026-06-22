@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using Gameplay.BattleEncounter.Battle;
 using Gameplay.BattleEncounter.Characters;
@@ -37,6 +38,8 @@ namespace Gameplay.BattleEncounter.UI.Card
         private Data.Card _currentCard;
         private Enemy _targetEnemy;
         private EnemyView _hovered;
+        private bool _aoePreviewActive;
+        private IReadOnlyList<EnemyView> _enemyViews;
         private readonly Subject<CardPlay> _cardPlayed = new();
 
         #endregion
@@ -50,6 +53,10 @@ namespace Gameplay.BattleEncounter.UI.Card
         public void SetContext(BattleContext context)
         {
             _context = context;
+        }
+        public void SetEnemyViews(IReadOnlyList<EnemyView> views)
+        {
+            _enemyViews = views;
         }
 
         public void BeginDrag(Vector2 cardPosition,Data.Card card)
@@ -70,7 +77,8 @@ namespace Gameplay.BattleEncounter.UI.Card
         {
             _arrowRT.gameObject.SetActive(false);
             _playZoneUI.SetActive(false);
-                ClearHover();   
+                ClearHover();
+                ClearAoePreview();
 
             if (IsValidPlay(_currentCard, mousePosition))
             {
@@ -86,9 +94,19 @@ namespace Gameplay.BattleEncounter.UI.Card
         }
         private void UpdateHoverEnemy(Vector2 mousePosition)
         {
-            EnemyView view = null;
+            var target = _currentCard != null ? _currentCard.Definition.PlayTarget : CardTarget.None;
 
-            if (_currentCard != null && _currentCard.Definition.PlayTarget == CardTarget.Enemy)
+            if (target == CardTarget.AllEnemies)
+            {
+                ClearHover();          
+                ShowAoePreview();
+                return;
+            }
+
+            ClearAoePreview();  
+
+            EnemyView view = null;
+            if (target == CardTarget.Enemy)
                 TryGetEnemyUnderMouse(mousePosition, out view);
 
             if (view == _hovered) return;
@@ -96,16 +114,40 @@ namespace Gameplay.BattleEncounter.UI.Card
             {
                 _hovered.HighLight(false);
                 _hovered.View.ClearDamagePreview();
-
-            }    
+            }
             _hovered = view;
-            if (_hovered != null) _hovered.HighLight(true);
             if (_hovered != null)
             {
-                _hovered.View.ShowDamagePreview(PreviewUIFor(_currentCard,_hovered.Enemy));
+                _hovered.HighLight(true);
+                _hovered.View.ShowDamagePreview(PreviewUIFor(_currentCard, _hovered.Enemy));
             }
-            
-            
+        }
+
+        private void ShowAoePreview()
+        {
+            if (_aoePreviewActive || _enemyViews == null) return;
+            _aoePreviewActive = true;
+
+            foreach (var ev in _enemyViews)
+            {
+                if (ev == null || ev.Enemy == null || ev.Enemy.IsDead) continue;
+                ev.HighLight(true);
+                ev.View.ShowDamagePreview(PreviewUIFor(_currentCard, ev.Enemy));
+            }
+        }
+
+        private void ClearAoePreview()
+        {
+            if (!_aoePreviewActive) return;
+            _aoePreviewActive = false;
+            if (_enemyViews == null) return;
+
+            foreach (var ev in _enemyViews)
+            {
+                if (ev == null) continue;
+                ev.HighLight(false);
+                ev.View.ClearDamagePreview();
+            }
         }
         private int PreviewUIFor(Data.Card card, Enemy target)
         {
@@ -184,6 +226,7 @@ namespace Gameplay.BattleEncounter.UI.Card
             if (isInPlayZone)
             {
                 CheckTypeCard(_currentCard.Definition.PlayTarget);
+               
                 return;
             }
             else

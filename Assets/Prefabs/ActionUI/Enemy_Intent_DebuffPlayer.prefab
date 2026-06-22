@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 352622585602524317}
   - component: {fileID: 6241634324062352055}
   - component: {fileID: 4466386827542121129}
+  - component: {fileID: -319004010969672612}
+  - component: {fileID: -7164776168787398576}
   m_Layer: 5
   m_Name: Enemy_Intent_DebuffPlayer
   m_TagString: Untagged
@@ -78,6 +80,36 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &-319004010969672612
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 844969980593655280}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 605c1634ef4ff6149b69d0936dd09e0b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Gameplay.BattleEncounter::Gameplay.BattleEncounter.UI.Characters.EnemyIntentView
+  _valueText: {fileID: 1981727613015245423}
+  _stackGameObject: {fileID: 4813252682829252693}
+  _stackText: {fileID: 8855380190934081455}
+--- !u!114 &-7164776168787398576
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 844969980593655280}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 592f1a6de17de4149aa54bb5c8b3da3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Gameplay.BattleEncounter::Gameplay.BattleEncounter.UI.Tooltip.IntentTooltipTrigger
+  _channel: {fileID: 11400000, guid: 9a8d25dfd3c95394b8e9dbb753dc887c, type: 2}
+  _statusDatabase: {fileID: 11400000, guid: f131419001bc14c4c98f449d9b567720, type: 2}
+  _title: Debuff
 --- !u!1 &1293738113737088647
 GameObject:
   m_ObjectHideFlags: 0
