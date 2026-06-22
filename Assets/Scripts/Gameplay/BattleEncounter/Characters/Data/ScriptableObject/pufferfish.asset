@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c61101f0b481e754bafbbaa1daea1698, type: 3}
   m_Name: pufferfish
   m_EditorClassIdentifier: Gameplay.BattleEncounter::Gameplay.BattleEncounter.Characters.Data.EnemyDefinition
-  MaxHealth: 30
+  MaxHealth: 40
   StartSize: 5
   TinySkeleton: {fileID: 11400000, guid: 3688d4f03f6059e49b9a5d1d8974cd5c, type: 2}
   NormalSkeleton: {fileID: 11400000, guid: b2cbfbc07f4653e458cb9b37b5f09b4b, type: 2}
