@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Gameplay.NodeSelection.UI
 {
-    public class PanelMenuView : MonoBehaviour
+    public class MenuPanelView : MonoBehaviour
     {
         #region References
 
@@ -21,7 +21,7 @@ namespace Gameplay.NodeSelection.UI
         
         private readonly CompositeDisposable _bindings = new();
 
-        public void Bind(PanelMenuViewModel vm)
+        public void Bind(MenuPanelViewModel vm)
         {
             _nameText.text = vm.PlayerName;
  

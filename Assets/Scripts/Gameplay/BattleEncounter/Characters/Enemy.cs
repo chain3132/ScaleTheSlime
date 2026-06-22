@@ -49,7 +49,10 @@ namespace Gameplay.BattleEncounter.Characters
         {
             if (IsDead) return UniTask.CompletedTask;
             foreach (var a in CurrentPlan)
+            {
+                if (IsDead || ctx.Player.IsDead) break;   
                 EnemyActionRunner.Run(a, this, ctx);
+            }
             return UniTask.CompletedTask;
         }
     }

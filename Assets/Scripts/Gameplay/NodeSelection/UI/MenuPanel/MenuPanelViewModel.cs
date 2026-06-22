@@ -3,7 +3,7 @@ using R3;
 
 namespace Gameplay.NodeSelection.UI
 {
-    public class PanelMenuViewModel : IDisposable
+    public class MenuPanelViewModel : IDisposable
     {
         public string PlayerName { get;}
         public ReadOnlyReactiveProperty<int> RunNumber { get; }
@@ -11,7 +11,7 @@ namespace Gameplay.NodeSelection.UI
         public ReadOnlyReactiveProperty<string> ClockText { get; }
         
         
-        public PanelMenuViewModel(string playerName,RunState runState)
+        public MenuPanelViewModel(string playerName,RunState runState)
         {
             PlayerName = playerName;
             RunNumber = runState.RunNumber.ToReadOnlyReactiveProperty();

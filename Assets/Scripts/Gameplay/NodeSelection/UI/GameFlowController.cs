@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
 using Gameplay.NodeSelection.Encounter;
 using Gameplay.NodeSelection.UI;
+using Gameplay.NodeSelection.UI.DefeatPanel;
 using Gameplay.NodeSelection.UI.Map;
 using Gameplay.NodeSelection.UI.Map.MapGenerator;
 using Gameplay.NodeSelection.UI.Nodes;
@@ -25,6 +26,7 @@ namespace Gameplay.NodeSelection.UI
         private readonly bool _walkOnly;
         private MapViewModel _mapVm;
         private readonly CompositeDisposable _mapScope = new();
+        private readonly DefeatPanelView _defeatPanel;
         
         public GameFlowController(MapView mapView,
             RunState runState, 
@@ -32,7 +34,7 @@ namespace Gameplay.NodeSelection.UI
             MapGenerationConfig config,
             NodeDatabase database,
             int seed,
-            bool walkOnly)
+            bool walkOnly,DefeatPanelView defeatPanel)
         {
             _mapView = mapView;
             _runState = runState;
@@ -41,6 +43,7 @@ namespace Gameplay.NodeSelection.UI
             _database = database;
             _seed = seed;
             _walkOnly = walkOnly;
+            _defeatPanel = defeatPanel;
         }
         
         public void BuildRunMap()
@@ -70,6 +73,7 @@ namespace Gameplay.NodeSelection.UI
             var result = await _encounter.EnterAsync(req, ct);
             if (result.Outcome == EncounterOutcome.Defeat)
             {
+                _defeatPanel.gameObject.SetActive(true);
                 return;
             }  
             _mapView.Show();

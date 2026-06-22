@@ -4,11 +4,13 @@ using Gameplay.BattleEncounter.Battle;
 using Gameplay.BattleEncounter.Characters.Data;
 using Gameplay.BattleEncounter.UI.Card;
 using Gameplay.NodeSelection.Encounter;
+using Gameplay.NodeSelection.UI.DefeatPanel;
 using Gameplay.NodeSelection.UI.Map;
 using Gameplay.NodeSelection.UI.Map.MapGenerator;
 using Gameplay.NodeSelection.UI.Nodes;
 using R3;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Gameplay.NodeSelection.UI
 {
@@ -17,12 +19,14 @@ namespace Gameplay.NodeSelection.UI
         [Header("Scene Views")]
         [SerializeField]
         private MapView _mapView;
-        [SerializeField]
-        private PanelMenuView _panelMenuView;
+        [FormerlySerializedAs("_panelMenuView")] [SerializeField]
+        private MenuPanelView menuPanelView;
         [SerializeField]
         private BattleEncounterEntry _battleEncounter;   
         [SerializeField]
-        private PlayerDefinition _playerDefinition;       
+        private PlayerDefinition _playerDefinition;
+        [SerializeField] 
+        private DefeatPanelView _defeatPanel;
 
         [Header("Config")]
         [SerializeField] 
@@ -42,7 +46,7 @@ namespace Gameplay.NodeSelection.UI
  
         private RunState _runState;
         private RunProgress _runProgress;
-        private PanelMenuViewModel _panelMenuVm;
+        private MenuPanelViewModel _menuPanelVm;
         private CancellationTokenSource _cts;
         private GameFlowController _flow;
         private readonly CompositeDisposable _runScope = new();
@@ -53,8 +57,8 @@ namespace Gameplay.NodeSelection.UI
 
             _runState = new RunState();
 
-            _panelMenuVm = new PanelMenuViewModel(_playerName, _runState);
-            _panelMenuView.Bind(_panelMenuVm);
+            _menuPanelVm = new MenuPanelViewModel(_playerName, _runState);
+            menuPanelView.Bind(_menuPanelVm);
             
             IEncounter encounter;
             if (_battleEncounter != null && _playerDefinition != null)
@@ -72,7 +76,7 @@ namespace Gameplay.NodeSelection.UI
             }
 
             _flow = new GameFlowController(_mapView, _runState, encounter,
-                _mapConfig, _nodeDatabase, _seed, _walkOnly);
+                _mapConfig, _nodeDatabase, _seed, _walkOnly,_defeatPanel);
             _flow.BuildRunMap();
         }
         
@@ -83,7 +87,7 @@ namespace Gameplay.NodeSelection.UI
             _cts?.Dispose();
  
             _mapView?.Teardown();
-            _panelMenuVm?.Dispose();
+            _menuPanelVm?.Dispose();
             _runScope.Dispose();
             _flow?.Dispose();
             _runState?.Dispose();
