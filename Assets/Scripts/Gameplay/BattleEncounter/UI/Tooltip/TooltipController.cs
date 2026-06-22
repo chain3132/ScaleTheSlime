@@ -17,11 +17,7 @@ namespace Gameplay.BattleEncounter.UI.Tooltip
         private Vector2 _offset = new(0f, 16f);
 
         private TooltipPanel _active;
-
-        private void Awake()
-        {
-            if (_canvas == null) _canvas = GetComponentInParent<Canvas>();
-        }
+        
 
         private void OnEnable()
         {
@@ -46,7 +42,7 @@ namespace Gameplay.BattleEncounter.UI.Tooltip
 
             _active.Bind(data);
             _active.gameObject.SetActive(true);
-            // ContentSizeFitter needs a forced rebuild before we can read the size.
+
             LayoutRebuilder.ForceRebuildLayoutImmediate(_active.Rect);
             Position(_active.Rect, screenAnchor);
         }
@@ -75,7 +71,6 @@ namespace Gameplay.BattleEncounter.UI.Tooltip
             tip.localPosition = Clamp(tip, canvasRect, local);
         }
 
-        // Keep the whole tooltip rect inside the canvas, accounting for its pivot.
         private static Vector2 Clamp(RectTransform tip, RectTransform canvas, Vector2 pos)
         {
             Vector2 size = tip.rect.size;

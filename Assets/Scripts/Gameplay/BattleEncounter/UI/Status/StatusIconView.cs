@@ -17,7 +17,7 @@ public class StatusIconView : MonoBehaviour
     {
         _icon.sprite = icon;
         _amount.text = amount.ToString();
-        if (_tooltip != null) _tooltip.SetType(type);
+        if (_tooltip != null) _tooltip.SetData(type, amount);
     }
 
 }

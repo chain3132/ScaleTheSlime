@@ -9,15 +9,12 @@ namespace Gameplay.BattleEncounter.UI.Tooltip
         [SerializeField]
         private TMP_Text _badge;
         [SerializeField]
-        private Image _badgeBackground;
-        [SerializeField]
         private TMP_Text _body;
 
         public void Bind(TooltipLine line)
         {
             if (_badge != null) _badge.text = line.Badge;
-            if (_badgeBackground != null) _badgeBackground.color = line.BadgeColor;
-            else if (_badge != null) _badge.color = line.BadgeColor;
+            if (_badge != null) _badge.color = line.BadgeColor;
             if (_body != null) _body.text = line.Body;
         }
     }

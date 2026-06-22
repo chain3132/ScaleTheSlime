@@ -45,12 +45,13 @@ namespace Gameplay.BattleEncounter.UI.Tooltip
 
         public string BadgeFor(SizeForm form)
         {
-            return InfoFor(form)?.Badge ?? string.Empty;
+            return InfoFor(form)?.Badge ?? string.Empty;    
         }
 
         public Color ColorFor(SizeForm form)
         {
             return InfoFor(form) is { } e ? e.Color : Color.white;
+            
         }
     }
 }

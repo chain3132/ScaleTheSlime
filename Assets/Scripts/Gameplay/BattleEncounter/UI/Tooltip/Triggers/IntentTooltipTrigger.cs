@@ -7,8 +7,10 @@ namespace Gameplay.BattleEncounter.UI.Tooltip
 
     public class IntentTooltipTrigger : TooltipTrigger
     {
-        [SerializeField] private StatusDatabase _statusDatabase;
-        [SerializeField] private string _title = "INTENT";
+        [SerializeField] 
+        private StatusDatabase _statusDatabase;
+        [SerializeField] 
+        private string _title = "INTENT";
 
         private EnemyAction _action;
 

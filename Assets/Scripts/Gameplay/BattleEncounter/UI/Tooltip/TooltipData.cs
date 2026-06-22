@@ -3,7 +3,11 @@ using UnityEngine;
 
 namespace Gameplay.BattleEncounter.UI.Tooltip
 {
-    public enum TooltipStyle { Standard, Passive }
+    public enum TooltipStyle
+    {
+        Standard,
+        Passive
+    }
 
     public readonly struct TooltipLine
     {
