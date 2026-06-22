@@ -16,9 +16,9 @@ MonoBehaviour:
   _actions:
   - Type: 0
     Value: 3
-    Repeat: 0
+    Repeat: 1
     Status: 0
   - Type: 1
     Value: 3
-    Repeat: 0
+    Repeat: 1
     Status: 0

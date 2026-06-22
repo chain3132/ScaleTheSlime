@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Gameplay.BattleEncounter.UI.Card.CardDefinition
   Id: 14
   DisplayName: Skewer
-  Description: 'Deal 2 Damage 5 times.
+  Description: 'Deal {damage} Damage 5 times.
 
     Size +2.'
   Art:

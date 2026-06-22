@@ -2746,26 +2746,6 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
---- !u!1 &308111739 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 721276011805138168, guid: 23ee6d3635d783a43b683e18c3d86a4b, type: 3}
-  m_PrefabInstance: {fileID: 6538770214513655042}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &308111742
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 308111739}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 251ea57a9f43eeb449ffced0cf481cdd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Gameplay.BattleEncounter::Gameplay.BattleEncounter.UI.Tooltip.SizeFormTooltipTrigger
-  _channel: {fileID: 11400000, guid: 9a8d25dfd3c95394b8e9dbb753dc887c, type: 2}
-  _database: {fileID: 11400000, guid: c64fc95ca1eee384587a33867a046950, type: 2}
-  _form: 3
 --- !u!1 &316775564
 GameObject:
   m_ObjectHideFlags: 0
@@ -4217,100 +4197,6 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
---- !u!1 &509440398
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 509440399}
-  - component: {fileID: 509440401}
-  - component: {fileID: 509440400}
-  m_Layer: 0
-  m_Name: CharacterHover
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &509440399
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 509440398}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 6538770214513655043}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &509440400
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 509440398}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b80cab52759e0ed439bc83cd8b05b718, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Gameplay.BattleEncounter::Gameplay.BattleEncounter.UI.Tooltip.PassiveTooltipTrigger
-  _channel: {fileID: 11400000, guid: 9a8d25dfd3c95394b8e9dbb753dc887c, type: 2}
-  _database: {fileID: 11400000, guid: c64fc95ca1eee384587a33867a046950, type: 2}
-  _title: PASSIVE
---- !u!61 &509440401
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 509440398}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
-  m_Offset: {x: 0.08703947, y: 0.9574342}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Size: {x: 1.8703957, y: 2.0009537}
-  m_EdgeRadius: 0
 --- !u!1 &529316212
 GameObject:
   m_ObjectHideFlags: 0
@@ -5989,17 +5875,6 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
---- !u!114 &700610364 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5540429388878194697, guid: 23ee6d3635d783a43b683e18c3d86a4b, type: 3}
-  m_PrefabInstance: {fileID: 6538770214513655042}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
 --- !u!1 &708951027
 GameObject:
   m_ObjectHideFlags: 0
@@ -9089,26 +8964,6 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
---- !u!1 &1217264751 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4963614270616653310, guid: 23ee6d3635d783a43b683e18c3d86a4b, type: 3}
-  m_PrefabInstance: {fileID: 6538770214513655042}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1217264754
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1217264751}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 251ea57a9f43eeb449ffced0cf481cdd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Gameplay.BattleEncounter::Gameplay.BattleEncounter.UI.Tooltip.SizeFormTooltipTrigger
-  _channel: {fileID: 11400000, guid: 9a8d25dfd3c95394b8e9dbb753dc887c, type: 2}
-  _database: {fileID: 11400000, guid: c64fc95ca1eee384587a33867a046950, type: 2}
-  _form: 2
 --- !u!1 &1223615579
 GameObject:
   m_ObjectHideFlags: 0
@@ -11640,11 +11495,6 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
---- !u!224 &1633964840 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 3082089587758031476, guid: 23ee6d3635d783a43b683e18c3d86a4b, type: 3}
-  m_PrefabInstance: {fileID: 6538770214513655042}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1667336022
 GameObject:
   m_ObjectHideFlags: 0
@@ -12614,26 +12464,6 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
---- !u!1 &1735438602 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5431309304030591114, guid: 23ee6d3635d783a43b683e18c3d86a4b, type: 3}
-  m_PrefabInstance: {fileID: 6538770214513655042}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1735438606
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1735438602}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 251ea57a9f43eeb449ffced0cf481cdd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Gameplay.BattleEncounter::Gameplay.BattleEncounter.UI.Tooltip.SizeFormTooltipTrigger
-  _channel: {fileID: 11400000, guid: 9a8d25dfd3c95394b8e9dbb753dc887c, type: 2}
-  _database: {fileID: 11400000, guid: c64fc95ca1eee384587a33867a046950, type: 2}
-  _form: 1
 --- !u!224 &1739846696 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5119773749747521690, guid: 315b4e0c4af09c14aabf664504b51127, type: 3}
@@ -15681,25 +15511,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 939366540}
     m_Modifications:
-    - target: {fileID: 402533170440464045, guid: 23ee6d3635d783a43b683e18c3d86a4b, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1511935780431388581, guid: 23ee6d3635d783a43b683e18c3d86a4b, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1774359902172502421, guid: 23ee6d3635d783a43b683e18c3d86a4b, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2351170071916209833, guid: 23ee6d3635d783a43b683e18c3d86a4b, type: 3}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 2644273957237554938, guid: 23ee6d3635d783a43b683e18c3d86a4b, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2792580760639803664, guid: 23ee6d3635d783a43b683e18c3d86a4b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -15741,14 +15555,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2823336849035578454, guid: 23ee6d3635d783a43b683e18c3d86a4b, type: 3}
-      propertyPath: _hpIndicator
-      value: 
-      objectReference: {fileID: 1633964840}
-    - target: {fileID: 2823336849035578454, guid: 23ee6d3635d783a43b683e18c3d86a4b, type: 3}
-      propertyPath: _hpFillBackground
-      value: 
-      objectReference: {fileID: 700610364}
     - target: {fileID: 2831393475163335597, guid: 23ee6d3635d783a43b683e18c3d86a4b, type: 3}
       propertyPath: m_LocalScale.x
       value: 0
@@ -15765,70 +15571,14 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 563470670}
-    - target: {fileID: 4373704208288067932, guid: 23ee6d3635d783a43b683e18c3d86a4b, type: 3}
-      propertyPath: m_RaycastTarget
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4963614270616653310, guid: 23ee6d3635d783a43b683e18c3d86a4b, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6634114845535902936, guid: 23ee6d3635d783a43b683e18c3d86a4b, type: 3}
       propertyPath: m_Name
       value: Player(Princess)
       objectReference: {fileID: 0}
-    - target: {fileID: 6634114845535902936, guid: 23ee6d3635d783a43b683e18c3d86a4b, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7319838857954477861, guid: 23ee6d3635d783a43b683e18c3d86a4b, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8967236664307660644, guid: 23ee6d3635d783a43b683e18c3d86a4b, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 40
-      objectReference: {fileID: 0}
-    - target: {fileID: 8967236664307660644, guid: 23ee6d3635d783a43b683e18c3d86a4b, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 40
-      objectReference: {fileID: 0}
-    - target: {fileID: 8967236664307660644, guid: 23ee6d3635d783a43b683e18c3d86a4b, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8967236664307660644, guid: 23ee6d3635d783a43b683e18c3d86a4b, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8967236664307660644, guid: 23ee6d3635d783a43b683e18c3d86a4b, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8967236664307660644, guid: 23ee6d3635d783a43b683e18c3d86a4b, type: 3}
-      propertyPath: m_ConstrainProportionsScale
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 9094289895631013598, guid: 23ee6d3635d783a43b683e18c3d86a4b, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 2792580760639803664, guid: 23ee6d3635d783a43b683e18c3d86a4b, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 509440399}
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 5431309304030591114, guid: 23ee6d3635d783a43b683e18c3d86a4b, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1735438606}
-    - targetCorrespondingSourceObject: {fileID: 4963614270616653310, guid: 23ee6d3635d783a43b683e18c3d86a4b, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1217264754}
-    - targetCorrespondingSourceObject: {fileID: 721276011805138168, guid: 23ee6d3635d783a43b683e18c3d86a4b, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 308111742}
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 23ee6d3635d783a43b683e18c3d86a4b, type: 3}
 --- !u!4 &6538770214513655043 stripped
 Transform:
