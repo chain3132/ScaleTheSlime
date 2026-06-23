@@ -13,4 +13,9 @@ MonoBehaviour:
   m_Name: rat_S_Action
   m_EditorClassIdentifier: Gameplay.BattleEncounter::Gameplay.BattleEncounter.Characters.Behaviors.MultiActionBehavior
   _mode: 0
-  _actions: []
+  _actions:
+  - Type: 0
+    Value: 2
+    Repeat: 2
+    Status: 0
+    cardToAdd: {fileID: 0}

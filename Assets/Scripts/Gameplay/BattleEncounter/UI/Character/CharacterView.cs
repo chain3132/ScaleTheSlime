@@ -37,6 +37,8 @@ namespace Gameplay.BattleEncounter.UI.Characters
         private RectTransform _hpIndicator;
         [SerializeField]
         private UIParticle shieldGainEffect;
+        [SerializeField] 
+        private UIParticle shieldBreakEffect;
         [SerializeField]
         private Image shieldIcon;
         [SerializeField]
@@ -78,10 +80,9 @@ namespace Gameplay.BattleEncounter.UI.Characters
         
 
         private readonly CompositeDisposable _bindings = new();
-        private ParticleSystem[] _particles;
         private int _currentHealth;
         private int _maxHealth;
-
+        private int _previousShield;
         private Material _outlineBase;
         private Material _outlineReplacement;
         private bool _highlighted;
@@ -96,7 +97,6 @@ namespace Gameplay.BattleEncounter.UI.Characters
                 return _renderer;
             }
         }
-
         public void Bind(Character c, CharacterDefinition def = null)
         {
             _bindings.Clear();
@@ -133,9 +133,8 @@ namespace Gameplay.BattleEncounter.UI.Characters
                     .AddTo(_bindings);
             
             if (_shieldText != null)
-                c.Shield.Skip(1).
-                    SubscribeAwait((shield, ct) 
-                        => UpdateShield(shield,ct))
+                c.Shield.Skip(1)
+                    .Subscribe(UpdateShield)
                     .AddTo(_bindings);
         }
         private void ApplyForm(SizeForm form, CharacterDefinition def)
@@ -177,7 +176,6 @@ namespace Gameplay.BattleEncounter.UI.Characters
                 overrides[_outlineBase] = _outlineReplacement;
             else
                 overrides.Remove(_outlineBase);
-
             r.LateUpdate();   
         }
 
@@ -218,25 +216,35 @@ namespace Gameplay.BattleEncounter.UI.Characters
             await UniTask.Delay(System.TimeSpan.FromSeconds(fx.main.duration), cancellationToken: ct);
         }
 
-        private async UniTask UpdateShield(int shield, CancellationToken ct)
+        private void UpdateShield(int shield)
         {
-            healthIcon.gameObject.SetActive(false);
-            shieldIcon.gameObject.SetActive(true);
-            shieldGainEffect.gameObject.SetActive(true);
-            _particles = shieldGainEffect.GetComponentsInChildren<ParticleSystem>();
-            shieldGainEffect.Play();
+            if (shield > 0)
+            {
+                healthIcon.gameObject.SetActive(false);
+                shieldIcon.gameObject.SetActive(true);
+                if (_shieldText != null) _shieldText.text = $"{shield}";
 
-            await UniTask.WaitUntil(() => {
-                foreach (var ps in _particles)
-                {
-                    if (ps.IsAlive(true))
-                    {
-                        return false;
-                    }
-                }
-                return true;}, cancellationToken: ct);     
-            if (_shieldText != null)
-                _shieldText.text = shield > 0 ? $"{shield}" : "";
+                PlayEffect(shieldGainEffect);
+            }
+            else
+            {
+                if (_shieldText != null) _shieldText.text = "";
+                
+                if (_previousShield > 0)
+                    PlayEffect(shieldBreakEffect);
+
+                shieldIcon.gameObject.SetActive(false);
+                healthIcon.gameObject.SetActive(true);
+            }
+
+            _previousShield = shield;
+        }
+
+        private static void PlayEffect(UIParticle effect)
+        {
+            if (effect == null) return;
+            effect.gameObject.SetActive(true);
+            effect.Play();
         }
         private void UpdateHealth(int health, int maxHealth)
         {

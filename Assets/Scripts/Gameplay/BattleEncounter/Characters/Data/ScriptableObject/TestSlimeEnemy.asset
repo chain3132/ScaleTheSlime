@@ -13,18 +13,20 @@ MonoBehaviour:
   m_Name: TestSlimeEnemy
   m_EditorClassIdentifier: Assembly-CSharp::Gameplay.BattleEncounter.Characters.Data.EnemyDefinition
   MaxHealth: 15
-  StartSize: 5
+  StartSize: 7
   TinySkeleton: {fileID: 11400000, guid: 85b014d5b0ccdb44d8b0a8e967241a6e, type: 2}
   NormalSkeleton: {fileID: 11400000, guid: 55ce55b72ed3ece449640f3e4c50064b, type: 2}
   GiantSkeleton: {fileID: 11400000, guid: ba51973d048d25142b7deccdbd6c92ba, type: 2}
+  BaseMaterial: {fileID: 0}
+  OutlineMaterial: {fileID: 0}
   TinyOffsetY: 90
   NormalOffsetY: 145
   GiantOffsetY: 250
   TinyBehavior: {fileID: 11400000, guid: 9a819aed51267fc4e87c66eb38b6e540, type: 2}
   NormalBehavior: {fileID: 11400000, guid: 9a819aed51267fc4e87c66eb38b6e540, type: 2}
-  GiantBehavior: {fileID: 11400000, guid: 9a819aed51267fc4e87c66eb38b6e540, type: 2}
+  GiantBehavior: {fileID: 11400000, guid: 4516db9410a640042b4dca862bebdc91, type: 2}
   TinyPassive: {fileID: 0}
-  NormalPassive: {fileID: 11400000, guid: 0df3ab586aff67e4fbbbee662f0b97a8, type: 2}
+  NormalPassive: {fileID: 0}
   GiantPassive: {fileID: 0}
   _diesWhenTooSmall: 0
   _diesWhenTooBig: 1

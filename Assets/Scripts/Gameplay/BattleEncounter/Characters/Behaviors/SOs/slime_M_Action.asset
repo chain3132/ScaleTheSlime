@@ -12,15 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f30f5ce3c8b7b394b8e3fd64867923d7, type: 3}
   m_Name: slime_M_Action
   m_EditorClassIdentifier: Gameplay.BattleEncounter::Gameplay.BattleEncounter.Characters.Behaviors.MultiActionBehavior
-  _mode: 1
+  _mode: 0
   _actions:
   - Type: 0
     Value: 5
-    Repeat: 0
-    Status: 0
-    cardToAdd: {fileID: 0}
-  - Type: 0
-    Value: 3
     Repeat: 0
     Status: 0
     cardToAdd: {fileID: 0}
@@ -29,13 +24,8 @@ MonoBehaviour:
     Repeat: 0
     Status: 0
     cardToAdd: {fileID: 0}
-  - Type: 3
-    Value: 2
+  - Type: 7
+    Value: 3
     Repeat: 0
     Status: 0
-    cardToAdd: {fileID: 0}
-  - Type: 3
-    Value: 2
-    Repeat: 0
-    Status: 0
-    cardToAdd: {fileID: 0}
+    cardToAdd: {fileID: 11400000, guid: 5eb00ec6a38520f4ba5346d087d92461, type: 2}

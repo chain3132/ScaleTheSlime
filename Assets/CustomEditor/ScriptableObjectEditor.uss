@@ -25,6 +25,8 @@
     padding-right: 4px;
     border-right-width: 1px;
     border-right-color: rgba(0, 0, 0, 0.3);
+    flex-grow: 0;
+    flex-shrink: 0;
 }
 .nav{
     background-color: #1b1f23;
@@ -33,12 +35,12 @@
 .nav-folder{
     background-color: #2b3137;
     border-bottom-color: #2a65a0;
-    border-bottom-width: 2;
+    border-bottom-width: 2px;
 }
 .box-card-preview{
-    width: 70;
-    height: 90;
-    flex-shrink: initial;
+    width: 70px;
+    height: 90px;
+    flex-shrink: 0;
 }
 .preview-text{
     font-size: 7px;                
@@ -62,8 +64,8 @@
     
 }
 .delete-button{
-    width: 20;
-    height: 20;
+    width: 20px;
+    height: 20px;
     background-color: #b31d28;
 }
 

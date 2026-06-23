@@ -12,11 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c61101f0b481e754bafbbaa1daea1698, type: 3}
   m_Name: rat
   m_EditorClassIdentifier: Gameplay.BattleEncounter::Gameplay.BattleEncounter.Characters.Data.EnemyDefinition
-  MaxHealth: 30
-  StartSize: 5
+  MaxHealth: 15
+  StartSize: 4
   TinySkeleton: {fileID: 11400000, guid: ee0362e50df095d42af62b303dfaaaab, type: 2}
   NormalSkeleton: {fileID: 11400000, guid: 6fe97ddcffedf9d40a72c0a9cadc36e9, type: 2}
   GiantSkeleton: {fileID: 11400000, guid: 4d057e6b723aee44aafc70e74b9ecc25, type: 2}
+  BaseMaterial: {fileID: 2100000, guid: cddc35b854cbf254d9d9caa911900d40, type: 2}
+  OutlineMaterial: {fileID: 2100000, guid: b14f68bb8cb418949a1716050a890b2b, type: 2}
   TinyOffsetY: 90
   NormalOffsetY: 145
   GiantOffsetY: 250
@@ -26,5 +28,5 @@ MonoBehaviour:
   TinyPassive: {fileID: 0}
   NormalPassive: {fileID: 0}
   GiantPassive: {fileID: 0}
-  _diesWhenTooSmall: 1
+  _diesWhenTooSmall: 0
   _diesWhenTooBig: 1

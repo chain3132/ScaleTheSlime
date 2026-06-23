@@ -39,7 +39,7 @@ namespace CustomEditor.TableView
         {
             var h = new VisualElement();
             h.AddToClassList("Header");
-            foreach (var (name, w) in new[] {("Preview",70),("DisplayName",120),("Description",300),("Art",300),("Effects",280)})
+            foreach (var (name, w) in new[] {("",20),("Preview",70),("DisplayName",120),("Description",300),("Art",300),("Effects",280)})
             {
                 var lbl = new Label(name);
                 lbl.style.unityTextAlign = TextAnchor.MiddleCenter;
@@ -57,7 +57,7 @@ namespace CustomEditor.TableView
             sortMenu.menu.AppendAction("name a-z", _ => SetSort("name"));
             bar.Add(sortMenu);
 
-            var create = new ToolbarButton(CreateNewCard) { text = "+ New" };
+            var create = new ToolbarButton(OpenCreateWizard) { text = "+ New" };
             create.AddToClassList("create-button");
             var refresh = new ToolbarButton(ShowCards) { text = "Refresh" };
             bar.Add(create);
@@ -73,6 +73,11 @@ namespace CustomEditor.TableView
             bar.Add(MakeFilter());
             
             return bar;
+        }
+
+        private void OpenCreateWizard()
+        {
+            CardCreationWindow.Open(CreateNewCard);
         }
 
         private ToolbarMenu MakeFilter()
@@ -106,16 +111,17 @@ namespace CustomEditor.TableView
             if (index % 2 == 1)
                 row.AddToClassList("row-odd");
             row.userData = card;
-            row.Add(MakePreview(card));
+            var deleteButton = new Button((() => DeleteCard(card))) { text = "X" };
+            deleteButton.AddToClassList("delete-button");
+            row.Add(deleteButton);
             
+            row.Add(MakePreview(card));
             AddCell(row, so, "DisplayName", 120);
             AddCell(row,so ,"Description",300);
             AddCell(row, so, "Art",         300);
             AddCell(row, so, "Effects",     280);
             
-            var deleteButton = new Button((() => DeleteCard(card))) { text = "X" };
-            deleteButton.AddToClassList("delete-button");
-            row.Add(deleteButton);
+            
             row.Bind(so);       
             _rows.Add(row); 
             return row;
@@ -183,9 +189,12 @@ namespace CustomEditor.TableView
             for (int i = 0; i < cards.Count; i++)
                 _rowsContainer.Add(MakeRow(cards[i], i));
         }
-        private void CreateNewCard()
+        private void CreateNewCard(CardCreationRequest eRequest)
         {
             var card = ScriptableObject.CreateInstance<CardDefinition>();
+            card.DisplayName = eRequest.DisplayName;
+            card.PlayTarget = eRequest.PlayTarget;
+            card.Effects = new List<CardEffectData> { eRequest.Preset };
 
             var existing = LoadAllCards().FirstOrDefault();
             string folder = existing != null

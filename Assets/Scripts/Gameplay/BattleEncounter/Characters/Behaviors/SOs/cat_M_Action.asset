@@ -12,5 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f30f5ce3c8b7b394b8e3fd64867923d7, type: 3}
   m_Name: cat_M_Action
   m_EditorClassIdentifier: Gameplay.BattleEncounter::Gameplay.BattleEncounter.Characters.Behaviors.MultiActionBehavior
-  _mode: 0
-  _actions: []
+  _mode: 1
+  _actions:
+  - Type: 0
+    Value: 3
+    Repeat: 2
+    Status: 0
+    cardToAdd: {fileID: 0}
+  - Type: 5
+    Value: 1
+    Repeat: 1
+    Status: 2
+    cardToAdd: {fileID: 0}
+  - Type: 0
+    Value: 9
+    Repeat: 1
+    Status: 2
+    cardToAdd: {fileID: 0}

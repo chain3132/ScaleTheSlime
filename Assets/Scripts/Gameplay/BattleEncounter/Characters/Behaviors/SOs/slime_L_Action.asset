@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Gameplay.BattleEncounter::Gameplay.BattleEncounter.Characters.Behaviors.MultiActionBehavior
   _mode: 0
   _actions:
-  - Type: 7
-    Value: 3
+  - Type: 0
+    Value: 10
     Repeat: 0
     Status: 0
     cardToAdd: {fileID: 11400000, guid: 5eb00ec6a38520f4ba5346d087d92461, type: 2}

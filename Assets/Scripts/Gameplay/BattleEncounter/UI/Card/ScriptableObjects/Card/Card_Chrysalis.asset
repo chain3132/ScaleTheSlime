@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8e900222d652fb4c93074220e2230b4, type: 3}
   m_Name: Card_Chrysalis
   m_EditorClassIdentifier: Assembly-CSharp::Gameplay.BattleEncounter.UI.Card.CardDefinition
-  Id: 02
   DisplayName: Chrysalis
   Description: "Gain Shield equal to your Size \xD72 times.\n Set Size to 1."
   Art:

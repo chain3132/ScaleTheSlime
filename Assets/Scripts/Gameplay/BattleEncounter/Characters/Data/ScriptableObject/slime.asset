@@ -17,6 +17,8 @@ MonoBehaviour:
   TinySkeleton: {fileID: 11400000, guid: 85b014d5b0ccdb44d8b0a8e967241a6e, type: 2}
   NormalSkeleton: {fileID: 11400000, guid: 55ce55b72ed3ece449640f3e4c50064b, type: 2}
   GiantSkeleton: {fileID: 11400000, guid: ba51973d048d25142b7deccdbd6c92ba, type: 2}
+  BaseMaterial: {fileID: 2100000, guid: c92ed930215ac5741a33d28e8b2fd737, type: 2}
+  OutlineMaterial: {fileID: 2100000, guid: 27e5f504000e2fe4598e7da79400654f, type: 2}
   TinyOffsetY: 90
   NormalOffsetY: 145
   GiantOffsetY: 250
