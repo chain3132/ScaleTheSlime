@@ -59,8 +59,9 @@ namespace Gameplay.BattleEncounter.UI.Reward
         private void ApplyDescription(CardDefinition cardDefinition)
         {
             if (descriptionText != null)
-                descriptionText.text = cardDefinition.Description;
+                descriptionText.text = CardTextFormatter.Format(cardDefinition);
         }
+        
         
     }
 }
