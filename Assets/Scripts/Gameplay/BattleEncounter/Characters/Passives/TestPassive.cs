@@ -12,16 +12,12 @@ namespace Gameplay.BattleEncounter.Characters.Passives
 
         public override void OnEnter(Character character, BattleContext ctx)
         {
-            
-            character.ApplyStatus(StatusType.Unstable,_amount,persistent:false);
-            
+            character.ApplyStatus(StatusType.Unstable,_amount,persistent:true);
         }
 
         public override void OnExit(Character character, BattleContext ctx)
         {
-            
-            character.ApplyStatus(StatusType.Unstable,-_amount,persistent:false);
-            
+            character.ApplyStatus(StatusType.Unstable,-_amount,persistent:true);   
         }
     }
 }

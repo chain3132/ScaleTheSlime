@@ -18,4 +18,3 @@ MonoBehaviour:
     MaxLayer: 99
     Enemies:
     - {fileID: 11400000, guid: 590a432cefd581c48b6c9c919382fe5c, type: 2}
-    - {fileID: 11400000, guid: 590a432cefd581c48b6c9c919382fe5c, type: 2}

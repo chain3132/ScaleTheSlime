@@ -11,7 +11,7 @@ namespace Gameplay.BattleEncounter.Battle
         #region Properties
         public Player Player { get; }
         public IReadOnlyList<Enemy> Enemies => _enemies;
-        public Deck Deck { get; }
+        public Deck Deck { get; private set; }
         public int AliveEnemyCount {
             get
             {
@@ -45,6 +45,9 @@ namespace Gameplay.BattleEncounter.Battle
             _enemies = enemies;
             Deck = deck;
         }
+
+       
+        public void SetDeck(Deck deck) => Deck = deck;
 
         public void RequestDraw(int count)
         {

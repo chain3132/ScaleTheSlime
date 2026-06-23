@@ -81,7 +81,10 @@ namespace Gameplay.BattleEncounter.Battle
             //request enemy prefab
             Setup(progress, enemyDefs);
             if (_handController != null)
+            {
                 await _handController.SetupAsync(progress.Deck, ct);
+                _context.SetDeck(_handController.Deck);   
+            }
 
             bool win = await _result.Task.AttachExternalCancellation(ct);
             

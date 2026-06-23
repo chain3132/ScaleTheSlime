@@ -1,5 +1,6 @@
 using System;
 using Gameplay.BattleEncounter.Status;
+using Gameplay.BattleEncounter.UI.Card;
 using NaughtyAttributes;
 using UnityEngine;
 
@@ -18,5 +19,10 @@ namespace Gameplay.BattleEncounter.Characters.Behaviors
         [ShowIf(nameof(UseStatus))]
         [AllowNesting]
         public StatusType Status;
+
+        private bool UseAddToDrawPile => Type == EnemyActionType.AddCardToDrawPile;
+        [ShowIf(nameof(UseAddToDrawPile))] 
+        [AllowNesting]
+        public CardDefinition cardToAdd;
     }
 }

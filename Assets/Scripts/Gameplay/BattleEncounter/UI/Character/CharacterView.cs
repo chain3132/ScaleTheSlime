@@ -82,6 +82,21 @@ namespace Gameplay.BattleEncounter.UI.Characters
         private int _currentHealth;
         private int _maxHealth;
 
+        private Material _outlineBase;
+        private Material _outlineReplacement;
+        private bool _highlighted;
+
+        private SkeletonRenderer _renderer;
+        private SkeletonRenderer Renderer
+        {
+            get
+            {
+                if (_renderer == null && _skeleton != null)
+                    _renderer = _skeleton.GetComponent<SkeletonRenderer>();
+                return _renderer;
+            }
+        }
+
         public void Bind(Character c, CharacterDefinition def = null)
         {
             _bindings.Clear();
@@ -93,6 +108,12 @@ namespace Gameplay.BattleEncounter.UI.Characters
                 c.Anim.Subscribe(PlayAnim).AddTo(_bindings);
 
             _maxHealth = c.MaxHealth;
+
+            if (def != null)
+            {
+                _outlineBase = def.BaseMaterial;
+                _outlineReplacement = def.OutlineMaterial;
+            }
 
             status?.Bind(c.Statuses);
 
@@ -130,12 +151,34 @@ namespace Gameplay.BattleEncounter.UI.Characters
                     _skeleton.Initialize(true);
                     if (!string.IsNullOrEmpty(_idleAnimationName))
                         _skeleton.AnimationState.SetAnimation(0, _idleAnimationName, true);
+                    if (_highlighted) ApplyHighlight();   
                 }
             }
 
             if (_sizeRoot != null)
                 _sizeRoot.anchoredPosition =
                     new Vector2(_sizeRoot.anchoredPosition.x, def.OffsetYFor(form));
+        }
+
+       
+        public void SetHighlight(bool on)
+        {
+            _highlighted = on;
+            ApplyHighlight();
+        }
+
+        private void ApplyHighlight()
+        {
+            var r = Renderer;
+            if (r == null || _outlineBase == null) return;
+
+            var overrides = r.CustomMaterialOverride;
+            if (_highlighted && _outlineReplacement != null)
+                overrides[_outlineBase] = _outlineReplacement;
+            else
+                overrides.Remove(_outlineBase);
+
+            r.LateUpdate();   
         }
 
         private void PlayAnim(CharacterAnim anim)
