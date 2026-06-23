@@ -52,6 +52,9 @@ namespace Gameplay.BattleEncounter.Battle
         private readonly List<Enemy> _enemies = new();
         private BattleContext _context;
         private CardEffectExecutor _executor;
+        private RunState _runState;   
+
+        public void SetRunState(RunState runState) => _runState = runState;
         private readonly CompositeDisposable _battleScope = new();   
         private UniTaskCompletionSource<bool> _result;               
 
@@ -100,6 +103,7 @@ namespace Gameplay.BattleEncounter.Battle
             _battleOver = false;
             _enemyPhase = false;
             _result = new UniTaskCompletionSource<bool>();
+            if (_runState != null) _runState.BattleTurn.Value = 1;   // first turn
 
             _player = new Player(_playerDefinition, progress.CurrentHealth);
             if (_playerView != null)
@@ -215,6 +219,7 @@ namespace Gameplay.BattleEncounter.Battle
 
         private void Teardown()
         {
+            if (_runState != null) _runState.BattleTurn.Value = 0;   // back to map
             _battleScope.Clear();
             _player?.Dispose();
             _player = null;
@@ -275,6 +280,8 @@ namespace Gameplay.BattleEncounter.Battle
         private async UniTask BeginNewTurnAsync(CancellationToken ct)
         {
             if (_context.AliveEnemyCount == 0) { EndBattle(true); return; }
+
+            if (_runState != null) _runState.BattleTurn.Value++;   // next player turn
 
             _player.ClearShield();
             _player.ClearTemporaryStatuses();

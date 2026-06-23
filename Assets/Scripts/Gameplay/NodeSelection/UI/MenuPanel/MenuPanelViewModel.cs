@@ -16,7 +16,9 @@ namespace Gameplay.NodeSelection.UI
             PlayerName = playerName;
             RunNumber = runState.RunNumber.ToReadOnlyReactiveProperty();
             
-            TurnText = new ReactiveProperty<string>(string.Empty).ToReadOnlyReactiveProperty();
+            TurnText = runState.BattleTurn
+                .Select(t => t > 0 ? t.ToString() : string.Empty)
+                .ToReadOnlyReactiveProperty(string.Empty);
             ClockText = Observable
                 .Interval(TimeSpan.FromSeconds(1))
                 .Select(_ => DateTime.Now.ToString("HH:mm"))

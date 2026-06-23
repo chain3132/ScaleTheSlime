@@ -9,6 +9,7 @@ namespace Gameplay.NodeSelection.UI
         #region Properties
         public ReactiveProperty<int> RunNumber { get; } = new(1);
         public ReactiveProperty<int> CurrentNodeId { get; } = new(-1);
+        public ReactiveProperty<int> BattleTurn { get; } = new(0);   
 
         #endregion
 
@@ -37,6 +38,7 @@ namespace Gameplay.NodeSelection.UI
         {
             RunNumber.Dispose();
             CurrentNodeId.Dispose();
+            BattleTurn.Dispose();
         }
     }
 }

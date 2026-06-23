@@ -27,8 +27,14 @@ namespace Gameplay.BattleEncounter.Battle
         private bool _skipReward = false;
 
         private RunProgress _progress;
+        private RunState _runState;
 
-        public void Initialize(RunProgress progress) => _progress = progress;
+        public void Initialize(RunProgress progress, RunState runState)
+        {
+            _progress = progress;
+            _runState = runState;
+            if (_battleController != null) _battleController.SetRunState(runState);
+        }
 
         public async UniTask<EncounterResult> EnterAsync(EncounterRequest req, CancellationToken ct)
         {
