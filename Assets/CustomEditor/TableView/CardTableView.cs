@@ -39,7 +39,7 @@ namespace CustomEditor.TableView
         {
             var h = new VisualElement();
             h.AddToClassList("Header");
-            foreach (var (name, w) in new[] {("Preview",70),("Id",50),("DisplayName",120),("Description",300),("Art",300),("Effects",280)})
+            foreach (var (name, w) in new[] {("Preview",70),("DisplayName",120),("Description",300),("Art",300),("Effects",280)})
             {
                 var lbl = new Label(name);
                 lbl.style.unityTextAlign = TextAnchor.MiddleCenter;
@@ -54,8 +54,6 @@ namespace CustomEditor.TableView
             var bar = new Toolbar();
 
             var sortMenu = new ToolbarMenu { text = "Sort" };
-            sortMenu.menu.AppendAction("Id asc", _ => SetSort("id_asc"));
-            sortMenu.menu.AppendAction("Id desc", _ => SetSort("id_desc"));
             sortMenu.menu.AppendAction("name a-z", _ => SetSort("name"));
             bar.Add(sortMenu);
 
@@ -110,7 +108,6 @@ namespace CustomEditor.TableView
             row.userData = card;
             row.Add(MakePreview(card));
             
-            AddCell(row, so, "Id",          50);
             AddCell(row, so, "DisplayName", 120);
             AddCell(row,so ,"Description",300);
             AddCell(row, so, "Art",         300);
@@ -144,7 +141,7 @@ namespace CustomEditor.TableView
                 var card = row.userData as CardDefinition;
                 if (card == null) continue;
 
-                string name = ((card.DisplayName ?? "") + " " + card.name + " " + (card.Id ?? "")).ToLower();
+                string name = ((card.DisplayName ?? "") + " " + card.name).ToLower();
 
                 bool matchSearch = words == "" || name.Contains(words);
 
@@ -171,8 +168,8 @@ namespace CustomEditor.TableView
             
             switch (_sortMode)
             {
-                case "id_asc":  cards = cards.OrderBy(c => c.Id); break;
-                case "id_desc": cards = cards.OrderByDescending(c => c.Id); break;
+                // case "id_asc":  cards = cards.OrderBy(c => c.Id); break;
+                // case "id_desc": cards = cards.OrderByDescending(c => c.Id); break;
                 default:        cards = cards.OrderBy(c => c.name); break;
             }
             return cards.ToList();

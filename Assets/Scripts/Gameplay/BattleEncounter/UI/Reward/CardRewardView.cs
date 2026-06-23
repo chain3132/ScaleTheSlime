@@ -27,6 +27,8 @@ namespace Gameplay.BattleEncounter.UI.Reward
         private Image cardBorderTop;
         [SerializeField]
         private TMP_Text headerText;
+        [SerializeField] 
+        private TMP_Text descriptionText;
 
         #endregion
 
@@ -40,7 +42,7 @@ namespace Gameplay.BattleEncounter.UI.Reward
             Apply(cardArt, s.CardArt, true);
             Apply(cardHeader, s.CardHeader, true);
             if (headerText != null) headerText.text = definition.DisplayName;
-
+            ApplyDescription(definition);
             Apply(cardIcon, s.CardIcon, s.IsSpecialCard);
             Apply(cardFrameLeft, s.CardFrameLeft, s.IsSpecialCard);
             Apply(cardFrameRight, s.CardFrameRight, s.IsSpecialCard);
@@ -53,5 +55,12 @@ namespace Gameplay.BattleEncounter.UI.Reward
             image.gameObject.SetActive(visible);
             if (visible) image.sprite = sprite;
         }
+
+        private void ApplyDescription(CardDefinition cardDefinition)
+        {
+            if (descriptionText != null)
+                descriptionText.text = cardDefinition.Description;
+        }
+        
     }
 }
