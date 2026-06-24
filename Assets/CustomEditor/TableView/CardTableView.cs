@@ -191,10 +191,8 @@ namespace CustomEditor.TableView
         }
         private void CreateNewCard(CardCreationRequest eRequest)
         {
-            var card = ScriptableObject.CreateInstance<CardDefinition>();
-            card.DisplayName = eRequest.DisplayName;
-            card.PlayTarget = eRequest.PlayTarget;
-            card.Effects = new List<CardEffectData> { eRequest.Preset };
+            var card = eRequest.Preset;
+            
 
             var existing = LoadAllCards().FirstOrDefault();
             string folder = existing != null

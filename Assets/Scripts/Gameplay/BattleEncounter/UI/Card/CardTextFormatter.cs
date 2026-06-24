@@ -85,7 +85,7 @@ namespace Gameplay.BattleEncounter.UI.Card
                 case CardEffectType.LoseHealth:
                     return "damage";
                 case CardEffectType.GainShield:
-                    return "block";
+                    return "shield";
                 case CardEffectType.Heal:
                     return "heal";
                 case CardEffectType.ChangeSize:
