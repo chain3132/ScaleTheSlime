@@ -595,7 +595,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 929790607046145212, guid: 77bac12c567e0cd44816fc1dd4fe9ab3, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -0.39996338
+      value: 7.8
       objectReference: {fileID: 0}
     - target: {fileID: 929790607046145212, guid: 77bac12c567e0cd44816fc1dd4fe9ab3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -615,15 +615,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2571401517678967763, guid: 77bac12c567e0cd44816fc1dd4fe9ab3, type: 3}
       propertyPath: m_Scale3D.x
-      value: 4.48
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 2571401517678967763, guid: 77bac12c567e0cd44816fc1dd4fe9ab3, type: 3}
       propertyPath: m_Scale3D.y
-      value: 4.48
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 2571401517678967763, guid: 77bac12c567e0cd44816fc1dd4fe9ab3, type: 3}
       propertyPath: m_Scale3D.z
-      value: 4.48
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 4280098335732148470, guid: 77bac12c567e0cd44816fc1dd4fe9ab3, type: 3}
       propertyPath: m_SortingLayer
