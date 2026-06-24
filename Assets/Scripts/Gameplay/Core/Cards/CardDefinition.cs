@@ -8,11 +8,16 @@ namespace Gameplay.BattleEncounter.UI.Card
     [CreateAssetMenu(menuName = "Battle/CardDefinition")]
     public class CardDefinition : ScriptableObject
     {
+        [Required("DisplayName is missing")]
         public string DisplayName;
-        [ResizableTextArea] 
+        
+        [ResizableTextArea,] 
         public string Description;
+        [Required("Art is missing")]
         public CardSprites Art;
-        public CardTarget PlayTarget;          
+        [Required("CardTarget is missing")]
+        public CardTarget PlayTarget;
+        [Required("CardKeyword is missing")]
         public CardKeyword Keywords;        
         public List<CardEffectData> Effects;
     }

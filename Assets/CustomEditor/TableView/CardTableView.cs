@@ -17,12 +17,17 @@ namespace CustomEditor.TableView
         private string _searchText = "";
         private CardEffectType? _filterType = null;
         private readonly List<VisualElement> _rows = new();
-    
+        private HelpBox _warning;
     
         public CardTableView()
         {
+            _warning = new HelpBox("", HelpBoxMessageType.Warning)
+            {
+                style = { display = DisplayStyle.None }
+            };
+            Add(_warning);
+            
             style.flexGrow = 1;
-
             Add(MakeToolbar());          
             Add(MakeHeader());          
 
@@ -32,6 +37,7 @@ namespace CustomEditor.TableView
             Add(scroll);
 
             ShowCards();
+            schedule.Execute(ValidateAll).Every(500);
         }
         #region Cards
 
@@ -263,7 +269,43 @@ namespace CustomEditor.TableView
             parent.Add(label);
         }
 
-        
+        private void ValidateAll()
+        {
+            var missingList = new List<string>();
+            foreach (var row in _rows)
+            {
+                if (row.userData is not CardDefinition cardDefinition)
+                {
+                    continue;
+                }
+
+                var missingFields = MissingFields(cardDefinition);
+                if (missingFields.Count > 0)
+                {
+                    missingList.Add($"{cardDefinition.name}: {string.Join(",",missingFields)}");
+                }
+
+                bool hasNoMissing = missingList.Count == 0;
+                _warning.style.display = hasNoMissing ? DisplayStyle.None : DisplayStyle.Flex;
+                if (!hasNoMissing)
+                {
+                    _warning.text = $"find {missingList.Count} card that field is incomplete. \n" +
+                                    string.Join("\n", missingList);
+                }
+            }
+        }
+
+        private List<string> MissingFields(CardDefinition card)
+        {
+            var missing = new List<string>();
+            if (string.IsNullOrWhiteSpace(card.DisplayName)) missing.Add("DisplayName");
+            if (card.Art == null || card.Art.CardArt == null)                  missing.Add("CardArt");
+            if (card.Art == null || card.Art.CardBackground == null)           missing.Add("CardBackground");
+            if (card.Art == null || card.Art.CardHeader == null)               missing.Add("CardHeader");
+            if (card.Effects == null || card.Effects.Count == 0)               missing.Add("Effects");
+
+            return missing;
+        }
 
         #endregion
     }
