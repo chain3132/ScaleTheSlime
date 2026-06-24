@@ -42,6 +42,33 @@ namespace Gameplay.BattleEncounter.UI.Card
             }
             return formattedDescription;
         }
+        public static string Format(CardDefinition def)
+        {
+            if (def == null) return string.Empty;
+            string formattedDescription = def.Description;
+
+            var tokenCounts = new Dictionary<string, int>();
+            foreach (var effect in def.Effects)
+            {
+                string tokenName = TokenFor(effect);
+                if (tokenName == null) continue;
+
+                int tokenIndex = tokenCounts.TryGetValue(tokenName, out var count) ? count : 0;
+                tokenCounts[tokenName] = tokenIndex + 1;
+                string formattedValue = effect.CardValue.ToString();
+                
+                if (tokenIndex == 0)
+                {
+                    formattedDescription = formattedDescription.Replace("{" + tokenName + "}",formattedValue );
+                    formattedDescription = formattedDescription.Replace("{" + tokenName + "1}", formattedValue);
+                }
+                else
+                {
+                    formattedDescription = formattedDescription.Replace("{" + tokenName + (tokenIndex + 1) + "}", formattedValue);
+                }
+            }
+            return formattedDescription;
+        }
 
         private static string Colorize(int displayValue, int baseValue)
         {
@@ -58,7 +85,7 @@ namespace Gameplay.BattleEncounter.UI.Card
                 case CardEffectType.LoseHealth:
                     return "damage";
                 case CardEffectType.GainShield:
-                    return "block";
+                    return "shield";
                 case CardEffectType.Heal:
                     return "heal";
                 case CardEffectType.ChangeSize:

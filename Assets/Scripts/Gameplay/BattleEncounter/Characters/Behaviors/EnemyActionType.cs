@@ -8,6 +8,7 @@ namespace Gameplay.BattleEncounter.Characters.Behaviors
         ShrinkSize,    
         BuffSelf,      
         DebuffPlayer,  
-        Heal,         
+        Heal, 
+        AddCardToDrawPile
     }
 }

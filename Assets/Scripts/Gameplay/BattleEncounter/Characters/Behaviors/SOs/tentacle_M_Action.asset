@@ -12,5 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f30f5ce3c8b7b394b8e3fd64867923d7, type: 3}
   m_Name: tentacle_M_Action
   m_EditorClassIdentifier: Gameplay.BattleEncounter::Gameplay.BattleEncounter.Characters.Behaviors.MultiActionBehavior
-  _mode: 0
-  _actions: []
+  _mode: 1
+  _actions:
+  - Type: 2
+    Value: 2
+    Repeat: 0
+    Status: 0
+    cardToAdd: {fileID: 0}
+  - Type: 0
+    Value: 6
+    Repeat: 0
+    Status: 0
+    cardToAdd: {fileID: 0}
+  - Type: 4
+    Value: 2
+    Repeat: 0
+    Status: 1
+    cardToAdd: {fileID: 0}

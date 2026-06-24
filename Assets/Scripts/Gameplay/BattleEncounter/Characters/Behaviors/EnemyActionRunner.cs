@@ -19,6 +19,7 @@ namespace Gameplay.BattleEncounter.Characters.Behaviors
                     case EnemyActionType.BuffSelf:     self.ApplyStatus(a.Status, a.Value); break;
                     case EnemyActionType.DebuffPlayer: ctx.Player.ApplyStatus(a.Status, a.Value); break;
                     case EnemyActionType.Heal:         self.Heal(a.Value); break;
+                    case EnemyActionType.AddCardToDrawPile: ctx.Deck?.AddToDrawPile(a.cardToAdd,a.Value); break;
                 }
             }
         }

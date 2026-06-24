@@ -17,5 +17,36 @@ MonoBehaviour:
     MinLayer: 0
     MaxLayer: 99
     Enemies:
-    - {fileID: 11400000, guid: 590a432cefd581c48b6c9c919382fe5c, type: 2}
-    - {fileID: 11400000, guid: 590a432cefd581c48b6c9c919382fe5c, type: 2}
+    - {fileID: 11400000, guid: ae874432fb5f38b45b15eac2cd3c07b1, type: 2}
+  - NodeType: 1
+    MinLayer: 2
+    MaxLayer: 99
+    Enemies:
+    - {fileID: 11400000, guid: f0d366c1353a7624b8716a783d79a031, type: 2}
+  - NodeType: 1
+    MinLayer: 2
+    MaxLayer: 99
+    Enemies:
+    - {fileID: 11400000, guid: 8a5e359a5e336bd4c8a654534de2a864, type: 2}
+  - NodeType: 1
+    MinLayer: 3
+    MaxLayer: 99
+    Enemies:
+    - {fileID: 11400000, guid: ae874432fb5f38b45b15eac2cd3c07b1, type: 2}
+    - {fileID: 11400000, guid: ae874432fb5f38b45b15eac2cd3c07b1, type: 2}
+  - NodeType: 1
+    MinLayer: 3
+    MaxLayer: 99
+    Enemies:
+    - {fileID: 11400000, guid: 5e70dec2865e6c74a8f6439dd6f675a2, type: 2}
+    - {fileID: 11400000, guid: ae874432fb5f38b45b15eac2cd3c07b1, type: 2}
+  - NodeType: 2
+    MinLayer: 0
+    MaxLayer: 99
+    Enemies:
+    - {fileID: 11400000, guid: 5e70dec2865e6c74a8f6439dd6f675a2, type: 2}
+  - NodeType: 6
+    MinLayer: 0
+    MaxLayer: 99
+    Enemies:
+    - {fileID: 11400000, guid: 89d8dfdd40540bc4f85ace7a30e8aa9f, type: 2}

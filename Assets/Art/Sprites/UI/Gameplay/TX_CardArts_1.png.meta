@@ -1,5 +1,7 @@
 fileFormatVersion: 2
 guid: 3859bc2d80614b84089f2baa3fe46b57
+labels:
+- cardsprite
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}

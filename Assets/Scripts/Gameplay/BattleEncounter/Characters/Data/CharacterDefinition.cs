@@ -15,6 +15,10 @@ namespace Gameplay.BattleEncounter.Characters.Data
         public SkeletonDataAsset NormalSkeleton;
         public SkeletonDataAsset GiantSkeleton;
 
+        [Header("Highlight outline (shared by all forms)")]
+        public Material BaseMaterial;
+        public Material OutlineMaterial;
+
         [Header("Size root Y offset per form")]
         public float TinyOffsetY;
         public float NormalOffsetY;

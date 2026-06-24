@@ -13,4 +13,19 @@ MonoBehaviour:
   m_Name: slime_S_Action
   m_EditorClassIdentifier: Gameplay.BattleEncounter::Gameplay.BattleEncounter.Characters.Behaviors.MultiActionBehavior
   _mode: 0
-  _actions: []
+  _actions:
+  - Type: 0
+    Value: 1
+    Repeat: 2
+    Status: 0
+    cardToAdd: {fileID: 0}
+  - Type: 3
+    Value: 1
+    Repeat: 1
+    Status: 0
+    cardToAdd: {fileID: 0}
+  - Type: 2
+    Value: 1
+    Repeat: 1
+    Status: 0
+    cardToAdd: {fileID: 0}

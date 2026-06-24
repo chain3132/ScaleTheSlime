@@ -125,8 +125,8 @@ namespace Gameplay.BattleEncounter.UI.Characters
 
         public void HighLight(bool highlight)
         {
-            if (_skeletonRenderer != null)
-                _skeletonRenderer.enabled = highlight;
+            if (_view != null)
+                _view.SetHighlight(highlight);
         }
 
         public void ClearIntent()

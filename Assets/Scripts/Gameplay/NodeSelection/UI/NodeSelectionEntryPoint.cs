@@ -67,7 +67,7 @@ namespace Gameplay.NodeSelection.UI
                     ? new List<CardDefinition>(_playerDefinition.StartingDeck.Cards)
                     : new List<CardDefinition>();
                 _runProgress = new RunProgress(_playerDefinition.MaxHealth, startingCards);
-                _battleEncounter.Initialize(_runProgress);
+                _battleEncounter.Initialize(_runProgress, _runState);
                 encounter = _battleEncounter;
             }
             else
