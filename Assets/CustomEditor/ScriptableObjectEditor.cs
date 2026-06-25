@@ -23,6 +23,11 @@ namespace CustomEditor
             { "Nodes",      new[] { "NodeDefinition", "NodeDatabase" } },
             { "Databases",  new[] { "StatusDatabase", "ActionIntentDatabase", "CharacterFxDatabase" } },
         };
+
+        private readonly HashSet<string> _perAssetTypes = new ()
+        {
+            "EnemyDefinition"
+        };
         
         [MenuItem("Tools/ScaleTheSlime/Data Editor")]
         public static void ShowExample()
@@ -65,16 +70,60 @@ namespace CustomEditor
                 foldout.AddToClassList("nav-folder");
                 foreach (var typeName in group.Value)
                 {
-                    int count = AssetDatabase.FindAssets($"t:{typeName}").Length;  
-                    var item = new Label($"{typeName} ({count})");
-                    item.AddToClassList("nav-item");                       
-                    item.RegisterCallback<ClickEvent>(_ => ShowType(typeName));
-                    foldout.Add(item);
+                    if (_perAssetTypes.Contains(typeName))
+                    {
+                        foldout.Add(MakeTypeWithAssets(typeName));
+                    }
+                    else
+                    {
+                        foldout.Add(MakeTypeAsset(typeName));;
+                    }
                 }
                 scroll.Add(foldout);
             }
             return scroll;
         }
+
+        private VisualElement MakeTypeAsset(string typeName)
+        {
+            int count = AssetDatabase.FindAssets($"t:{typeName}").Length;
+            var item = new Label($"{typeName} ({count})");
+            item.AddToClassList("nav-item");                       
+            item.RegisterCallback<ClickEvent>(_ => ShowType(typeName));
+            return item;
+        }
+
+        private VisualElement MakeTypeWithAssets(string typeName)
+        {
+            var guids = AssetDatabase.FindAssets($"t:{typeName}");
+            var typeFolder = new Foldout { text = $"{typeName} ({guids.Length})",value = false};
+            typeFolder.AddToClassList("nav-subFolder");
+            foreach (var guid in guids)
+            {
+                var path = AssetDatabase.GUIDToAssetPath(guid);
+                var asset = AssetDatabase.LoadAssetAtPath<ScriptableObject>(path);
+                if (asset == null)
+                {
+                    continue;
+                }
+                var item = new Label($"{asset.name}");
+                item.AddToClassList("nav-item");
+                item.AddToClassList("nav-subItem");
+                item.RegisterCallback<ClickEvent>(_ => ShowAsset(asset));
+                typeFolder.Add(item);
+                
+            }
+
+            return typeFolder;
+
+        }
+
+        private void ShowAsset(ScriptableObject asset)
+        {
+            detail.Clear();
+            detail.Add(new InspectorElement(asset));
+        }
+
         private void ShowType(string typeName)
         {
             detail.Clear();
