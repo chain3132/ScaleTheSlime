@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using CustomEditor.TableView;
+using Gameplay.BattleEncounter.Characters.Data;
 using Gameplay.BattleEncounter.UI.Card;
 using UnityEditor;
 using UnityEditor.UIElements;
@@ -121,7 +122,9 @@ namespace CustomEditor
         private void ShowAsset(ScriptableObject asset)
         {
             detail.Clear();
-            detail.Add(new InspectorElement(asset));
+            if (asset is EnemyDefinition enemy)
+                detail.Add(new ScrollView { } );     
+            detail.Add(new EnemyTableView(asset as EnemyDefinition));
         }
 
         private void ShowType(string typeName)
