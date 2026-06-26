@@ -14,6 +14,7 @@ namespace Gameplay.BattleEncounter.Characters.Behaviors
 
         [SerializeField] private SelectMode _mode = SelectMode.DoAll;
         [SerializeField] private List<EnemyAction> _actions = new();
+        
 
         public override IReadOnlyList<EnemyAction> PlanTurn()
         {

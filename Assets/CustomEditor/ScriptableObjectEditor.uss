@@ -76,10 +76,10 @@
      margin-left: 10px;
 }
 .nav-subItem {
-        padding-left: 28px;          
-        font-size: 11px;
-        color: rgb(170, 170, 170);
-    }
+    padding-left: 28px;          
+    font-size: 11px;
+    color: rgb(170, 170, 170);
+}
 .section {
     margin: 10px 10px;
     border-width: 1px; 
@@ -141,4 +141,17 @@
 .issue-warning { 
     color: #d9a441; 
     -unity-font-style: bold;
+}
+.enemy-header {
+    flex-direction: row;
+    align-items: center;
+    padding: 10px 10px;
+    background-color: #3c3c3c;
+    border-bottom-width: 1px;
+    border-bottom-color: #222222;
+}
+.enemy-header-title {
+    -unity-font-style: bold;
+    font-size: 14px;
+    color: rgb(240, 240, 240);
 }

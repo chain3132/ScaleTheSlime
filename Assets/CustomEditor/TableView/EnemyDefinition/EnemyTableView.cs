@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEditor;
+using UnityEditor.Experimental.GraphView;
 using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -43,6 +44,7 @@ namespace CustomEditor
             {
                 style = { display = DisplayStyle.None }
             };
+            Add(MakeHeader(enemyDefinition.name));
             Add(_banner);
             Add(Section("PROPERTIES", MakeFields(serializedObject,"MaxHealth", "StartSize")));
             Add(Section("FORMS",MakeFormsTable(serializedObject)));
@@ -55,6 +57,16 @@ namespace CustomEditor
             Revalidate(serializedObject);
         }
 
+        private VisualElement MakeHeader(string enemyName)
+        {
+            var bar = new VisualElement();
+            bar.AddToClassList("enemy-header");
+
+            var title = new Label(enemyName);                    
+            title.AddToClassList("enemy-header-title");
+            bar.Add(title);
+            return bar;
+        }
         private VisualElement MakeFields(SerializedObject serializedObject, params string[] names)
         {
             var visualElement = new VisualElement();
@@ -63,6 +75,7 @@ namespace CustomEditor
             return visualElement;
         }
 
+        
         private PropertyField MakeBoundCell(SerializedObject serializedObject, string path, bool hideLabel = false)
         {
             var property = serializedObject.FindProperty(path);

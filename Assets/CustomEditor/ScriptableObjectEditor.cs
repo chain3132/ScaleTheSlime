@@ -13,8 +13,6 @@ namespace CustomEditor
 {
     public class ScriptableObjectEditor : EditorWindow
     {
-        [SerializeField]
-        private VisualTreeAsset m_VisualTreeAsset = default;
 
         private VisualElement detail;
         private readonly Dictionary<string, string[]> _groups = new()
@@ -22,12 +20,12 @@ namespace CustomEditor
             { "Cards",      new[] { "CardDefinition", "DeckDefinition", "CardRewardPool" } },
             { "Characters", new[] { "PlayerDefinition", "EnemyDefinition" } },
             { "Nodes",      new[] { "NodeDefinition", "NodeDatabase" } },
-            { "Databases",  new[] { "StatusDatabase", "ActionIntentDatabase", "CharacterFxDatabase" } },
+            { "Databases",  new[] { "StatusDatabase", "ActionIntentDatabase","MultiActionBehavior", "CharacterFxDatabase" } },
         };
 
         private readonly HashSet<string> _perAssetTypes = new ()
         {
-            "EnemyDefinition"
+            "EnemyDefinition",
         };
         
         [MenuItem("Tools/ScaleTheSlime/Data Editor")]
@@ -134,6 +132,10 @@ namespace CustomEditor
                 detail.Add(new CardTableView());
             else if (typeName == "NodeDefinition")
                 detail.Add(new NodeTableView());
+            else if (typeName == "MultiActionBehavior" )
+            {
+                detail.Add(new MultiActionBehaviorView());
+            }
             else
                 detail.Add(new Label($"not available {typeName}"));  }
 
