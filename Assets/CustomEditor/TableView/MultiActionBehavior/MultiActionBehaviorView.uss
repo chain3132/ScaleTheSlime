@@ -1,0 +1,36 @@
+
+VisualElement {}
+.nav {
+    height: 100%;
+    width: 20%;
+    background-color: #1b1f23;
+}
+.nav-foldout{
+    padding: 2px ;
+    -unity-font-style: bold;
+    background-color: #434343;
+    border-top-width: 1px;
+    border-color: #2c2c2c;
+}
+.nav-item {
+    padding-left: 14px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    color: rgb(200, 200, 200);
+    background-color: #3a3a3a;
+    -unity-font-style: normal;
+
+}
+.header{
+    padding: 5px;
+    background-color: #3a3a3a;
+    -unity-font-style: bold;
+}
+.subLabel{
+    font-size: 9px;
+    padding: 3px;
+    color: #6b6a63;
+}
+
+
+

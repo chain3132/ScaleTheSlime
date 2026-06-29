@@ -25,4 +25,13 @@ MonoBehaviour:
     CardBorderTop: {fileID: 0}
   PlayTarget: 0
   Keywords: 4
-  Effects: []
+  Effects:
+  - Type: 0
+    StatusType: 0
+    StatusAmount: 0
+    Target: 0
+    CardToAdd: {fileID: 0}
+    ValueSource: 0
+    CardValue: 0
+    Repeat: 0
+    CustomSource: 0
