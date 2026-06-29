@@ -16,7 +16,8 @@
         "Unity.ResourceManager",
         "UniTask.Addressables",
         "Unity.Splines",
-        "Unity.Mathematics"
+        "Unity.Mathematics",
+        "Unity.Localization"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

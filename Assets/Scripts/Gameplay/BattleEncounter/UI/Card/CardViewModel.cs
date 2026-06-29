@@ -9,12 +9,12 @@ namespace Gameplay.BattleEncounter.UI.Card
         public Data.Card Card { get; }
         public BattleContext Context { get; }
         public CardDefinition Definition => Card.Definition;
-        public string DisplayName => Definition.DisplayName;
+        public string DisplayName => Definition.DisplayName.GetLocalizedString();
 
         
         public string Description => Context != null
-            ? CardTextFormatter.Format(Definition, Context)
-            : Definition.Description;
+            ? CardTextFormatter.Format(Definition, Context,Definition.Description.GetLocalizedString())
+            : Definition.Description.GetLocalizedString();
 
         public Sprite Art => Definition.Art != null ? Definition.Art.CardArt : null;
 

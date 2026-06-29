@@ -1,0 +1,228 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: Cards_en
+  m_EditorClassIdentifier: Unity.Localization::UnityEngine.Localization.Tables.StringTable
+  m_LocaleId:
+    m_Code: en
+  m_SharedData: {fileID: 11400000, guid: e91750097d6622f4ba59825f8527ed07, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 6045547794432
+    m_Localized: Attack
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8905643692032
+    m_Localized: Deal {damage} damage.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9097684094976
+    m_Localized: Defend
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9242387582976
+    m_Localized: Gain {shield} shield.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9560169025536
+    m_Localized: Dropsy
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9566082994176
+    m_Localized: 'Gain {shield} shield.
+
+      Size +1.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9568402444288
+    m_Localized: Splatter
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10735899545600
+    m_Localized: 'Deal {damage} damage.
+
+      Size -2.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10999125676032
+    m_Localized: Strategize
+    m_Metadata:
+      m_Items: []
+  - m_Id: 11160153395200
+    m_Localized: 'Discard 1 cards and draw the same amount.
+
+      Cannot be discarded.
+
+      Destroy.
+
+'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 11789202526208
+    m_Localized: Siphon
+    m_Metadata:
+      m_Items: []
+  - m_Id: 11946912550912
+    m_Localized: 'Deal {damage} damage.
+
+      Target size-1.
+
+      Size +1.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12540695973888
+    m_Localized: Trickery
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12628822495232
+    m_Localized: 'Next card is played 2 times.
+
+      Cannot be discarded.
+
+      Destroy.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13051134382080
+    m_Localized: Chrysalis
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13218264813568
+    m_Localized: 'Gain shield equal to your size X 2 times.
+
+      Set size to 1.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13904121597952
+    m_Localized: Vow of Majesty
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14009746755584
+    m_Localized: 'Size +1.
+
+      Gain 2 Strength.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14551235596288
+    m_Localized: Study
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14699646849024
+    m_Localized: Draw 1 Cards.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14837912080384
+    m_Localized: Stomp
+    m_Metadata:
+      m_Items: []
+  - m_Id: 15057920102400
+    m_Localized: 'Deal {damage} damage to all enemies.
+
+      All enemies size -1.
+
+      Cannot
+      be discarded.
+
+      Destroy.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 15614172893184
+    m_Localized: Concentration
+    m_Metadata:
+      m_Items: []
+  - m_Id: 15700642664448
+    m_Localized: 'Draw 2 cards.
+
+      Size -2.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16331587620864
+    m_Localized: Rupture
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16415733747712
+    m_Localized: 'Deal {damage} damage to all enemies.
+
+      Size -1.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16680989921280
+    m_Localized: Sleeping Beauty
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16833264128000
+    m_Localized: 'Discard all cards in your hand.
+
+      Increase size equal to number
+      of cards discarded.
+
+      Heal equal to number of cards discarded.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 17412132605952
+    m_Localized: Momentous Strike
+    m_Metadata:
+      m_Items: []
+  - m_Id: 17684376489984
+    m_Localized: 'Deal damage equal to your size X 2 times.
+
+      Halve size.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 17985615597568
+    m_Localized: Dirty Schemes
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18053676568576
+    m_Localized: 'Draw 3 cards.
+
+      Add 3 slimed into your draw pile.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18508842438656
+    m_Localized: Transfer
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18597849763840
+    m_Localized: 'Deal {damage} damage.
+
+      Size -3.
+
+      Target Size +3.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18854771855360
+    m_Localized: Skewer
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18922669248512
+    m_Localized: 'Deal {damage} damage 3 times.
+
+      Size +2.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 19157961314304
+    m_Localized: Slimed
+    m_Metadata:
+      m_Items: []
+  - m_Id: 19268284092416
+    m_Localized: 'Unplayable.
+
+      Whenever your size changes,
+
+      Destroy this
+      card.'
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

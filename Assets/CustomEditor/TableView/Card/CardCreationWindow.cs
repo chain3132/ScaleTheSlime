@@ -131,23 +131,19 @@ namespace CustomEditor.TableView
             switch (type)
             {
                 case CardEffectType.Attack:
-                    card.DisplayName = "New Attack";
-                    card.Description = "Deal {damage} damage.";
                     card.PlayTarget  = CardTarget.Enemy;
                     effect.Target      = CardTarget.Enemy;
                     effect.ValueSource = ValueSource.Card;
                     effect.CardValue   = 5;
                     break;
                 case CardEffectType.GainShield:
-                    card.DisplayName = "New Block";
-                    card.Description = "Gain {shield} shield.";
+                   
                     card.PlayTarget  = CardTarget.Player;
                     effect.Target      = CardTarget.Player;
                     effect.ValueSource = ValueSource.Card;
                     effect.CardValue   = 3;
                     break;
                 default:
-                    card.DisplayName = type.ToString();
                     card.PlayTarget  = CardTarget.None;
                     effect.Target    = CardTarget.None;
                     break;

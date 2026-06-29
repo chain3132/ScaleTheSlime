@@ -41,7 +41,7 @@ namespace Gameplay.BattleEncounter.UI.Reward
             Apply(cardBackground, s.CardBackground, true);
             Apply(cardArt, s.CardArt, true);
             Apply(cardHeader, s.CardHeader, true);
-            if (headerText != null) headerText.text = definition.DisplayName;
+            if (headerText != null) headerText.text = definition.DisplayName.GetLocalizedString();
             ApplyDescription(definition);
             Apply(cardIcon, s.CardIcon, s.IsSpecialCard);
             Apply(cardFrameLeft, s.CardFrameLeft, s.IsSpecialCard);
@@ -59,7 +59,7 @@ namespace Gameplay.BattleEncounter.UI.Reward
         private void ApplyDescription(CardDefinition cardDefinition)
         {
             if (descriptionText != null)
-                descriptionText.text = CardTextFormatter.Format(cardDefinition);
+                descriptionText.text = CardTextFormatter.Format(cardDefinition,cardDefinition.Description.GetLocalizedString());
         }
         
         

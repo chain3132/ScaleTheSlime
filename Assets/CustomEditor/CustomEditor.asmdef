@@ -4,9 +4,12 @@
     "references": [
         "Gameplay.Core",
         "Gameplay.BattleEncounter",
-        "Gameplay.NodeSelection"
+        "Gameplay.NodeSelection",
+        "Unity.Localization"
     ],
-    "includePlatforms": ["Editor"],
+    "includePlatforms": [
+        "Editor"
+    ],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": false,

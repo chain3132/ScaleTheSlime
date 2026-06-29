@@ -14,7 +14,7 @@ namespace Gameplay.BattleEncounter.UI.Tooltip
         {
             var info = _database != null ? _database.InfoFor(_form) : null;
             if (info == null) { data = default; return false; }
-            data = TooltipData.Standard(info.Title, info.Description);
+            data = TooltipData.Standard(info.Title.GetLocalizedString(), info.Description.GetLocalizedString());
             return true;
         }
     }
