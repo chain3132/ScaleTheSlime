@@ -2,9 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Gameplay.BattleEncounter.Characters.Behaviors;
 using UnityEditor;
-using UnityEditor.Search;
 using UnityEditor.UIElements;
-using UnityEngine;
 using UnityEngine.UIElements;
 
 public class MultiActionBehaviorView : VisualElement
@@ -28,6 +26,7 @@ public class MultiActionBehaviorView : VisualElement
         spilt.style.flexGrow = 1;
         root.Add(spilt);
         root.style.flexGrow = 1;  
+        
         spilt.Add(MakeSidebar());
         _detail = new VisualElement();
         _detail.style.flexGrow = 1;

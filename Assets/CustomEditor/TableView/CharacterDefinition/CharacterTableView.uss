@@ -1,0 +1,106 @@
+VisualElement {}
+.nav {
+    height: 100%;
+    width: 20%;
+    background-color: #1b1f23;
+}
+.nav-foldout{
+    padding: 2px ;
+    -unity-font-style: bold;
+    background-color: #434343;
+    border-top-width: 1px;
+    border-color: #2c2c2c;
+}
+.nav-item {
+    padding-left: 14px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    color: rgb(200, 200, 200);
+    background-color: #3a3a3a;
+    -unity-font-style: normal;
+
+}
+.header{
+    padding: 5px;
+    background-color: #3a3a3a;
+    -unity-font-style: bold;
+}
+.subLabel{
+    font-size: 9px;
+    padding: 3px;
+    color: #6b6a63;
+}
+.enemy-header {
+    flex-direction: row;
+    align-items: center;
+    padding: 10px 10px;
+    background-color: #3c3c3c;
+    border-bottom-width: 1px;
+    border-bottom-color: #222222;
+}
+.enemy-header-title {
+    -unity-font-style: bold;
+    font-size: 14px;
+    color: rgb(240, 240, 240);
+}
+.issues {
+    margin: 6px 4px;
+}
+.cell-error .unity-base-field__input {
+    border-width: 1px;
+    border-color: #d9534f;
+    background-color: rgba(217, 83, 79, 0.12);
+}
+.cell-warning .unity-base-field__input {
+    border-width: 1px;
+    border-color: #d9a441;
+    background-color: rgba(217, 164, 65, 0.12);
+}
+.issue-row {
+    padding: 2px 4px;
+    border-bottom-width: 1px;
+    border-bottom-color: #2c2c2c;
+}
+.issue-error   {
+    color: #e06c66;
+    -unity-font-style: bold;
+}
+.issue-warning {
+    color: #d9a441;
+    -unity-font-style: bold;
+}.section {
+     margin: 10px 10px;
+     border-width: 1px;
+     border-color: rgba(0,0,0,0.3);
+     background-color: #333333;
+     border-radius: 5px;
+ }
+.section-header {
+    -unity-font-style: bold;
+    font-size: 12px;
+    padding: 5px 5px;
+    background-color: #3f3f3f;
+    border-left-width: 3px;
+    border-left-color: #a35b2c;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+.section-Fields PropertyField{
+    margin: 5px 5px;
+    font-size: 12px;
+    width: 40%;
+
+}
+.section-FormsTable-Header{
+    -unity-text-align: middle-left;
+    padding: 5px;
+}
+.section-FormsTable {
+    -unity-text-align: middle-left;
+    flex-direction: row;
+    margin: 5px 5px;
+    padding: 5px;
+    border-top-width: 1px;
+    border-bottom-width: 1px;
+    border-color: #2c2c2c;
+}

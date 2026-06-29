@@ -9,12 +9,10 @@ namespace Gameplay.BattleEncounter.Characters.Data
     [CreateAssetMenu(menuName = "Battle/PlayerDefinition")]
     public class PlayerDefinition : CharacterDefinition, IPassiveProvider
     {
-        [Header("Passive")]
         public Passive TinyPassive;
         public Passive NormalPassive;
         public Passive GiantPassive;
 
-        [Header("Unique card ")]
         public CardDefinition Unique2;
         public CardDefinition Unique5;
         public CardDefinition Unique8;

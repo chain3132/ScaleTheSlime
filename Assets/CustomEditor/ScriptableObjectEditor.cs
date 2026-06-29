@@ -5,6 +5,7 @@ using CustomEditor.TableView;
 using Gameplay.BattleEncounter.Characters.Data;
 using Gameplay.BattleEncounter.UI.Card;
 using UnityEditor;
+using UnityEditor.Search;
 using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -15,18 +16,21 @@ namespace CustomEditor
     {
 
         private VisualElement detail;
-        private readonly Dictionary<string, string[]> _groups = new()
+        private VisualElement _sidebarHost;
+        private readonly Dictionary<string, string[]> _definitionGroups = new()
         {
-            { "Cards",      new[] { "CardDefinition", "DeckDefinition", "CardRewardPool" } },
+            { "Cards",      new[] { "CardDefinition" } },
             { "Characters", new[] { "PlayerDefinition", "EnemyDefinition" } },
-            { "Nodes",      new[] { "NodeDefinition", "NodeDatabase" } },
-            { "Databases",  new[] { "StatusDatabase", "ActionIntentDatabase","MultiActionBehavior", "CharacterFxDatabase" } },
+            { "Nodes",      new[] { "NodeDefinition", } },
+            { "Behaviors",  new[] { "MultiActionBehavior" } },
+        };
+        private readonly Dictionary<string,string[]> _databaseGroups = new()
+        {
+            { "Databases", new[]{ "DeckDefinition", "CardRewardPool", "NodeDatabase",
+                "StatusDatabase", "ActionIntentDatabase", "CharacterFxDatabase" } },
         };
 
-        private readonly HashSet<string> _perAssetTypes = new ()
-        {
-            "EnemyDefinition",
-        };
+        
         
         [MenuItem("Tools/ScaleTheSlime/Data Editor")]
         public static void ShowExample()
@@ -40,49 +44,87 @@ namespace CustomEditor
             var uss = AssetDatabase.LoadAssetAtPath<StyleSheet>(
                 "Assets/CustomEditor/ScriptableObjectEditor.uss");
             rootVisualElement.styleSheets.Add(uss);
-            
-            // Each editor window contains a root VisualElement object
-            VisualElement root = rootVisualElement;
-            
+
+
+            var tab = new Toolbar();
+            var definitionTab = new ToolbarToggle { text = "Definitions", value = true };
+            var databaseTab = new ToolbarToggle { text = "Databases" };
+            tab.Add(definitionTab);
+            tab.Add(databaseTab);
+            rootVisualElement.Add(tab);
 
             var split = new TwoPaneSplitView(0,250,TwoPaneSplitViewOrientation.Horizontal);
             split.style.flexGrow = 1;
-            root.Add(split);
-            
-            split.Add(MakeSidebar());
-            detail = new VisualElement();
-            detail.style.flexGrow = 1;
-            split.Add(detail);
+            rootVisualElement.Add(split);
 
+            _sidebarHost = new VisualElement { style = { flexGrow = 1 } };
+            detail = new VisualElement { style = { flexGrow = 1 } };
+            
+            split.Add(_sidebarHost);
+            split.Add(detail);
+            ShowTab(_definitionGroups, isDatabase: false);
+
+            definitionTab.RegisterValueChangedCallback(e =>
+            {
+                if (e.newValue)
+                {
+                    {
+                        databaseTab.SetValueWithoutNotify(false);
+                        ShowTab(_definitionGroups, false);
+                    }
+                }
+            });
+            databaseTab.RegisterValueChangedCallback(e =>
+            {
+                if (e.newValue)
+                {
+                    definitionTab.SetValueWithoutNotify(false);
+                    ShowTab(_databaseGroups, true);
+                }
+            });
 
         }
 
         #region SideBar
 
-        private VisualElement MakeSidebar()
+        private VisualElement MakeSidebar(Dictionary<string,string[]> groups, bool isDatabase)
         {
             var scroll = new ScrollView();
             scroll.AddToClassList("nav");
-            foreach (var group in _groups)
+            foreach (var group in groups)
             {
                 var foldout = new Foldout { text = group.Key, value = true };   
                 foldout.AddToClassList("nav-folder");
                 foreach (var typeName in group.Value)
                 {
-                    if (_perAssetTypes.Contains(typeName))
-                    {
-                        foldout.Add(MakeTypeWithAssets(typeName));
-                    }
-                    else
-                    {
-                        foldout.Add(MakeTypeAsset(typeName));;
-                    }
+                    foldout.Add(isDatabase ? MakeDatabaseItem(typeName) : MakeTypeAsset(typeName));
                 }
                 scroll.Add(foldout);
             }
             return scroll;
         }
+        private VisualElement MakeDatabaseItem(string typeName)
+        {
+            int count = AssetDatabase.FindAssets($"t:{typeName}").Length;
+            var item = new Label($"{typeName} ({count})");
+            item.AddToClassList("nav-item");
+            item.RegisterCallback<ClickEvent>(_ => ShowDatabase(typeName));
+            return item;
+        }
+        private void ShowDatabase(string typeName)
+        {
+            detail.Clear();
+            var guids = AssetDatabase.FindAssets($"t:{typeName}");
+            if (guids.Length == 0) { detail.Add(new Label($"No {typeName} asset")); return; }
 
+            var scroll = new ScrollView();
+            foreach (var guid in guids)
+            {
+                var asset = AssetDatabase.LoadAssetAtPath<ScriptableObject>(AssetDatabase.GUIDToAssetPath(guid));
+                if (asset != null) scroll.Add(new InspectorElement(asset));  
+            }
+            detail.Add(scroll);
+        }
         private VisualElement MakeTypeAsset(string typeName)
         {
             int count = AssetDatabase.FindAssets($"t:{typeName}").Length;
@@ -91,39 +133,7 @@ namespace CustomEditor
             item.RegisterCallback<ClickEvent>(_ => ShowType(typeName));
             return item;
         }
-
-        private VisualElement MakeTypeWithAssets(string typeName)
-        {
-            var guids = AssetDatabase.FindAssets($"t:{typeName}");
-            var typeFolder = new Foldout { text = $"{typeName} ({guids.Length})",value = false};
-            typeFolder.AddToClassList("nav-subFolder");
-            foreach (var guid in guids)
-            {
-                var path = AssetDatabase.GUIDToAssetPath(guid);
-                var asset = AssetDatabase.LoadAssetAtPath<ScriptableObject>(path);
-                if (asset == null)
-                {
-                    continue;
-                }
-                var item = new Label($"{asset.name}");
-                item.AddToClassList("nav-item");
-                item.AddToClassList("nav-subItem");
-                item.RegisterCallback<ClickEvent>(_ => ShowAsset(asset));
-                typeFolder.Add(item);
-                
-            }
-
-            return typeFolder;
-
-        }
-
-        private void ShowAsset(ScriptableObject asset)
-        {
-            detail.Clear();
-            if (asset is EnemyDefinition enemy)
-                detail.Add(new ScrollView { } );     
-            detail.Add(new EnemyTableView(asset as EnemyDefinition));
-        }
+        
 
         private void ShowType(string typeName)
         {
@@ -132,12 +142,28 @@ namespace CustomEditor
                 detail.Add(new CardTableView());
             else if (typeName == "NodeDefinition")
                 detail.Add(new NodeTableView());
-            else if (typeName == "MultiActionBehavior" )
+            else if (typeName == "PlayerDefinition")
+            {
+                detail.Add(new CharacterTableView(typeof(PlayerDefinition)));
+            }
+            else if (typeName == "EnemyDefinition")
+            {
+                detail.Add(new CharacterTableView(typeof(EnemyDefinition)));
+            }
+            else if (typeName == "MultiActionBehavior")
             {
                 detail.Add(new MultiActionBehaviorView());
             }
             else
-                detail.Add(new Label($"not available {typeName}"));  }
+                detail.Add(new Label($"not available {typeName}"));
+        }
+
+        private void ShowTab(Dictionary<string, string[]> groups, bool isDatabase)
+        {
+            _sidebarHost.Clear();
+            _sidebarHost.Add(MakeSidebar(groups,isDatabase));
+            detail.Clear();
+        }
 
         #endregion
         

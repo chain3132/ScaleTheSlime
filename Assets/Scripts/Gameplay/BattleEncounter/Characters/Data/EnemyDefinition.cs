@@ -8,6 +8,7 @@ namespace Gameplay.BattleEncounter.Characters.Data
     [CreateAssetMenu(menuName = "Battle/EnemyDefinition")]
     public class EnemyDefinition : CharacterDefinition, IPassiveProvider
     {
+        public EnemyTier EnemyTier;
         public EnemyBehavior TinyBehavior;
         public EnemyBehavior NormalBehavior;
         public EnemyBehavior GiantBehavior;
@@ -17,9 +18,9 @@ namespace Gameplay.BattleEncounter.Characters.Data
         public Passive GiantPassive;
 
         [SerializeField] 
-        private bool _diesWhenTooSmall = true;   // size = 0 → ตาย
+        private bool _diesWhenTooSmall = true;   // size = 0  ตาย
         [SerializeField] 
-        private bool _diesWhenTooBig = true;     // size = 10 → ตาย
+        private bool _diesWhenTooBig = true;     // size = 10 ตาย
         public bool DiesWhenTooSmall => _diesWhenTooSmall;
         public bool DiesWhenTooBig => _diesWhenTooBig;
 
