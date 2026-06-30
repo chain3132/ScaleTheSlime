@@ -2,12 +2,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Gameplay.BattleEncounter.UI.Card;
-using Gameplay.BattleEncounter.UI.Card.Data;
 using UnityEditor;
+using UnityEditor.Localization;
 using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UIElements;
 using UnityEngine.Localization;
+using UnityEngine.Localization.Tables;
 
 namespace CustomEditor.TableView
 {
@@ -19,6 +20,7 @@ namespace CustomEditor.TableView
         private CardEffectType? _filterType = null;
         private readonly List<VisualElement> _rows = new();
         private HelpBox _warning;
+        private const string PreviewLocale = "en";
     
         public CardTableView()
         {
@@ -144,19 +146,20 @@ namespace CustomEditor.TableView
             row.Add(field);
 
         }
+        private static string ResolveEditor(LocalizedString loc)
+        {
+            if (loc.IsEmpty) return "none";
+            var collection = LocalizationEditorSettings.GetStringTableCollection(loc.TableReference);
+            if (collection == null) return "no table";
+            if (collection.GetTable(PreviewLocale) is not StringTable table) return "<no locale>";
+
+            string key   = loc.TableEntryReference.ResolveKeyName(table.SharedData);
+            var    entry = table.GetEntry(key);
+            return string.IsNullOrEmpty(entry?.Value) ? $"⚠ {key}" : entry.Value;
+        }
         private void AddLocalizedCell(VisualElement row, LocalizedString loc, float width)
         {
-            string text;
-            if (loc.IsEmpty)
-                text = "<none>";                                   
-            else
-            {
-                string value = loc.GetLocalizedString();
-                text = string.IsNullOrEmpty(value)
-                    ? $"⚠ {loc.TableEntryReference.Key}"            
-                    : value;
-            }
-            var label = new Label(text);
+            var label = new Label(ResolveEditor(loc));
             label.AddToClassList("cell");
             label.style.width = width;
             label.style.whiteSpace = WhiteSpace.Normal;   
@@ -172,7 +175,7 @@ namespace CustomEditor.TableView
                 var card = row.userData as CardDefinition;
                 if (card == null) continue;
 
-                string name = ((Resolve(card.DisplayName) ?? "") + " " + card.name).ToLower();
+                string name = ((ResolveEditor(card.DisplayName) ?? "") + " " + card.name).ToLower();
 
                 bool matchSearch = words == "" || name.Contains(words);
 
@@ -257,7 +260,7 @@ namespace CustomEditor.TableView
                 AddImageCardPreview(boxPreview,art.CardArt,14, 14, 6, 30, ScaleMode.ScaleAndCrop);
                 AddImageCardPreview(boxPreview,art.CardBackground, 0, 0, 0, 0, ScaleMode.ScaleToFit);
                 AddImageCardPreview(boxPreview,art.CardHeader, 10, 10, -85, 0, ScaleMode.ScaleToFit);
-                AddTextCardPreview(boxPreview,Resolve(card.DisplayName),10,10,-85,0);
+                AddTextCardPreview(boxPreview,ResolveEditor(card.DisplayName),10,10,-85,0);
 
             }
             return boxPreview;
@@ -288,10 +291,7 @@ namespace CustomEditor.TableView
             parent.Add(label);
         }
 
-        private static string Resolve(LocalizedString s)
-        {
-            return s.IsEmpty ? "" : s.GetLocalizedString();
-        }
+        
 
         private void ValidateAll()
         {

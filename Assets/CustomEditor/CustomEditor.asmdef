@@ -5,7 +5,8 @@
         "Gameplay.Core",
         "Gameplay.BattleEncounter",
         "Gameplay.NodeSelection",
-        "Unity.Localization"
+        "Unity.Localization",
+        "Unity.Localization.Editor"
     ],
     "includePlatforms": [
         "Editor"
