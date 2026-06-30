@@ -10,10 +10,10 @@ namespace Gameplay.BattleEncounter.UI.Card
         private const string BuffedColor = "#7CFC7C";   
         private const string DebuffedColor = "#FF6B6B"; 
 
-        public static string Format(CardDefinition def, BattleContext ctx, Character target = null)
+        public static string Format(CardDefinition def, BattleContext ctx,string resolvedDescription, Character target = null)
         {
             if (def == null) return string.Empty;
-            string formattedDescription = def.Description;
+            string formattedDescription = resolvedDescription;
             if (ctx == null || def.Effects == null || string.IsNullOrEmpty(formattedDescription))
                 return formattedDescription;
 
@@ -42,10 +42,10 @@ namespace Gameplay.BattleEncounter.UI.Card
             }
             return formattedDescription;
         }
-        public static string Format(CardDefinition def)
+        public static string Format(CardDefinition def,string resolvedDescription)
         {
             if (def == null) return string.Empty;
-            string formattedDescription = def.Description;
+            string formattedDescription = resolvedDescription;
 
             var tokenCounts = new Dictionary<string, int>();
             foreach (var effect in def.Effects)

@@ -7,6 +7,7 @@ using UnityEditor;
 using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UIElements;
+using UnityEngine.Localization;
 
 namespace CustomEditor.TableView
 {
@@ -122,8 +123,8 @@ namespace CustomEditor.TableView
             row.Add(deleteButton);
             
             row.Add(MakePreview(card));
-            AddCell(row, so, "DisplayName", 120);
-            AddCell(row,so ,"Description",300);
+            AddLocalizedCell(row, card.DisplayName, 120);
+            AddLocalizedCell(row, card.Description, 300);
             AddCell(row, so, "Art",         300);
             AddCell(row, so, "Effects",     280);
             
@@ -143,6 +144,24 @@ namespace CustomEditor.TableView
             row.Add(field);
 
         }
+        private void AddLocalizedCell(VisualElement row, LocalizedString loc, float width)
+        {
+            string text;
+            if (loc.IsEmpty)
+                text = "<none>";                                   
+            else
+            {
+                string value = loc.GetLocalizedString();
+                text = string.IsNullOrEmpty(value)
+                    ? $"⚠ {loc.TableEntryReference.Key}"            
+                    : value;
+            }
+            var label = new Label(text);
+            label.AddToClassList("cell");
+            label.style.width = width;
+            label.style.whiteSpace = WhiteSpace.Normal;   
+            row.Add(label);
+        }
 
         private void ApplyFilter()
         {
@@ -153,7 +172,7 @@ namespace CustomEditor.TableView
                 var card = row.userData as CardDefinition;
                 if (card == null) continue;
 
-                string name = ((card.DisplayName ?? "") + " " + card.name).ToLower();
+                string name = ((Resolve(card.DisplayName) ?? "") + " " + card.name).ToLower();
 
                 bool matchSearch = words == "" || name.Contains(words);
 
@@ -238,7 +257,7 @@ namespace CustomEditor.TableView
                 AddImageCardPreview(boxPreview,art.CardArt,14, 14, 6, 30, ScaleMode.ScaleAndCrop);
                 AddImageCardPreview(boxPreview,art.CardBackground, 0, 0, 0, 0, ScaleMode.ScaleToFit);
                 AddImageCardPreview(boxPreview,art.CardHeader, 10, 10, -85, 0, ScaleMode.ScaleToFit);
-                AddTextCardPreview(boxPreview,card.DisplayName,10,10,-85,0);
+                AddTextCardPreview(boxPreview,Resolve(card.DisplayName),10,10,-85,0);
 
             }
             return boxPreview;
@@ -269,6 +288,11 @@ namespace CustomEditor.TableView
             parent.Add(label);
         }
 
+        private static string Resolve(LocalizedString s)
+        {
+            return s.IsEmpty ? "" : s.GetLocalizedString();
+        }
+
         private void ValidateAll()
         {
             var missingList = new List<string>();
@@ -292,13 +316,13 @@ namespace CustomEditor.TableView
                     _warning.text = $"find {missingList.Count} card that field is incomplete. \n" +
                                     string.Join("\n", missingList);
                 }
-            }
+            }   
         }
 
         private List<string> MissingFields(CardDefinition card)
         {
             var missing = new List<string>();
-            if (string.IsNullOrWhiteSpace(card.DisplayName)) missing.Add("DisplayName");
+            if (card.DisplayName.IsEmpty) missing.Add("DisplayName");
             if (card.Art == null || card.Art.CardArt == null)                  missing.Add("CardArt");
             if (card.Art == null || card.Art.CardBackground == null)           missing.Add("CardBackground");
             if (card.Art == null || card.Art.CardHeader == null)               missing.Add("CardHeader");

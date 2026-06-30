@@ -2,17 +2,15 @@ using System.Collections.Generic;
 using Gameplay.BattleEncounter.UI.Card.Enum;
 using NaughtyAttributes;
 using UnityEngine;
-
+using UnityEngine.Localization;
 namespace Gameplay.BattleEncounter.UI.Card
 {
     [CreateAssetMenu(menuName = "Battle/CardDefinition")]
     public class CardDefinition : ScriptableObject
     {
-        [Required("DisplayName is missing")]
-        public string DisplayName;
+        public LocalizedString DisplayName;
         
-        [ResizableTextArea,] 
-        public string Description;
+        public LocalizedString Description;
         [Required("Art is missing")]
         public CardSprites Art;
         [Required("CardTarget is missing")]

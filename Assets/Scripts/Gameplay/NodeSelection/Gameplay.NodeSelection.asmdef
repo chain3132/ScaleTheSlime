@@ -11,7 +11,8 @@
         "Unity.TextMeshPro",
         "Unity.Addressables",
         "Unity.ResourceManager",
-        "UniTask.Addressables"
+        "UniTask.Addressables",
+        "Unity.Localization"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

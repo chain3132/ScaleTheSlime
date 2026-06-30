@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Gameplay.BattleEncounter.Characters.Enums;
 using UnityEngine;
+using UnityEngine.Localization;
 
 namespace Gameplay.BattleEncounter.UI.Tooltip
 {
@@ -15,9 +16,8 @@ namespace Gameplay.BattleEncounter.UI.Tooltip
             public SizeForm Form;
             public string Badge = "S";       // S / M / L
             public Color Color = Color.white;
-            public string Title;
-            [TextArea] 
-            public string Description;
+            public LocalizedString Title;
+            public LocalizedString Description;
         }
 
         [SerializeField] 

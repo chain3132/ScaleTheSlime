@@ -1,0 +1,59 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Localization-String-Tables-Thai (th)
+  m_EditorClassIdentifier: Unity.Addressables.Editor::UnityEditor.AddressableAssets.Settings.AddressableAssetGroup
+  m_GroupName: Localization-String-Tables-Thai (th)
+  m_GUID: 7be0bf93998b56f40bace2f571aabf17
+  m_SerializeEntries:
+  - m_GUID: 46c272eb5d12d2f429f3e271598227a4
+    m_Address: Menu_th
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-th
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5e665b631fd8b1044a72ab279663d491
+    m_Address: Cards_th
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-th
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9f97ba09a7ba11b478a1e74cecb3a4e8
+    m_Address: SizeFormInfo_th
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-th
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d2728e23d89213642877d71821d7b23b
+    m_Address: Status_th
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-th
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f4a845fc791d3ad4d890ac2999173054
+    m_Address: Intents_th
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-th
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f68a5a9946d7f044b8efcfcff68638c6
+    m_Address: Passive_th
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-th
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 1
+  m_Settings: {fileID: 11400000, guid: c6607686d53bbb24f99068e017991ae1, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: c3033e27ef15a6e4f95e46cf1d3e4f2f, type: 2}
+    - {fileID: 11400000, guid: 6164865df5a12f94b80735d1cd8aaf70, type: 2}

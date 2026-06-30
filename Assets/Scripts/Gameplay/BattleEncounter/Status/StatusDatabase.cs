@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+    using UnityEngine.Localization;
 
-namespace Gameplay.BattleEncounter.Status
+    namespace Gameplay.BattleEncounter.Status
 {
     [CreateAssetMenu(menuName = "Battle/StatusDatabase")]
     public class StatusDatabase : ScriptableObject
@@ -13,9 +14,8 @@ namespace Gameplay.BattleEncounter.Status
         {
             public StatusType Type;
             public Sprite Icon;
-            public string DisplayName;
-            [TextArea]
-            public string Description;
+            public LocalizedString DisplayName;
+            public LocalizedString Description;
         }
 
         [SerializeField] 
@@ -34,12 +34,12 @@ namespace Gameplay.BattleEncounter.Status
 
         public string NameFor(StatusType type)
         {
-            return Map.TryGetValue(type, out var e) ? e.DisplayName : type.ToString();
+            return Map.TryGetValue(type, out var e) ? e.DisplayName.GetLocalizedString() : type.ToString();
         }
 
         public string DescriptionFor(StatusType type)
         {
-            return Map.TryGetValue(type, out var e) ? e.Description : string.Empty;
+            return Map.TryGetValue(type, out var e) ? e.Description.GetLocalizedString() : string.Empty;
         }
     }
 }

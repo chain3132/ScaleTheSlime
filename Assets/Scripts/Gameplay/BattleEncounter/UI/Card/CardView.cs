@@ -6,6 +6,8 @@ using R3;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Localization;
+using UnityEngine.Localization.Settings;
 using UnityEngine.UI;
 
 namespace Gameplay.BattleEncounter.UI.Card
@@ -53,7 +55,6 @@ namespace Gameplay.BattleEncounter.UI.Card
         {
             _statusSub?.Dispose();
             _statusSub = null;
-
             _cardPlayController = playController;
             _vm = vm;
             _card = vm.Card;
@@ -63,6 +64,8 @@ namespace Gameplay.BattleEncounter.UI.Card
             Apply(cardBackground, s.CardBackground, true);
             Apply(cardArt, s.CardArt, true);
             Apply(cardHeader, s.CardHeader, true);
+            
+            LocalizationSettings.SelectedLocaleChanged += OnLocaleChanged;
             if (headerText != null) headerText.text = vm.DisplayName;
             RefreshDescription();
 
@@ -81,6 +84,11 @@ namespace Gameplay.BattleEncounter.UI.Card
         {
             if (descriptionText != null && _vm != null)
                 descriptionText.text = _vm.Description;
+        }
+        private void OnLocaleChanged(Locale _)
+        {
+            if (headerText != null) headerText.text = _vm.DisplayName;
+            RefreshDescription();
         }
 
         private static void Apply(Image image, Sprite sprite, bool visible)
@@ -169,6 +177,7 @@ namespace Gameplay.BattleEncounter.UI.Card
         {
             _statusSub?.Dispose();
             if (_hoverMotion.IsActive()) _hoverMotion.Cancel();
+            LocalizationSettings.SelectedLocaleChanged -= OnLocaleChanged;
         }
 
         

@@ -3,7 +3,10 @@
     "rootNamespace": "",
     "references": [
         "UniTask",
-        "NaughtyAttributes.Core"
+        "NaughtyAttributes.Core",
+        "Unity.Localization",
+        "Unity.ResourceManager",
+        "Unity.TextMeshPro"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

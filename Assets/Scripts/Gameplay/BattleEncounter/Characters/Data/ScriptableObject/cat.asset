@@ -22,6 +22,7 @@ MonoBehaviour:
   TinyOffsetY: 90
   NormalOffsetY: 145
   GiantOffsetY: 250
+  EnemyTier: 2
   TinyBehavior: {fileID: 11400000, guid: cfb5c0d47bc512d48a1c740d0b667cca, type: 2}
   NormalBehavior: {fileID: 11400000, guid: aa5d988e09972f64c91bb37c2f8f4df1, type: 2}
   GiantBehavior: {fileID: 11400000, guid: b9b2cf8c6c97d524c861944bb3955d3c, type: 2}

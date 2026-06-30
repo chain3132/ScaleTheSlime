@@ -1,0 +1,53 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Localization-Assets-Shared
+  m_EditorClassIdentifier: Unity.Addressables.Editor::UnityEditor.AddressableAssets.Settings.AddressableAssetGroup
+  m_GroupName: Localization-Assets-Shared
+  m_GUID: fa63b464848b4a0439e55cea6f13524d
+  m_SerializeEntries:
+  - m_GUID: 1da7861ddcf52e64289cc518ab74a39c
+    m_Address: Assets/Localization/SizeFormInfo/SizeFormInfo Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 378e1016634739649abe27ac9c2bbdbc
+    m_Address: Assets/Localization/Passive/Passive Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 76362ce28184bdd4ea730e4e7a3dd59c
+    m_Address: Assets/Localization/Menu/Menu Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: cdd218c7723e185428fa1a3eb0b508a9
+    m_Address: Assets/Localization/Intents/Intents Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e636cfbcd4815984899ff33168e535c1
+    m_Address: Assets/Localization/Status/Status Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e91750097d6622f4ba59825f8527ed07
+    m_Address: Assets/Localization/Cards Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 1
+  m_Settings: {fileID: 11400000, guid: c6607686d53bbb24f99068e017991ae1, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 38cc22a2656aacc469df2576b5291abe, type: 2}
+    - {fileID: 11400000, guid: d80633226894c43429f5c22bf1b8226e, type: 2}

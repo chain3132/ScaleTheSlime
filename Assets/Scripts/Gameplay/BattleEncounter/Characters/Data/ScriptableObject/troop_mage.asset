@@ -17,9 +17,12 @@ MonoBehaviour:
   TinySkeleton: {fileID: 11400000, guid: 8fb65c33a8cbafa41898e5207d171889, type: 2}
   NormalSkeleton: {fileID: 11400000, guid: 1cc720618403f2041978e1e903e34f84, type: 2}
   GiantSkeleton: {fileID: 11400000, guid: 579901c624a1f304280dbcd72ad05847, type: 2}
+  BaseMaterial: {fileID: 0}
+  OutlineMaterial: {fileID: 0}
   TinyOffsetY: 90
   NormalOffsetY: 145
   GiantOffsetY: 250
+  EnemyTier: 4
   TinyBehavior: {fileID: 11400000, guid: 8748a52865d93d0428a82ee524ba8f1e, type: 2}
   NormalBehavior: {fileID: 11400000, guid: c200a36ec9c35d54db7dd101b6bf2828, type: 2}
   GiantBehavior: {fileID: 11400000, guid: 1fd36117e43befd47a1fd85c8609e342, type: 2}

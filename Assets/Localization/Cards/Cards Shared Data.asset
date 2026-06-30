@@ -1,0 +1,180 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: Cards Shared Data
+  m_EditorClassIdentifier: Unity.Localization::UnityEngine.Localization.Tables.SharedTableData
+  m_TableCollectionName: Cards
+  m_TableCollectionNameGuidString: e91750097d6622f4ba59825f8527ed07
+  m_Entries:
+  - m_Id: 6045547794432
+    m_Key: card.attack.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8905643692032
+    m_Key: card.attack.description
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9097684094976
+    m_Key: card.defend.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9242387582976
+    m_Key: card.defend.description
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9560169025536
+    m_Key: card.dropsy.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9566082994176
+    m_Key: card.dropsy.description
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9568402444288
+    m_Key: card.splatter.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10735899545600
+    m_Key: card.splatter.description
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10999125676032
+    m_Key: card.strategize.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 11160153395200
+    m_Key: card.strategize.description
+    m_Metadata:
+      m_Items: []
+  - m_Id: 11789202526208
+    m_Key: card.siphon.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 11946912550912
+    m_Key: card.siphon.description
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12540695973888
+    m_Key: card.trickery.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12628822495232
+    m_Key: card.trickery.description
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13051134382080
+    m_Key: card.chrysalis.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13218264813568
+    m_Key: card.chrysalis.description
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13904121597952
+    m_Key: card.vowofmajesty.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14009746755584
+    m_Key: card.vowofmajesty.description
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14551235596288
+    m_Key: card.study.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14699646849024
+    m_Key: card.study.description
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14837912080384
+    m_Key: card.stomp.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 15057920102400
+    m_Key: card.stomp.description
+    m_Metadata:
+      m_Items: []
+  - m_Id: 15614172893184
+    m_Key: card.concentration.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 15700642664448
+    m_Key: card.concentration.description
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16331587620864
+    m_Key: card.rupture.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16415733747712
+    m_Key: card.rupture.description
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16680989921280
+    m_Key: card.sleepingbeauty.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16833264128000
+    m_Key: card.sleepingbeauty.description
+    m_Metadata:
+      m_Items: []
+  - m_Id: 17412132605952
+    m_Key: card.momentousstrike.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 17684376489984
+    m_Key: card.momentousstrike.description
+    m_Metadata:
+      m_Items: []
+  - m_Id: 17985615597568
+    m_Key: card.dirtyschemes.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18053676568576
+    m_Key: card.dirtyschemes.description
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18508842438656
+    m_Key: card.transfer.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18597849763840
+    m_Key: card.transfer.description
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18854771855360
+    m_Key: card.skewer.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18922669248512
+    m_Key: card.skewer.description
+    m_Metadata:
+      m_Items: []
+  - m_Id: 19157961314304
+    m_Key: card.Slimed.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 19268284092416
+    m_Key: card.Slimed.description
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    rid: 1537413683673301309
+  references:
+    version: 2
+    RefIds:
+    - rid: 1537413683673301309
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1782726765976

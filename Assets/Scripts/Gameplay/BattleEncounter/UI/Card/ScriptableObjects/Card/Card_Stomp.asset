@@ -12,10 +12,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8e900222d652fb4c93074220e2230b4, type: 3}
   m_Name: Card_Stomp
   m_EditorClassIdentifier: Assembly-CSharp::Gameplay.BattleEncounter.UI.Card.CardDefinition
-  Id: 17
-  DisplayName: Stomp
-  Description: "Deal {damage} Damage to all enemies. \nAll enemies Size -1. \nCannot
-    be discarded. Destroy."
+  DisplayName:
+    m_TableReference:
+      m_TableCollectionName: GUID:e91750097d6622f4ba59825f8527ed07
+    m_TableEntryReference:
+      m_KeyId: 14837912080384
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  Description:
+    m_TableReference:
+      m_TableCollectionName: GUID:e91750097d6622f4ba59825f8527ed07
+    m_TableEntryReference:
+      m_KeyId: 15057920102400
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
   Art:
     CardBackground: {fileID: 1651503625, guid: 0a7e9a4d06787974da201bb5ad716a06, type: 3}
     CardArt: {fileID: 1236236576, guid: 15ab22a9cf160184682b1ddc2a1465b5, type: 3}
@@ -46,3 +60,6 @@ MonoBehaviour:
     CardValue: -1
     Repeat: 1
     CustomSource: 0
+  references:
+    version: 2
+    RefIds: []
