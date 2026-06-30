@@ -12,6 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20ea709b1f17cc3418d39c7ec8303045, type: 3}
   m_Name: GiantPassive
   m_EditorClassIdentifier: Gameplay.BattleEncounter::Gameplay.BattleEncounter.Characters.Passives.GiantPassive
-  _description: Target takes 50% more damage from attacks. At the end of its turn,
-    remove 1 stack.
+  _description:
+    m_TableReference:
+      m_TableCollectionName: GUID:378e1016634739649abe27ac9c2bbdbc
+    m_TableEntryReference:
+      m_KeyId: 1092515172352
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
   _amount: 1
+  references:
+    version: 2
+    RefIds: []

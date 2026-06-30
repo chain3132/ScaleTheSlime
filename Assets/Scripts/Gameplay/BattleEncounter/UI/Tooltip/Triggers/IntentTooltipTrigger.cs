@@ -1,6 +1,7 @@
 using Gameplay.BattleEncounter.Characters.Behaviors;
 using Gameplay.BattleEncounter.Status;
 using UnityEngine;
+using UnityEngine.Localization.Settings;
 
 namespace Gameplay.BattleEncounter.UI.Tooltip
 {
@@ -9,8 +10,7 @@ namespace Gameplay.BattleEncounter.UI.Tooltip
     {
         [SerializeField] 
         private StatusDatabase _statusDatabase;
-        [SerializeField] 
-        private string _title = "INTENT";
+        private const string Table  = "Intents";
 
         private EnemyAction _action;
 
@@ -19,26 +19,52 @@ namespace Gameplay.BattleEncounter.UI.Tooltip
         protected override bool TryBuild(out TooltipData data)
         {
             if (_action == null) { data = default; return false; }
-            data = TooltipData.Standard(_title, Describe(_action));
+            
+            string title = LocalizationSettings.StringDatabase.GetLocalizedString(Table, GetTitle(_action));
+            data = TooltipData.Standard(title, Describe(_action));
             return true;
         }
 
+        private string GetTitle(EnemyAction a)
+        {
+             string key = a.Type switch
+            {
+                EnemyActionType.Attack       => a.Repeat > 1 ? "intent.attackmulti.name" : "intent.attack.name",
+                EnemyActionType.GainArmor    => "intent.gainarmor.name",
+                EnemyActionType.GrowSize     => "intent.growsize.name",
+                EnemyActionType.ShrinkSize   => "intent.shrinksize.name",
+                EnemyActionType.BuffSelf     => "intent.buffself.name",
+                EnemyActionType.DebuffPlayer => "intent.debuffplayer.name",
+                EnemyActionType.AddCardToDrawPile => "intent.addcardtodrawpile.name",
+                _ => null,
+            };
+             return key;
+        }
         private string Describe(EnemyAction a)
         {
-            string status = _statusDatabase != null ? _statusDatabase.NameFor(a.Status) : a.Status.ToString();
-            switch (a.Type)
+            string key = a.Type switch
             {
-                case EnemyActionType.Attack:
-                    return a.Repeat > 1
-                        ? $"Attack for {a.Value} damage {a.Repeat} times."
-                        : $"Attack for {a.Value} damage.";
-                case EnemyActionType.GainArmor:    return $"Gain {a.Value} Block.";
-                case EnemyActionType.GrowSize:     return $"Grow size by {a.Value}.";
-                case EnemyActionType.ShrinkSize:   return $"Shrink size by {a.Value}.";
-                case EnemyActionType.BuffSelf:     return $"Gain {a.Value} {status}.";
-                case EnemyActionType.DebuffPlayer: return $"Apply {a.Value} {status} to you.";
-                default:                           return string.Empty;
-            }
+                EnemyActionType.Attack       => a.Repeat > 1 ? "intent.attackmulti.description" : "intent.attack.description",
+                EnemyActionType.GainArmor    => "intent.gainarmor.description",
+                EnemyActionType.GrowSize     => "intent.growsize.description",
+                EnemyActionType.ShrinkSize   => "intent.shrinksize.description",
+                EnemyActionType.BuffSelf     => "intent.buffself.description",
+                EnemyActionType.DebuffPlayer => "intent.debuffplayer.description",
+                EnemyActionType.AddCardToDrawPile => "intent.addcardtodrawpile.description",
+                _ => null,
+            };
+            string status = _statusDatabase != null ? _statusDatabase.NameFor(a.Status) : a.Status.ToString();
+
+            string result = LocalizationSettings.StringDatabase.GetLocalizedString(Table, key)
+                .Replace("{value}",  a.Value.ToString())
+                .Replace("{repeat}", a.Repeat.ToString())
+                .Replace("{status}", status);
+            if (a.cardToAdd != null)
+            {
+                result = result.Replace("{card}", a.cardToAdd.DisplayName?.GetLocalizedString());
+            }                     
+            return result;
         }
+        
     }
 }

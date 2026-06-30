@@ -12,4 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e6bb1b0bb482ee428f4f8307a1d0bc4, type: 3}
   m_Name: CatPassive
   m_EditorClassIdentifier: Gameplay.BattleEncounter::Gameplay.BattleEncounter.Characters.Passives.TestPassive
+  _description:
+    m_TableReference:
+      m_TableCollectionName: GUID:378e1016634739649abe27ac9c2bbdbc
+    m_TableEntryReference:
+      m_KeyId: 1271263825920
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
   _amount: 2
+  references:
+    version: 2
+    RefIds: []

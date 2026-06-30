@@ -6,7 +6,7 @@ namespace Gameplay.BattleEncounter.Characters.Passives
 {
     public abstract class Passive : ScriptableObject
     {
-        [SerializeField, TextArea]
+        [SerializeField]
         private LocalizedString _description;
         public string Description => _description.GetLocalizedString();
 

@@ -12,8 +12,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8e900222d652fb4c93074220e2230b4, type: 3}
   m_Name: Card_Dropsy
   m_EditorClassIdentifier: Assembly-CSharp::Gameplay.BattleEncounter.UI.Card.CardDefinition
-  DisplayName: Dropsy
-  Description: "Gain {shield} Shield. \nSize +1."
+  DisplayName:
+    m_TableReference:
+      m_TableCollectionName: GUID:e91750097d6622f4ba59825f8527ed07
+    m_TableEntryReference:
+      m_KeyId: 9560169025536
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  Description:
+    m_TableReference:
+      m_TableCollectionName: GUID:e91750097d6622f4ba59825f8527ed07
+    m_TableEntryReference:
+      m_KeyId: 9566082994176
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
   Art:
     CardBackground: {fileID: -1152778665, guid: 0a7e9a4d06787974da201bb5ad716a06, type: 3}
     CardArt: {fileID: -1979122721, guid: 3859bc2d80614b84089f2baa3fe46b57, type: 3}
@@ -44,3 +60,6 @@ MonoBehaviour:
     CardValue: 1
     Repeat: 1
     CustomSource: 3
+  references:
+    version: 2
+    RefIds: []

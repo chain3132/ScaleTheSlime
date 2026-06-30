@@ -15,7 +15,6 @@ using UnityEngine;
             public StatusType Type;
             public Sprite Icon;
             public LocalizedString DisplayName;
-            [TextArea]
             public LocalizedString Description;
         }
 

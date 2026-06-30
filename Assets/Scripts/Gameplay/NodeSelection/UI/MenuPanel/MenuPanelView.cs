@@ -1,6 +1,7 @@
 using R3;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Localization.Settings;
 
 namespace Gameplay.NodeSelection.UI
 {
@@ -17,6 +18,7 @@ namespace Gameplay.NodeSelection.UI
         [SerializeField] 
         private TMP_Text _clockText;
 
+        private const string Table = "Menu";
         #endregion
         
         private readonly CompositeDisposable _bindings = new();
@@ -24,9 +26,11 @@ namespace Gameplay.NodeSelection.UI
         public void Bind(MenuPanelViewModel vm)
         {
             _nameText.text = vm.PlayerName;
- 
-            vm.RunNumber.Subscribe(r => _runText.text = $"Run {r}").AddTo(_bindings);
-            vm.TurnText.Subscribe(t => _turnText.text = string.IsNullOrEmpty(t) ? "" : $"Turn {t}").AddTo(_bindings);
+            string run = LocalizationSettings.StringDatabase.GetLocalizedString(Table,"menu.run");
+            string turn = LocalizationSettings.StringDatabase.GetLocalizedString(Table,"menu.turn");
+
+            vm.RunNumber.Subscribe(r => _runText.text = $"{run } {r} ").AddTo(_bindings);
+            vm.TurnText.Subscribe(t => _turnText.text = string.IsNullOrEmpty(t) ? "" : $"{turn} {t}").AddTo(_bindings);
             vm.ClockText.Subscribe(c => _clockText.text = c).AddTo(_bindings);
         }
  

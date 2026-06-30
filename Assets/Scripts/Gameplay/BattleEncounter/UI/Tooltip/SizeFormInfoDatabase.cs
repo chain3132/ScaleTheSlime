@@ -17,7 +17,6 @@ namespace Gameplay.BattleEncounter.UI.Tooltip
             public string Badge = "S";       // S / M / L
             public Color Color = Color.white;
             public LocalizedString Title;
-            [TextArea] 
             public LocalizedString Description;
         }
 

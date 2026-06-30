@@ -15,27 +15,124 @@ MonoBehaviour:
   _entries:
   - Type: 1
     Icon: {fileID: -139519365, guid: cf746e92101f2d149921440b394666bb, type: 3}
-    DisplayName: Strength
-    Description: Increase attack damage by {value}.
+    DisplayName:
+      m_TableReference:
+        m_TableCollectionName: GUID:e636cfbcd4815984899ff33168e535c1
+      m_TableEntryReference:
+        m_KeyId: 12641275904
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
+    Description:
+      m_TableReference:
+        m_TableCollectionName: GUID:e636cfbcd4815984899ff33168e535c1
+      m_TableEntryReference:
+        m_KeyId: 809542258688
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
   - Type: 5
     Icon: {fileID: 1240024824, guid: cf746e92101f2d149921440b394666bb, type: 3}
-    DisplayName: Vulnerable
-    Description: Target takes 50% more damage from attacks. At the end of its turn,
-      remove 1 stack.
+    DisplayName:
+      m_TableReference:
+        m_TableCollectionName: GUID:e636cfbcd4815984899ff33168e535c1
+      m_TableEntryReference:
+        m_KeyId: 1503531798528
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
+    Description:
+      m_TableReference:
+        m_TableCollectionName: GUID:e636cfbcd4815984899ff33168e535c1
+      m_TableEntryReference:
+        m_KeyId: 1762190331904
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
   - Type: 4
     Icon: {fileID: 1467504536, guid: cf746e92101f2d149921440b394666bb, type: 3}
-    DisplayName: Shield Bonus
-    Description: Increase Shield gained from cards by {value}.
+    DisplayName:
+      m_TableReference:
+        m_TableCollectionName: GUID:e636cfbcd4815984899ff33168e535c1
+      m_TableEntryReference:
+        m_KeyId: 3457691586560
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
+    Description:
+      m_TableReference:
+        m_TableCollectionName: GUID:e636cfbcd4815984899ff33168e535c1
+      m_TableEntryReference:
+        m_KeyId: 3585613664256
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
   - Type: 2
     Icon: {fileID: -5379215314323685206, guid: 01e36ea0f5a53574cac9f34ba0014888, type: 3}
-    DisplayName: Week
-    Description: Deals 25% less attack damage. At the end of its turn, remove 1 stack.
+    DisplayName:
+      m_TableReference:
+        m_TableCollectionName: GUID:e636cfbcd4815984899ff33168e535c1
+      m_TableEntryReference:
+        m_KeyId: 1995557212160
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
+    Description:
+      m_TableReference:
+        m_TableCollectionName: GUID:e636cfbcd4815984899ff33168e535c1
+      m_TableEntryReference:
+        m_KeyId: 2107436077056
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
   - Type: 6
     Icon: {fileID: -828211296, guid: cf746e92101f2d149921440b394666bb, type: 3}
-    DisplayName: Thorn
-    Description: When attacked, deal {value} damage back to its attacker.
+    DisplayName:
+      m_TableReference:
+        m_TableCollectionName: GUID:e636cfbcd4815984899ff33168e535c1
+      m_TableEntryReference:
+        m_KeyId: 2290563584000
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
+    Description:
+      m_TableReference:
+        m_TableCollectionName: GUID:e636cfbcd4815984899ff33168e535c1
+      m_TableEntryReference:
+        m_KeyId: 2445467619328
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
   - Type: 7
     Icon: {fileID: 1693384911, guid: cf746e92101f2d149921440b394666bb, type: 3}
-    DisplayName: Unstable
-    Description: At the end of the turn, randomly increase or decrease your Size
-      between -2 to +2.
+    DisplayName:
+      m_TableReference:
+        m_TableCollectionName: GUID:e636cfbcd4815984899ff33168e535c1
+      m_TableEntryReference:
+        m_KeyId: 2650954960896
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
+    Description:
+      m_TableReference:
+        m_TableCollectionName: GUID:e636cfbcd4815984899ff33168e535c1
+      m_TableEntryReference:
+        m_KeyId: 2784925224960
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
+  references:
+    version: 2
+    RefIds: []

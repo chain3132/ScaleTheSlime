@@ -16,16 +16,16 @@ MonoBehaviour:
   _actions:
   - Type: 0
     Value: 5
-    Repeat: 0
+    Repeat: 1
     Status: 0
     cardToAdd: {fileID: 0}
   - Type: 2
     Value: 2
-    Repeat: 0
+    Repeat: 1
     Status: 0
     cardToAdd: {fileID: 0}
   - Type: 7
     Value: 3
-    Repeat: 0
+    Repeat: 1
     Status: 0
     cardToAdd: {fileID: 11400000, guid: 5eb00ec6a38520f4ba5346d087d92461, type: 2}

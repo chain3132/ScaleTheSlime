@@ -15,6 +15,31 @@ MonoBehaviour:
   m_GroupName: Localization-Assets-Shared
   m_GUID: fa63b464848b4a0439e55cea6f13524d
   m_SerializeEntries:
+  - m_GUID: 1da7861ddcf52e64289cc518ab74a39c
+    m_Address: Assets/Localization/SizeFormInfo/SizeFormInfo Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 378e1016634739649abe27ac9c2bbdbc
+    m_Address: Assets/Localization/Passive/Passive Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 76362ce28184bdd4ea730e4e7a3dd59c
+    m_Address: Assets/Localization/Menu/Menu Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: cdd218c7723e185428fa1a3eb0b508a9
+    m_Address: Assets/Localization/Intents/Intents Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e636cfbcd4815984899ff33168e535c1
+    m_Address: Assets/Localization/Status/Status Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: e91750097d6622f4ba59825f8527ed07
     m_Address: Assets/Localization/Cards Shared Data.asset
     m_ReadOnly: 1
